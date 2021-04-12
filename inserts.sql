@@ -1,9 +1,17 @@
-INSERT INTO School VALUES(DEFAULT,'Chalmers');
-INSERT INTO Classes VALUES('IT',DEFAULT,1);
 
-INSERT INTO Roles VALUES('Admin',1);
-INSERT INTO Roles VALUES('Student',3);
 
-INSERT INTO lUser VALUES('a@a.com',DEFAULT,'a','a',1,1);
-INSERT INTO lUser VALUES('b@b.com',DEFAULT,'b','b',1,3);
+INSERT INTO School VALUES(DEFAULT,'Chalmers'); -- schoolId = 1
+
+INSERT INTO Classes VALUES(DEFAULT,'IT',1); -- classId = 1
+
+INSERT INTO Roles VALUES
+(1,'Student'),
+(2,'Teacher'), 
+(3,'Admin');
+
+INSERT INTO Users VALUES
+(DEFAULT,'teacher@gmail.com','Linda','Efson','qwe123',1,3),
+(DEFAULT,'jjaokk@gmail.com','Joakim','Ohlsson','qwe123',1,2),
+(DEFAULT,'foo@gmail.com','Foo','Fooson','qwe123',1,1),
+(DEFAULT,'bar@gmail.com','Bar','Barson','qwe123',1,1);
 

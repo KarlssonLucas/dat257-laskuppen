@@ -1,11 +1,12 @@
 DROP TABLE IF EXISTS School CASCADE;
 DROP TABLE IF EXISTS Classes CASCADE;
-DROP TABLE IF EXISTS lUser CASCADE;
+DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Roles CASCADE;
 DROP TABLE IF EXISTS ExtraPoints CASCADE;
 DROP TABLE IF EXISTS Review CASCADE;
 DROP TABLE IF EXISTS Book CASCADE;
-
+DROP TABLE IF EXISTS FrequentlyAskedQuestions CASCADE;
+DROP TABLE IF EXISTS SchoolSettings CASCADE;
 
 CREATE TABLE School(
     id SERIAL PRIMARY KEY,
@@ -13,49 +14,61 @@ CREATE TABLE School(
 );
 
 CREATE TABLE Classes(
+    id SERIAL PRIMARY KEY,
     className TEXT,
-    classId SERIAL UNIQUE,
-    school INT,
-    FOREIGN KEY(school) REFERENCES School(id),
-    PRIMARY KEY(school,className)
+    schoolId INT,
+    FOREIGN KEY(schoolId) REFERENCES School(id),
+    UNIQUE (schoolId,className)
 );
 
 CREATE TABLE Roles(
-    role TEXT,
-    id INT,
-    PRIMARY KEY(id)
+    id INT PRIMARY KEY,
+    role TEXT
 );
 
-CREATE TABLE lUser(
-    mail TEXT UNIQUE,
+CREATE TABLE Users(
     id SERIAL PRIMARY KEY,
-    name TEXT,
+    mail TEXT UNIQUE,
+    firstName TEXT,
+    lastName TEXT,
     password TEXT,
-    class INT REFERENCES Classes(classId),
-    role INT REFERENCES Roles(id)
+    classId INT REFERENCES Classes(id),
+    roleId INT REFERENCES Roles(id)
 );
 
 CREATE TABLE ExtraPoints(
-    luser INT REFERENCES lUser(id),
+    userId INT REFERENCES Users(id),
     points INT,
-    reason TEXT,
-    PRIMARY KEY(luser)
-);
-
-CREATE TABLE Review(
-    book TEXT, 
-    writtenBy INT REFERENCES lUser(id),
-    worthReading BOOLEAN DEFAULT FALSE,
-    accepted BOOLEAN DEFAULT FALSE,
-    summary TEXT,
-    PRIMARY KEY (writtenBy,book) 
+    reason TEXT
 );
 
 CREATE TABLE Book(
-    id TEXT PRIMARY KEY,
+    id INT PRIMARY KEY,
     apiLink TEXT,
     title TEXT,
     author TEXT,
     pages INT
 );
 
+CREATE TABLE Review(
+    id INT PRIMARY KEY,
+    bookId INT REFERENCES Book(id), 
+    writtenBy INT REFERENCES Users(id),
+    worthReading BOOLEAN DEFAULT FALSE,
+    accepted BOOLEAN DEFAULT FALSE,
+    grade INT,
+    summary TEXT,
+    UNIQUE (writtenBy,bookId) 
+);
+
+CREATE TABLE FrequentlyAskedQuestions(
+    id INT PRIMARY KEY,
+    schoolId INT REFERENCES School(id),
+    question TEXT,
+    answer TEXT
+);
+
+CREATE TABLE SchoolSettings(
+    schoolId INT REFERENCES School(id) PRIMARY KEY,
+    weeklyBook INT REFERENCES Book(id)
+);
