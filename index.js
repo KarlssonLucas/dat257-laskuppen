@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const db = require('./queries')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 
 // Data parsing
 app.use(express.json());
@@ -21,6 +21,6 @@ app.get('/*', (request, response) => {
 })
 
 // Start server
-app.listen(port,'localhost', () => {
+app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
