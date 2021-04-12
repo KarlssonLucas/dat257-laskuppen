@@ -9,6 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Create all API-requests
 app.get('/api/users', db.getUsers)
+app.get('/api/lusers', db.getLusers)
 app.get('/api/users/:id', db.getUserById)
 app.delete('/api/users/:id', db.deleteUser)
 
