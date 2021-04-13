@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Laskuppen from './Laskuppen';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Layout from './layouts'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Layout />
+    <Laskuppen />
   </React.StrictMode>,
   document.getElementById('root')
 );
