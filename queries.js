@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 if(!process.env.DATABASE_URL){
   require('dotenv').config();
 }
@@ -22,6 +24,15 @@ const getLusers = (request, response) => {
   })
 }
 
+const bookssearch = async (request, response) => {
+const id = request.params.bookname
+const lala = await fetch("https://www.googleapis.com/books/v1/volumes?q="+id+"&key=AIzaSyD6vUKgssAx94FJyicks9mzGOe4gq24MZ0&maxResults=40").then((resp) => resp.json());
+response.status(200).json(lala.items.map((book) => {
+    return {
+        title: book.volumeInfo.title
+    };
+}));
+}
 
 const getUsers = (request, response) => {
   client.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
@@ -58,5 +69,6 @@ module.exports = {
   getUsers,
   getUserById,
   deleteUser,
-  getLusers
+  getLusers,
+  bookssearch 
 }
