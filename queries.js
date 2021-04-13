@@ -17,10 +17,17 @@ client.connect();
 
 const bookssearch = async (request, response) => {
 const id = request.params.bookname
-const lala = await fetch("https://www.googleapis.com/books/v1/volumes?q="+id+"&key="+process.env.GOOGLEAPI_KEY+"&maxResults=40").then((resp) => resp.json());
+const lala = await fetch("https://www.googleapis.com/books/v1/volumes?q="+id+"&key="+process.env.GOOGLEAPI_KEY+"&maxResults=40")
+.then((resp) => resp.json());
 response.status(200).json(lala.items.map((book) => {
     return {
-        title: book.volumeInfo.title
+        id: book.id,
+        title: book.volumeInfo.title,
+        authors: book.volumeInfo.authors,
+        pageCount: book.volumeInfo.pageCount,
+        publishedDate: book.volumeInfo.publishedDate,
+        description: book.volumeInfo.description,
+        thumbnail: book.volumeInfo.imageLinks
     };
 }));
 }
