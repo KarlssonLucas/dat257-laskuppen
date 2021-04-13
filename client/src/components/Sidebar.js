@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+ import '../css/sidebar.css';
 
 
 export default class Sidebar extends React.Component {
