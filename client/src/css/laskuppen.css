@@ -1,12 +1,18 @@
 .general-styling{
-    display: flex;
+    display: grid;
+    grid-template: 
+    "a b";
+    grid-template-columns: 0.4fr 2fr ;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    
 }
 
-.sidebar-container{
-    width: 20vw;
+.sidebar-container {
+    grid-area: a;
 }
 
-.content-container{
-    width: 80vw;
-}  
+.content-container {
+    grid-area: b;
+}
 
