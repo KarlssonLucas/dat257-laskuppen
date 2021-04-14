@@ -41,6 +41,24 @@ const getUsers = (request, response) => {
   })
 }
 
+const mostReadBook = (request, response) => {
+  client.query("SELECT book.id, title FROM Review LEFT JOIN Book ON bookId = Book.id WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') AND review.worthReading = true GROUP BY book.id ORDER BY COUNT(*) DESC LIMIT 1", (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const userReadMost = (request, response) => {
+  client.query("SELECT Users.id, firstName || ' ' || lastName AS name, SUM(COALESCE(pages,0)) as points FROM Review LEFT JOIN Users ON writtenBy = users.id LEFT JOIN Book ON Book.id = bookId WHERE accepted = true AND review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY users.id ORDER BY points DESC LIMIT 1", (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 const getUserById = (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -63,9 +81,43 @@ const deleteUser = (request, response) => {
   })
 }
 
+function escape(input, match){
+  if(match.includes(input.toLowerCase())){
+    return true;
+  }
+  return false;
+}
+
+function error(text){
+  return {error:text};
+}
+
+const toplist = (request, response) => {
+   const filter = request.query.filter
+   const order = request.query.order
+
+   const match1 = ["name","points","classname","booksread"];
+   const match2 = ["asc","desc"];
+    
+   if(escape(filter,match1) && escape(order,match2)){
+   client.query('SELECT * FROM topliststudent ORDER BY ' + filter + ' ' + order,(error, results) => {
+     if (error) {
+       throw error
+     }
+     response.status(200).json(results.rows)
+   })
+  }
+  else{
+    response.status(400).json(error("Wrong parameters"))
+  }
+ }
+
 module.exports = {
   getUsers,
   getUserById,
   deleteUser,
-  bookssearch 
+  bookssearch,
+  mostReadBook,
+  userReadMost,
+  toplist
 }

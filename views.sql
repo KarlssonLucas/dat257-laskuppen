@@ -1,0 +1,30 @@
+CREATE OR REPLACE VIEW studentsPoints AS
+SELECT Users.id as uidd, SUM(COALESCE(pages,0)) as points, 
+COUNT(Review.id) as booksRead
+FROM Review 
+LEFT JOIN Users ON writtenBy = users.id 
+LEFT JOIN Book ON Book.id = bookId WHERE accepted = true 
+GROUP BY users.id;
+
+-- toplistan filtrera genom att lägga till order by i slutet
+CREATE OR REPLACE VIEW toplistStudent AS 
+SELECT firstName || ' ' || lastName as name, 
+className, COALESCE(studentsPoints.points, 0)+COALESCE(exPoints,0) as points, COALESCE(booksRead, 0) as booksRead
+FROM Users LEFT JOIN studentsPoints ON uidd = id 
+LEFT JOIN ExtraPoints ON userId = id 
+LEFT JOIN Classes ON Classes.id = classId
+WHERE studentsPoints.points > 0 OR exPoints > 0;
+
+CREATE OR REPLACE VIEW acceptedReviews AS
+SELECT title, firstName || ' ' || lastName as name, author, 
+grade || '/' || '10' as grade, worthReading, summary, accepted, published
+FROM Review LEFT JOIN Users on review.id = users.id
+LEFT JOIN Book ON Book.id = bookId; --add where accepted = true for "läs recensioner"
+
+-- hitta böcker
+CREATE OR REPLACE VIEW booksRead AS
+SELECT title, author, pages, ROUND(AVG(grade)) || '/' || 10 as grade,
+descr, thumbnail
+FROM Review LEFT JOIN Book ON review.id = bookId
+GROUP BY book.id;
+
