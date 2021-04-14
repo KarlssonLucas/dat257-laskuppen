@@ -1,20 +1,19 @@
 .general-styling{
     display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr;
     grid-template: 
-    a b;
+    "a b";
+    grid-template-columns: 0.4fr 2fr ;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    
 }
 
 .sidebar-container {
-    width: 30%;
-}
-
-.content-container {
-    width: 70%;
     grid-area: a;
 }
 
 .content-container {
     grid-area: b;
+    align-items: center;
 }
+
