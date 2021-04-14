@@ -1,0 +1,12 @@
+.general-styling{
+    display: flex;
+}
+
+.sidebar-container{
+    width: 20vw;
+}
+
+.content-container{
+    width: 80vw;
+}  
+
