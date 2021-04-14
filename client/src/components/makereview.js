@@ -6,6 +6,7 @@ export default class makereview extends Component {
 
 
 
+
     render() {
         return (
 
@@ -55,9 +56,14 @@ export default class makereview extends Component {
                     </div>
                     
                     <div className="D"> 
-                    <p> Recension </p>
-                        <textarea rows = {10} cols = {100}/>
+                        <p> Recension </p>
+                            <textarea rows = {10} cols = {100}/>
                         
+                    </div>
+
+                    <div className="E">
+                        <button className="btn btn-success" onClick={() => {console.log("submitted")}}>Skicka
+                        </button>
                     </div>
             </div>
         )
