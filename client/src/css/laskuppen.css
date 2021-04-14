@@ -14,5 +14,6 @@
 
 .content-container {
     grid-area: b;
+    align-items: center;
 }
 
