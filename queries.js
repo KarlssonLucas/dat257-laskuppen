@@ -25,6 +25,21 @@ response.status(200).json(lala.items.map((book) => {
 }));
 }
 
+
+const submitreview = (request, response) => {
+
+  // TODO::
+
+  // CHECK THAT CORRECT DATA IS SENT
+
+  // CHECK IF BOOK EXISTS IN (OUR) DATABASE
+
+  // ADD REVIEW TO DATABASE
+
+  response.status(200).send(request.body);
+}
+
+
 const getUsers = (request, response) => {
   client.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
     if (error) {
@@ -60,5 +75,6 @@ module.exports = {
   getUsers,
   getUserById,
   deleteUser,
-  bookssearch 
+  bookssearch,
+  submitreview
 }

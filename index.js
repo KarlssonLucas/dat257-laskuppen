@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.get('/api/users', db.getUsers)
 app.get('/api/users/:id', db.getUserById)
 app.get('/api/books/:bookname', db.bookssearch)
+app.post('/api/submitreview',db.submitreview);
 app.delete('/api/users/:id', db.deleteUser)
 
 // Load react frontend
