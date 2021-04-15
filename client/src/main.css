@@ -3,16 +3,11 @@
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr;
     grid-template: 
-    a b;
+    "a b";
 }
 
 .sidebar-container {
-    width: 30%;
-}
-
-.content-container {
-    width: 70%;
-    grid-area: a;
+    grid-area: b;
 }
 
 .content-container {
