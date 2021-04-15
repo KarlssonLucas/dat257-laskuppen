@@ -6,6 +6,7 @@ import makereview from './components/makereview';
 import './main.css';
 import ToplistPage from "./pages/ToplistPage";
 import "./css/laskuppen.css";
+import MakeReviewComponent from './components/makereview';
 
 export default class Laskuppen extends React.Component {
 
@@ -26,7 +27,7 @@ export default class Laskuppen extends React.Component {
                         <Switch>
                             <Route exact path="/toplist" render={(props) => <ToplistPage  {...props} />}/>
                             <Route exact path="/reviews" render={(props) => <ContentTestComponent text="reviews" {...props} />}/>
-                            <Route exact path="/makereview" component={makereview}/>
+                            <Route exact path="/makereview" component={MakeReviewComponent}/>
                             <Route exact path="/books" render={(props) => <ContentTestComponent text="books" {...props} />}/>
                             <Route exact path="/faq" render={(props) => <ContentTestComponent text="faq" {...props} />}/>
                      </Switch>
