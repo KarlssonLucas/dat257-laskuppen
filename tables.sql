@@ -59,7 +59,7 @@ CREATE TABLE Review(
     worthReading BOOLEAN DEFAULT FALSE,
     accepted BOOLEAN DEFAULT FALSE,
     published BOOLEAN DEFAULT FALSE,
-    grade INT,
+    grade INT, --rename rating? (EnTeori)
     summary TEXT,
     timeOfReview DATE,
     UNIQUE (writtenBy,bookId) 

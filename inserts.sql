@@ -21,7 +21,7 @@ INSERT INTO Book VALUES
 (3, 'asd','harry3','jkrow',250,'harry bla bla bla','asdasd.com/asdasd');
 
 INSERT INTO Review VALUES
-(1, 1, 1, true, true, true, 10, 'asd asd asd', NOW() - INTERVAL '10 DAY'),
+(1, 1, 1, true, true, true, 8, 'asd asd asd', NOW() - INTERVAL '10 DAY'),
 (3, 3, 1, true, true, true, 10, 'asd asd asd', NOW() - INTERVAL '15 DAY'),
 (4, 1, 2, true, true, true, 10, 'asd asd asd', NOW()),
 (5, 2, 2, true, true, true, 10, 'asd asd asd', NOW()),

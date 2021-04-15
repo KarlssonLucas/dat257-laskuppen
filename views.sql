@@ -28,3 +28,16 @@ descr, thumbnail
 FROM Review LEFT JOIN Book ON review.id = bookId
 GROUP BY book.id;
 
+-- topplista över mest lästa böckerna
+CREATE OR REPLACE VIEW mostReadBooksToplist AS
+SELECT Book.title, COUNT (Review.bookId) AS freq
+FROM Book LEFT JOIN Review ON Review.bookId = Book.id
+GROUP BY Book.title
+ORDER BY freq DESC; -- filtrera genom att lägga till order by freq DESC/ASC i slutet om vi vill, ASC känns dock irrelevant.
+
+--topplista över högst rankade böckerna
+CREATE OR REPLACE VIEW bestRatedBooksToplist AS
+SELECT Book.title, COALESCE(AVG(grade), 0) AS averageRating
+FROM Book LEFT JOIN Review ON Review.bookId = Book.id
+GROUP BY Book.title
+ORDER BY averageRating DESC;
