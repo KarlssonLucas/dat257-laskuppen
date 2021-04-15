@@ -1,4 +1,5 @@
 .general-styling{
+    max-height: 100vh;
     display: grid;
     grid-template: 
     "a b";

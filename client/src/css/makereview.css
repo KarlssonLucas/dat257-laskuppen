@@ -1,21 +1,38 @@
-.rdiv {
-    margin: auto;
-    width: 900px;
-    border: 3px solid green;
-    padding: 10px;
+.content {
+    height: 100vh;
+    display: grid;
+    grid-template-areas: 
+    "header"
+    "innerContent";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 15fr;
+    background-color: #7339EE;
+    gap: 10px 0px;
+    justify-items: center;    
+
+
 }
 
-.rec {
-    width: 100px;
-    height: 100px;
+.header{
+    grid-area: header;
+    background-color: #aba9af70;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .grid-container {
+    background-color: #FFFFFF;
+    padding: 0.5em 1em 1em 1em;
+    width: 98.5%;
+    height: 98.5%;
+    grid-area: innerContent;
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 1fr;
-    grid-template-rows: 1fr 3fr 3fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 7fr 7fr 1fr;
     gap: 5px 20px;
-    margin-right: 100px;
     grid-template-areas:
       "a a a a"
       "b b c c"
@@ -32,8 +49,8 @@
   .B {
     grid-area: b; 
     display: grid;
-    grid-template-columns: 1fr 0.1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 1fr 1fr ;
     grid-template-areas:
     "score score"
     "likeable likeable";
@@ -61,9 +78,14 @@
       
   }
 
-  .pages { grid-area: pages; }
+  .pages { 
+    grid-area: pages; }
   .author { grid-area: author; }
-  .pic { grid-area: Pic; }
+
+  .pic { 
+    display: flex;
+    align-items: center;
+    grid-area: pic; }
   
   .D { 
     grid-area: d;

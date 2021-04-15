@@ -11,8 +11,7 @@ export default class makereview extends Component {
         return (
 
             <div className="content">
-
-
+                <div className="header"> <h2 style={{color:'white'}}> Skriv Recensioner </h2> </div>
                 <div className="grid-container">
 
                     <div className="A">
@@ -43,7 +42,7 @@ export default class makereview extends Component {
                             <p> Sidor </p>
                             <input type='number' />
                         </div>
-                        <div className="pix">
+                        <div className="pic">
                             <img src="https://pbs.twimg.com/profile_images/1181583065811996673/ylZLdBGL_400x400.jpg" height={100} width={100} />
 
                         </div>
