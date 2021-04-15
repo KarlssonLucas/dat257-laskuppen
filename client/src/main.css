@@ -1,0 +1,15 @@
+.general-styling{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-template: 
+    "a b";
+}
+
+.sidebar-container {
+    grid-area: b;
+}
+
+.content-container {
+    grid-area: b;
+}
