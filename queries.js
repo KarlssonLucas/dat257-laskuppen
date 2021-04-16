@@ -57,7 +57,7 @@ const submitreview = (request, response) => {
     let summary = request.body.review;
 
     client.query(
-      "INSERT INTO Review VALUES(1,1,1,$1,true,$2,$3)",
+      "INSERT INTO Review VALUES(20, 1, 1, $1, true, true, $2, $3, NOW() - INTERVAL '10 DAY')",
       [worthReading, grade, summary],
       (error, results) => {
         if (error) {

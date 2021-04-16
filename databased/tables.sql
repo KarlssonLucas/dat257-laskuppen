@@ -38,7 +38,7 @@ CREATE TABLE Users(
 
 CREATE TABLE ExtraPoints(
     userId INT REFERENCES Users(id),
-    points INT,
+    exPoints INT,
     reason TEXT
 );
 
@@ -47,7 +47,9 @@ CREATE TABLE Book(
     apiLink TEXT,
     title TEXT,
     author TEXT,
-    pages INT
+    pages INT,
+    descr TEXT,
+    thumbnail TEXT
 );
 
 CREATE TABLE Review(
@@ -56,8 +58,10 @@ CREATE TABLE Review(
     writtenBy INT REFERENCES Users(id),
     worthReading BOOLEAN DEFAULT FALSE,
     accepted BOOLEAN DEFAULT FALSE,
+    published BOOLEAN DEFAULT FALSE,
     grade INT,
     summary TEXT,
+    timeOfReview DATE,
     UNIQUE (writtenBy,bookId) 
 );
 
