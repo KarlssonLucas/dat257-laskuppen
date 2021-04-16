@@ -15,6 +15,8 @@ const MakeReviewComponent = () => {
 
     function submitForm(){
 
+        console.log(JSON.stringify(values))
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
