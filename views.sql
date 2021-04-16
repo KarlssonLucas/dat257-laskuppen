@@ -17,13 +17,13 @@ WHERE studentsPoints.points > 0 OR exPoints > 0;
 
 CREATE OR REPLACE VIEW acceptedReviews AS
 SELECT title, firstName || ' ' || lastName as name, author, 
-grade || '/' || '10' as grade, worthReading, summary, accepted, published
+rating || '/' || '10' as grade, worthReading, summary, accepted, published
 FROM Review LEFT JOIN Users on review.id = users.id
 LEFT JOIN Book ON Book.id = bookId; --add where accepted = true for "läs recensioner"
 
 -- hitta böcker
 CREATE OR REPLACE VIEW booksRead AS
-SELECT title, author, pages, ROUND(AVG(grade)) || '/' || 10 as grade,
+SELECT title, author, pages, ROUND(AVG(rating)) || '/' || 10 as grade,
 descr, thumbnail
 FROM Review LEFT JOIN Book ON review.id = bookId
 GROUP BY book.id;
@@ -37,7 +37,7 @@ ORDER BY freq DESC; -- filtrera genom att lägga till order by freq DESC/ASC i s
 
 --topplista över högst rankade böckerna
 CREATE OR REPLACE VIEW bestRatedBooksToplist AS
-SELECT Book.title, COALESCE(AVG(grade), 0) AS averageRating
+SELECT Book.title, COALESCE(AVG(rating), 0) AS averageRating
 FROM Book LEFT JOIN Review ON Review.bookId = Book.id
 GROUP BY Book.title
 ORDER BY averageRating DESC;
