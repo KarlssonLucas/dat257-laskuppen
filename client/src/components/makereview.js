@@ -2,11 +2,27 @@ import '../css/makereview.css';
 import SearchBar from './SearchBar'
 import { useFormHook } from './useFormHook';
 import Reward from 'react-rewards'
-import React, {createRef} from 'react';
+import React from 'react';
 
 
 
 const MakeReviewComponent = () => {
+
+    var reward;
+
+    const press = () => {
+        for(let attr in values){
+            if(values[attr] == null){ // WRONG INPUT
+                reward.punishMe();
+                return false;
+            }
+        }
+
+        reward.rewardMe();
+
+        submitForm();
+        
+    }
 
     const [values,handleChange] = useFormHook({
         title: null,
@@ -17,8 +33,8 @@ const MakeReviewComponent = () => {
         review: null
     });
 
-    function submitForm(reward){
-        
+    function submitForm(){
+       
 
         console.log(JSON.stringify(values))
 
@@ -34,7 +50,7 @@ const MakeReviewComponent = () => {
     }
 
         
-
+  
 
     return (
 
@@ -49,7 +65,12 @@ const MakeReviewComponent = () => {
                 <div className="B">
                     <div className="score">
                         <p> Betyg </p>
-                        <input name="grade" type='number' value={values.grade} onChange={handleChange} max={10} min={0} />
+                        <input name="grade" type='number'  value={values.grade} onChange={(e) => {
+                            var val = e.target.value;
+                            if(val > 10 || val < 1) 
+                                return;
+                            handleChange(e);
+                            }}/>
                     </div>
                     <div className="likeable">
                         <p> Läsvärd </p>
@@ -68,7 +89,7 @@ const MakeReviewComponent = () => {
                     </div>
                     <div className="pages">
                         <p> Sidor </p>
-                        <input name="pages" type='number' value={values.pages} onChange={handleChange}/>
+                        <input name="pages" type='number' value={values.pages} onChange={handleChange} min={0}/>
                     </div>
                     <div className="pic">
                         <img src="https://pbs.twimg.com/profile_images/1181583065811996673/ylZLdBGL_400x400.jpg" height={100} width={100} />
@@ -81,9 +102,8 @@ const MakeReviewComponent = () => {
 
                 </div>
                 <div className="E">
-                    <Reward ref ={ref  => {this.reward = {ref}}}
-                    type='confetti'>
-                    <button className="btn btn-success" onClick={submitForm()}>Skicka</button>
+                    <Reward ref ={ref  => {reward = ref}} type='confetti'>
+                    <button className="btn btn-success" onClick={press}>Skicka</button>
                     </Reward>
                 </div>
             </div>
