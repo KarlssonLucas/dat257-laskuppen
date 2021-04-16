@@ -1,6 +1,10 @@
 import '../css/makereview.css';
 import SearchBar from './SearchBar'
 import { useFormHook } from './useFormHook';
+import Reward from 'react-rewards'
+import React, {createRef} from 'react';
+
+
 
 const MakeReviewComponent = () => {
 
@@ -13,7 +17,8 @@ const MakeReviewComponent = () => {
         review: null
     });
 
-    function submitForm(){
+    function submitForm(reward){
+        
 
         console.log(JSON.stringify(values))
 
@@ -76,8 +81,10 @@ const MakeReviewComponent = () => {
 
                 </div>
                 <div className="E">
-                    <button className="btn btn-success" onClick={submitForm}>Skicka
-                        </button>
+                    <Reward ref ={ref  => {this.reward = {ref}}}
+                    type='confetti'>
+                    <button className="btn btn-success" onClick={submitForm()}>Skicka</button>
+                    </Reward>
                 </div>
             </div>
         </div>
