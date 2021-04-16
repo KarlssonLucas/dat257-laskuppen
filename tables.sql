@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS Review CASCADE;
 DROP TABLE IF EXISTS Book CASCADE;
 DROP TABLE IF EXISTS FrequentlyAskedQuestions CASCADE;
 DROP TABLE IF EXISTS SchoolSettings CASCADE;
+DROP TABLE IF EXISTS Errors CASCADE;
 
 CREATE TABLE School(
     id SERIAL PRIMARY KEY,
@@ -82,3 +83,12 @@ CREATE TABLE SchoolSettings(
     minimumReviewLength INT DEFAULT 1 NOT NULL,
     CHECK (minimumReviewLength > 0)
 );
+
+
+CREATE TABLE Errors (
+    id SERIAL PRIMARY KEY,
+    timeOfError DATE DEFAULT NOW() NOT NULL,
+    userId INT REFERENCES Users(id) NOT NULL,
+    error TEXT NOT NULL,
+    msg TEXT NOT NULL
+)

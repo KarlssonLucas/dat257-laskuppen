@@ -16,6 +16,7 @@ CREATE OR REPLACE FUNCTION insert_new_review() RETURNS trigger AS $$
  
     -- Check if user is making a duplicate review 
     IF EXISTS (SELECT * FROM Review WHERE bookId = book AND writtenBy = writtenBy) THEN
+        INSERT INTO Errors (error,msg,userId) VALUES ('DUPLICATE REVIEW','Book: ' || book,NEW.writtenBy);
         RAISE NOTICE 'DUPLICATE REVIEW: % %', NEW.writtenBy , book;
         RETURN null; -- Return
     END IF;
