@@ -1,3 +1,3 @@
 \i tables.sql
-\i inserts.sql
 \i views.sql
+\i inserts.sql

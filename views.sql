@@ -41,3 +41,9 @@ SELECT Book.title, COALESCE(AVG(rating), 0) AS averageRating
 FROM Book LEFT JOIN Review ON Review.bookId = Book.id
 GROUP BY Book.title
 ORDER BY averageRating DESC;
+
+
+-- View till inserts för att skapa nya reviews
+CREATE OR REPLACE VIEW NewReview AS 
+SELECT title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,summary
+FROM Book RIGHT JOIN Review ON Book.id = Review.bookId;
