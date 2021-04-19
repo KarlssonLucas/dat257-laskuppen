@@ -1,18 +1,18 @@
 import '../css/makereview.css';
-import SearchBar from './SearchBar'
 import { useFormHook } from './useFormHook';
 import Reward from 'react-rewards'
-import React from 'react';
+import React, { useState } from 'react';
 
 
 
 const MakeReviewComponent = () => {
 
     var reward;
+    const [search, searchHandle] = useState("")
 
     const press = () => {
-        for(let attr in values){
-            if(values[attr] == null){ // WRONG INPUT
+        for (let attr in values) {
+            if (values[attr] == null) { // WRONG INPUT
                 reward.punishMe();
                 return false;
             }
@@ -21,10 +21,10 @@ const MakeReviewComponent = () => {
         reward.rewardMe();
 
         submitForm();
-        
+
     }
 
-    const [values,handleChange] = useFormHook({
+    const [values, handleChange] = useFormHook({
         title: null,
         grade: null,
         recommended: null,
@@ -33,8 +33,13 @@ const MakeReviewComponent = () => {
         review: null
     });
 
-    function submitForm(){
-       
+    const doSomething = event => {
+        searchHandle(event.target.value)
+        console.log(search)
+    };
+
+    function submitForm() {
+
 
         console.log(JSON.stringify(values))
 
@@ -44,13 +49,13 @@ const MakeReviewComponent = () => {
             body: JSON.stringify(values)
         };
 
-        fetch("/api/submitreview",requestOptions).then(response => response.json()).then(response => {
-            console.log("FROM BACKEND: " , response);      
+        fetch("/api/submitreview", requestOptions).then(response => response.json()).then(response => {
+            console.log("FROM BACKEND: ", response);
         })
     }
 
-        
-  
+
+
 
     return (
 
@@ -59,18 +64,24 @@ const MakeReviewComponent = () => {
             <div className="grid-container">
 
                 <div className="A">
-                    <SearchBar />
+                    <input
+                        type="text"
+                        id="header-text"
+                        value = {search}
+                        onChange={doSomething}
+                        placeholder="T.ex. Harry Potter och..."
+                    />
                 </div>
 
                 <div className="B">
                     <div className="score">
                         <p> Betyg </p>
-                        <input name="grade" type='number'  value={values.grade} onChange={(e) => {
+                        <input name="grade" type='number' value={values.grade} onChange={(e) => {
                             var val = e.target.value;
-                            if(val > 10 || val < 1) 
+                            if (val > 10 || val < 1)
                                 return;
                             handleChange(e);
-                            }}/>
+                        }} />
                     </div>
                     <div className="likeable">
                         <p> Läsvärd </p>
@@ -81,15 +92,15 @@ const MakeReviewComponent = () => {
                 <div className="C">
                     <div className="title">
                         <p> Titel </p>
-                        <input name="title" type='text' value={values.title} onChange={handleChange}/>
+                        <input name="title" type='text' value={values.title} onChange={handleChange} />
                     </div>
                     <div className="author">
                         <p> Författare </p>
-                        <input name="author" type='text' value={values.author} onChange={handleChange}/>
+                        <input name="author" type='text' value={values.author} onChange={handleChange} />
                     </div>
                     <div className="pages">
                         <p> Sidor </p>
-                        <input name="pages" type='number' value={values.pages} onChange={handleChange} min={0}/>
+                        <input name="pages" type='number' value={values.pages} onChange={handleChange} min={0} />
                     </div>
                     <div className="pic">
                         <img src="https://pbs.twimg.com/profile_images/1181583065811996673/ylZLdBGL_400x400.jpg" height={100} width={100} />
@@ -102,8 +113,8 @@ const MakeReviewComponent = () => {
 
                 </div>
                 <div className="E">
-                    <Reward ref ={ref  => {reward = ref}} type='confetti'>
-                    <button className="btn btn-success" onClick={press}>Skicka</button>
+                    <Reward ref={ref => { reward = ref }} type='confetti'>
+                        <button className="btn btn-success" onClick={press}>Skicka</button>
                     </Reward>
                 </div>
             </div>

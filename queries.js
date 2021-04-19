@@ -35,30 +35,21 @@ const bookssearch = async (request, response) => {
 };
 
 const submitreview = (request, response) => {
-  let badInput = [];
-
-  for (const [key, value] of Object.entries(request.body)) {
-    if (value === null) {
-      badInput[key] = value;
-    }
-  }
-  console.log(badInput);
-  console.log(Object.keys(badInput).length)
-  console.log(request.body);
-
-
-  // CHECK THAT CORRECT DATA IS SENT
-
-  if (Object.keys(badInput).length > 0) {
-    response.status(400).send(badInput);
-  } else {
+    let title = request.body.title;
+    let pages = request.body.pages;
+    let review = request.body.review;
+    let author = request.body.author;
+    let apilink = "google/asd";
+    let descr = "desc";
+    let thumbnail = "img_src";
+    let writtenBy = 1;
     let worthReading = request.body.recommended === "true";
-    let grade = parseInt(request.body.grade);
+    let rating = parseInt(request.body.grade);
     let summary = request.body.review;
 
     client.query(
-      "INSERT INTO Review VALUES(20, 1, 1, $1, true, true, $2, $3, NOW() - INTERVAL '10 DAY')",
-      [worthReading, grade, summary],
+      "INSERT INTO newreview VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
+      [title,author,pages,apilink,descr,thumbnail,writtenBy,worthReading,rating,summary],
       (error, results) => {
         if (error) {
           throw error;
@@ -66,7 +57,7 @@ const submitreview = (request, response) => {
         response.status(200).send(results.rows);
       }
     );
-  }
+    console.log("EPIC")
   // ADD REVIEW TO DATABASE
 };
 
