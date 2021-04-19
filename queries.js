@@ -16,24 +16,6 @@ const client = new Client({
 
 client.connect();
 
-const bookssearch = async (request, response) => {
-  const id = request.params.bookname;
-  const lala = await fetch(
-    "https://www.googleapis.com/books/v1/volumes?q=" +
-      id +
-      "&key=" +
-      process.env.GOOGLEAPI_KEY +
-      "&maxResults=40"
-  ).then((resp) => resp.json());
-  response.status(200).json(
-    lala.items.map((book) => {
-      return {
-        title: book.volumeInfo.title,
-      };
-    })
-  );
-};
-
 const submitreview = (request, response) => {
     let title = request.body.title;
     let pages = request.body.pages;
@@ -61,6 +43,23 @@ const submitreview = (request, response) => {
   // ADD REVIEW TO DATABASE
 };
 
+const bookssearch = async (request, response) => {
+const id = request.params.bookname
+const lala = await fetch("https://www.googleapis.com/books/v1/volumes?q="+id+"&key="+process.env.GOOGLEAPI_KEY+"&maxResults=40")
+.then((resp) => resp.json());
+response.status(200).json(lala.items.map((book) => {
+    return {
+        id: book.id,
+        title: book.volumeInfo.title,
+        authors: book.volumeInfo.authors,
+        pageCount: book.volumeInfo.pageCount,
+        publishedDate: book.volumeInfo.publishedDate,
+        description: book.volumeInfo.description,
+        thumbnail: book.volumeInfo.imageLinks
+    };
+}));
+}
+
 const getUsers = (request, response) => {
   client.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
     if (error) {
@@ -69,6 +68,24 @@ const getUsers = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
+
+const mostReadBook = (request, response) => {
+  client.query("SELECT book.id, title FROM Review LEFT JOIN Book ON bookId = Book.id WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') AND review.worthReading = true GROUP BY book.id ORDER BY COUNT(*) DESC LIMIT 1", (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const userReadMost = (request, response) => {
+  client.query("SELECT Users.id, firstName || ' ' || lastName AS name, SUM(COALESCE(pages,0)) as points FROM Review LEFT JOIN Users ON writtenBy = users.id LEFT JOIN Book ON Book.id = bookId WHERE accepted = true AND review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY users.id ORDER BY points DESC LIMIT 1", (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
 const getUserById = (request, response) => {
   const id = parseInt(request.params.id);
@@ -92,10 +109,44 @@ const deleteUser = (request, response) => {
   });
 };
 
+function escape(input, match){
+  if(match.includes(input.toLowerCase())){
+    return true;
+  }
+  return false;
+}
+
+function error(text){
+  return {error:text};
+}
+
+const toplist = (request, response) => {
+   const filter = request.query.filter
+   const order = request.query.order
+
+   const match1 = ["name","points","classname","booksread"];
+   const match2 = ["asc","desc"];
+    
+   if(escape(filter,match1) && escape(order,match2)){
+   client.query('SELECT * FROM topliststudent ORDER BY ' + filter + ' ' + order,(error, results) => {
+     if (error) {
+       throw error
+     }
+     response.status(200).json(results.rows)
+   })
+  }
+  else{
+    response.status(400).json(error("Wrong parameters"))
+  }
+ }
+
 module.exports = {
   getUsers,
   getUserById,
   deleteUser,
   bookssearch,
   submitreview,
-};
+  mostReadBook,
+  userReadMost,
+  toplist
+}
