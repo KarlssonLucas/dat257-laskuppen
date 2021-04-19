@@ -102,6 +102,17 @@ const getUserById = (request, response) => {
   });
 };
 
+const getUserPoints = (request, response) => {
+  const id = parseInt(request.params.id);
+
+  client.query("SELECT * FROM studentsPoints WHERE uidd = $1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
 const deleteUser = (request, response) => {
   const id = parseInt(request.params.id);
 
@@ -146,6 +157,7 @@ const toplist = (request, response) => {
 
 module.exports = {
   getUsers,
+  getUserPoints,
   getUserById,
   deleteUser,
   bookssearch,
