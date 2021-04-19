@@ -1,16 +1,14 @@
 import React from 'react';
 import Sidebar from './components/Sidebar';
-import ContentTestComponent from './components/ContentTestComponent';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import makereview from './components/makereview';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ToplistPage from './pages/ToplistPage';
+import MakeReviewPage from './pages/MakeReviewPage';
+import BooksPage from './pages/BooksPage';
+import FAQPage from './pages/FAQPage';
 import './main.css';
-import ToplistPage from "./pages/ToplistPage";
-import "./css/laskuppen.css";
-import MakeReviewComponent from './components/makereview';
+import './css/laskuppen.css';
 
 export default class Laskuppen extends React.Component {
-
-
 
     constructor(props) {
         super();
@@ -26,10 +24,9 @@ export default class Laskuppen extends React.Component {
                     <div className="content-container">
                         <Switch>
                             <Route exact path="/toplist" render={(props) => <ToplistPage  {...props} />}/>
-                            <Route exact path="/reviews" render={(props) => <ContentTestComponent text="reviews" {...props} />}/>
-                            <Route exact path="/makereview" component={MakeReviewComponent}/>
-                            <Route exact path="/books" render={(props) => <ContentTestComponent text="books" {...props} />}/>
-                            <Route exact path="/faq" render={(props) => <ContentTestComponent text="faq" {...props} />}/>
+                            <Route exact path="/makereview" render={(props) => <MakeReviewPage  {...props} />}/>
+                            <Route exact path="/books" render={(props) => <BooksPage {...props} />}/>
+                            <Route exact path="/faq" render={(props) => <FAQPage  {...props} />}/>
                      </Switch>
                     </div>
                 </div>
