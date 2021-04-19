@@ -91,15 +91,14 @@ handleChange: function(e) {
         })
     }
 
-
-
-
     return (
 
-        <div className="content">
-            <div className="header"> <h2 style={{ color: 'white' }}> Skriv Recensioner </h2> </div>
+        <div className="m-page-general-styling">
+            <div className="m-page-header">
+                 <h2> Skriv Recensioner </h2> 
+            </div>
+        <div className="m-page-inner-container">
             <div className="grid-container">
-
                 <div className="A">
                     <input
                         type="text"
@@ -154,6 +153,7 @@ handleChange: function(e) {
                         <button className="btn btn-success" onClick={press}>Skicka</button>
                     </Reward>
                 </div>
+            </div>
             </div>
         </div>
     )

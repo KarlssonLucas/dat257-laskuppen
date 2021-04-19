@@ -19,12 +19,6 @@ export default class Sidebar extends React.Component {
                         cName: "nav-text"
                     },
                     {
-                        title: "Läs Recensioner",
-                        path: "/reviews",
-                        icon: <FontAwesomeIcon icon={faHome} color='white' size='lg' />,
-                        cName: "nav-text"
-                    },
-                    {
                         title: "Skriv Recension",
                         path: "/makereview",
                         icon: <FontAwesomeIcon icon={faHome} color='white' size='lg' />,
