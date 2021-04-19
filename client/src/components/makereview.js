@@ -8,7 +8,47 @@ import React, { useState } from 'react';
 const MakeReviewComponent = () => {
 
     var reward;
-    const [search, searchHandle] = useState("")
+
+    const [books, setBooks] = useState([]);
+    const [search, setSearch] = useState("");
+    const [authorAndTitle, setAuthorAndTitle] = useState([]);
+
+
+    const fetchedBooks = () => {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json'},
+        };
+
+        const result = fetch("/api/books/".concat(search), requestOptions).then(response => response.json()).then(response => {
+            console.log("FROM BACKEND: ", response);
+        })
+        setBooks(result);
+    
+    }
+
+
+    /*handleSubmit: function(txt) {
+    this.props.onChange(txt);
+},
+handleChange: function(e) {
+    var value = e.target.value;
+    this.setState({message: value});
+    this.handleSubmit(value);
+},*/
+
+
+    const updateSearch = event => {
+        setSearch({search: event.target.value}, () => {console.log(search)} );
+        
+    
+        fetchedBooks();
+        console.log(books)
+        console.log(search)
+    };
+
+
 
     const press = () => {
         for (let attr in values) {
@@ -33,10 +73,7 @@ const MakeReviewComponent = () => {
         review: null
     });
 
-    const doSomething = event => {
-        searchHandle(event.target.value)
-        console.log(search)
-    };
+    
 
     function submitForm() {
 
@@ -68,7 +105,7 @@ const MakeReviewComponent = () => {
                         type="text"
                         id="header-text"
                         value = {search}
-                        onChange={doSomething}
+                        onChange={updateSearch}
                         placeholder="T.ex. Harry Potter och..."
                     />
                 </div>

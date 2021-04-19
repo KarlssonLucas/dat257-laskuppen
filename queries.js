@@ -47,6 +47,7 @@ const bookssearch = async (request, response) => {
 const id = request.params.bookname
 const lala = await fetch("https://www.googleapis.com/books/v1/volumes?q="+id+"&key="+process.env.GOOGLEAPI_KEY+"&maxResults=40")
 .then((resp) => resp.json());
+console.log(request)
 response.status(200).json(lala.items.map((book) => {
     return {
         id: book.id,
