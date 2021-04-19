@@ -14,7 +14,7 @@ const MakeReviewComponent = () => {
     const [authorAndTitle, setAuthorAndTitle] = useState([]);
 
 
-    const fetchedBooks = () => {
+    const fetchedBooks = (search) => {
 
         const requestOptions = {
             method: 'GET',
@@ -24,7 +24,8 @@ const MakeReviewComponent = () => {
         const result = fetch("/api/books/".concat(search), requestOptions).then(response => response.json()).then(response => {
             console.log("FROM BACKEND: ", response);
         })
-        setBooks(result);
+
+        return result;
     
     }
 
@@ -39,13 +40,14 @@ handleChange: function(e) {
 },*/
 
 
-    const updateSearch = event => {
-        setSearch({search: event.target.value}, () => {console.log(search)} );
-        
-    
-        fetchedBooks();
-        console.log(books)
-        console.log(search)
+    const updateSearch = event =>  {
+        setSearch(event.target.value);
+
+        if(event.target.value.length >= 5){
+            let books = fetchedBooks(event.target.value);
+            console.log(books)
+        }
+       
     };
 
 
