@@ -7,45 +7,40 @@ import React, { useState } from 'react';
 
 const MakeReviewComponent = () => {
 
-    var reward;
+    var reward,search;
+    var fetching = false; 
 
     const [books, setBooks] = useState([]);
-    const [search, setSearch] = useState("");
-    const [authorAndTitle, setAuthorAndTitle] = useState([]);
 
-
-    const fetchedBooks = (search) => {
+    const fetchedBooks = async (str) => {
 
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json'},
         };
 
-        const result = fetch("/api/books/".concat(search), requestOptions).then(response => response.json()).then(response => {
-            console.log("FROM BACKEND: ", response);
-        })
+        await fetch("/api/books/".concat(str), requestOptions).then(response => response.json()).then(response => {
+                console.log("SET BOOKS: " , response);
+                setBooks(response);
+            }
+        );
 
-        return result;
-    
+        if(str != search){
+            fetchedBooks(search);
+        }else{
+            fetching=false;
+        }
+
+
     }
 
-
-    /*handleSubmit: function(txt) {
-    this.props.onChange(txt);
-},
-handleChange: function(e) {
-    var value = e.target.value;
-    this.setState({message: value});
-    this.handleSubmit(value);
-},*/
-
-
     const updateSearch = event =>  {
-        setSearch(event.target.value);
 
-        if(event.target.value.length >= 5){
-            let books = fetchedBooks(event.target.value);
-            console.log(books)
+        search = event.target.value;
+
+        if(!fetching && event.target.value.length >= 5){
+            fetching = true;           
+            fetchedBooks(event.target.value);
         }
        
     };
@@ -105,10 +100,10 @@ handleChange: function(e) {
                     <input
                         type="text"
                         id="header-text"
-                        value = {search}
                         onChange={updateSearch}
                         placeholder="T.ex. Harry Potter och..."
                     />
+                    {(books[0]==undefined) ? "No book" : JSON.stringify(books[0].title) + " " + JSON.stringify(books[0].authors) + " " + JSON.stringify(books[0].pageCount)}
                 </div>
 
                 <div className="B">
