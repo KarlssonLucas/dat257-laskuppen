@@ -17,34 +17,34 @@ const client = new Client({
 client.connect();
 
 const submitreview = (request, response) => {
-    let title = request.body.title;
-    let pages = request.body.pages;
-    let review = request.body.review;
-    let author = request.body.author;
-    let apilink = "google/asd";
-    let descr = "desc";
-    let thumbnail = "img_src";
-    let writtenBy = 1;
-    let worthReading = request.body.recommended === "true";
-    let rating = parseInt(request.body.grade);
-    let summary = request.body.review;
+  let title = request.body.title;
+  let pages = request.body.pages;
+  let review = request.body.review;
+  let author = request.body.author;
+  let apilink = "google/asd";
+  let descr = "desc";
+  let thumbnail = "img_src";
+  let writtenBy = 1;
+  let worthReading = request.body.recommended === "true";
+  let rating = parseInt(request.body.grade);
+  let summary = request.body.review;
 
-    client.query(
-      "INSERT INTO newreview VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-      [title,author,pages,apilink,descr,thumbnail,writtenBy,worthReading,rating,summary],
-      (error, results) => {
-        if (error) {
-          throw error;
-        }
-        response.status(200).send(results.rows);
+  client.query(
+    "INSERT INTO newreview VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
+    [title, author, pages, apilink, descr, thumbnail, writtenBy, worthReading, rating, summary],
+    (error, results) => {
+      if (error) {
+        throw error;
       }
-    );
-    console.log("EPIC")
+      response.status(200).send(results.rows);
+    }
+  );
+  console.log("EPIC")
   // ADD REVIEW TO DATABASE
 };
 
 const bookssearch = async (request, response) => {
-  
+
   let id = request.params.bookname.replace(" ", "+")
 
   const books = await fetch("https://www.googleapis.com/books/v1/volumes?q=" + id + "&projection=full&key=" + process.env.GOOGLEAPI_KEY + "&maxResults=40")
@@ -133,36 +133,36 @@ const deleteUser = (request, response) => {
   });
 };
 
-function escape(input, match){
-  if(match.includes(input.toLowerCase())){
+function escape(input, match) {
+  if (match.includes(input.toLowerCase())) {
     return true;
   }
   return false;
 }
 
-function error(text){
-  return {error:text};
+function error(text) {
+  return { error: text };
 }
 
 const toplist = (request, response) => {
-   const filter = request.query.filter
-   const order = request.query.order
+  const filter = request.query.filter
+  const order = request.query.order
 
-   const match1 = ["name","points","classname","booksread"];
-   const match2 = ["asc","desc"];
-    
-   if(escape(filter,match1) && escape(order,match2)){
-   client.query('SELECT * FROM topliststudent ORDER BY ' + filter + ' ' + order,(error, results) => {
-     if (error) {
-       throw error
-     }
-     response.status(200).json(results.rows)
-   })
+  const match1 = ["name", "points", "classname", "booksread"];
+  const match2 = ["asc", "desc"];
+
+  if (escape(filter, match1) && escape(order, match2)) {
+    client.query('SELECT * FROM topliststudent ORDER BY ' + filter + ' ' + order, (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    })
   }
-  else{
+  else {
     response.status(400).json(error("Wrong parameters"))
   }
- }
+}
 
 module.exports = {
   getUsers,
