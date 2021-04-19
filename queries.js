@@ -44,21 +44,24 @@ const submitreview = (request, response) => {
 };
 
 const bookssearch = async (request, response) => {
-const id = request.params.bookname
-const lala = await fetch("https://www.googleapis.com/books/v1/volumes?q="+id+"&key="+process.env.GOOGLEAPI_KEY+"&maxResults=40")
-.then((resp) => resp.json());
-console.log(request)
-response.status(200).json(lala.items.map((book) => {
-    return {
-        id: book.id,
-        title: book.volumeInfo.title,
-        authors: book.volumeInfo.authors,
-        pageCount: book.volumeInfo.pageCount,
-        publishedDate: book.volumeInfo.publishedDate,
-        description: book.volumeInfo.description,
-        thumbnail: book.volumeInfo.imageLinks
-    };
-}));
+    const id = request.params.bookname
+    const lala = await fetch("https://www.googleapis.com/books/v1/volumes?q="+id+"&key="+process.env.GOOGLEAPI_KEY+"&maxResults=40")
+    .then((resp) => resp.json());
+    if (lala.items == undefined) {
+        response.status(200).json("No results"); 
+    } else {
+        response.status(200).json(lala.items.map((book) => {
+            return {
+                id: book.id,
+                title: book.volumeInfo.title,
+                authors: book.volumeInfo.authors,
+                pageCount: book.volumeInfo.pageCount,
+                publishedDate: book.volumeInfo.publishedDate,
+                description: book.volumeInfo.description,
+                thumbnail: book.volumeInfo.imageLinks
+            };
+        }));
+    }
 }
 
 const getUsers = (request, response) => {
