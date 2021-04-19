@@ -1,70 +1,72 @@
-.grid-container {
-    background-color: #FFFFFF;
-    padding: 1em 1em 1em 1em;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 7fr 7fr 1fr;
-    gap: 5px 20px;
-    grid-template-areas:
-      "a a a a"
-      "b b c c"
-      "d d d d"
-      "e e e e";
-  }
-  
-  .A { 
-      grid-area: a;
-      background-color: #ECDFDF;
-      border-radius: 9px 9px 9px 9px;
-      border: solid 2px #C4C4C4; }
-  
-  .B {
-    grid-area: b; 
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
-    grid-template-rows: 1fr 1fr ;
-    grid-template-areas:
-    "score score"
-    "likeable likeable";
-    background-color: #FAEBD7;
-    border-radius: 9px 9px 9px 9px;
-    border: solid 2px #C4C4C4;
-    
+.page-container {
+  background-color: var(--white);
+  padding: 1em;
+  display: grid;
+  grid-template-areas: "a a a a" "b b c c" "d d d d" "e e e e";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 7fr 7fr 1fr;
+  gap: 5px 20px;
 }
-  .score { grid-area: score;}
-  .likeable { grid-area: likeable;}
-  
-  .C {
-    grid-area: c;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-      "title title pic"
-      "author author pic"
-      "pages pages pic";
-      background-color: #FAEBD7;
-      border-radius: 9px 9px 9px 9px;
-      border: solid 2px #C4C4C4;
-      
-  }
 
-  .pages { 
-    grid-area: pages; }
-  .author { grid-area: author; }
+.A {
+  grid-area: a;
+  background-color: #ECDFDF;
+  border-radius: 9px 9px 9px 9px;
+  border: solid 2px #C4C4C4;
+}
 
-  .pic { 
-    display: flex;
-    align-items: center;
-    grid-area: pic; }
-  
-  .D { 
-    grid-area: d;
-    background-color: #FAEBD7;
-    border-radius: 9px 9px 9px 9px;
-    border: solid 2px #C4C4C4; }
+.B {
+  grid-area: b;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "score score" "likeable likeable";
+  background-color: #FAEBD7;
+  border-radius: 9px 9px 9px 9px;
+  border: solid 2px #C4C4C4;
+}
 
-  .E { 
-     grid-area: e;
-   }
+.score {
+  grid-area: score;
+}
+
+.likeable {
+  grid-area: likeable;
+}
+
+.C {
+  grid-area: c;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "title title pic" "author author pic" "pages pages pic";
+  background-color: #FAEBD7;
+  border-radius: 9px 9px 9px 9px;
+  border: solid 2px #C4C4C4;
+}
+
+.pages {
+  grid-area: pages;
+}
+
+.author {
+  grid-area: author;
+}
+
+.pic {
+  display: flex;
+  align-items: center;
+  grid-area: pic;
+}
+
+.D {
+  grid-area: d;
+  background-color: #FAEBD7;
+  border-radius: 9px 9px 9px 9px;
+  border: solid 2px #C4C4C4;
+}
+
+.E {
+  grid-area: e;
+}

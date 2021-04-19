@@ -100,7 +100,7 @@ handleChange: function(e) {
                  <h2> Skriv Recensioner </h2> 
             </div>
         <div className="m-page-inner-container">
-            <div className="grid-container">
+            <div className="page-container">
                 <div className="A">
                     <input
                         type="text"

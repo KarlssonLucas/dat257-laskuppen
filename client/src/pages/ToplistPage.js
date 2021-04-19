@@ -7,7 +7,7 @@ export default class ToplistPage extends React.Component {
         return (
             <div className="m-page-general-styling">
                 <div className="m-page-header">
-                    <h2> Topplista </h2> 
+                    <h2> Topplista </h2>
                 </div>
                 <div className="m-page-inner-container">
                     <div className="page-content">
