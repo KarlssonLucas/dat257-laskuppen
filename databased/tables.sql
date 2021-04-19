@@ -84,6 +84,10 @@ CREATE TABLE SchoolSettings(
     CHECK (minimumReviewLength > 0)
 );
 
+CREATE TABLE RecommendedBooks(
+    schoolId INT REFERENCES School(id) PRIMARY KEY NOT NULL,
+    bookId INT REFERENCES Book(id) NOT NULL 
+);
 
 CREATE TABLE Errors (
     id SERIAL PRIMARY KEY,
