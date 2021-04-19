@@ -1,5 +1,63 @@
 .page-content {
-    background-color: #FFFFFF;
+  background-color: var(--white);
     width: 100%;
     height: 100%;
+    padding: 1em;
+    display: grid;
+    grid-template-areas: "top-reader-card top-book-card my-points my-recommendation" "e e e e";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
+    gap:1em;
+
+}
+
+.top-reader-card, .top-book-card, .my-points, .my-recommendation {
+  background-color: #ECDFDF;
+  border-radius: 9px 9px 9px 9px;
+  border: solid 2px #C4C4C4;
+}
+
+.top-reader-card {
+    grid-area: top-reader-card;
+}
+
+.top-book-card {
+    grid-area: top-book-card;
+}
+
+.my-points {
+    grid-area: my-points;
+}
+
+.my-recommendation {
+    grid-area: my-recommendation;
+}
+
+.top-lists {
+  grid-area: top-lists;
+  background-color: #ECDFDF;
+  border-radius: 9px 9px 9px 9px;
+  border: solid 2px #C4C4C4;
+}
+
+hr {
+width:90%;
+border-color:black;
+margin:0px;
+margin-left:1em;
+}
+
+.card-title {
+    margin:0px;
+    margin-left:1em;
+}
+
+.card-text {
+    margin:0px;
+    margin-left:2em;
+    margin-top: 2em;
+}
+
+.pic {
+    margin:0px;
 }

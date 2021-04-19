@@ -11,7 +11,37 @@ export default class ToplistPage extends React.Component {
                 </div>
                 <div className="m-page-inner-container">
                     <div className="page-content">
-                        Content
+
+                        <div className="top-reader-card">
+                            <p className="card-title"> Veckans toppläsare </p>
+                            <hr />
+                            <p className="card-text"> Borges </p>
+                        </div>
+
+                        <div className="top-book-card">
+                            <p className="card-title"> Veckans bok </p>
+                            <hr />
+                            <p className="card-text"> Fiktioner </p>
+                        </div>
+
+                        <div className="my-points">
+                            <p className="card-title"> Mina poäng </p>
+                            <hr />
+                            <p className="card-text"> 42 </p>
+                        </div>
+
+
+                        <div className="my-recommendation">
+                            <p className="card-title"> Rekommendation </p>
+                            <hr />
+                            <p className="card-text"> Alefen </p>
+                        </div>
+
+                        <div className="E">
+                            <p > Topplistor </p>
+                            <p>Elev, klass etc</p>
+                        </div>
+
                     </div>
                 </div>
             </div>
