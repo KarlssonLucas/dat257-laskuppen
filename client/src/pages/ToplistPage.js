@@ -6,13 +6,14 @@ const ToplistPage = () => {
     const [points,setPoints] = useState(0)
     const [topReaderOfWeek, settopReaderOfWeek] = useState([])
     const [topWeeklyBook, setTopWeeklyBook] = useState("")
-
+    const [topList, setTopList] = useState([])
 
     useEffect(() =>{
         fetchPoints();
         fetchTopReader();
         fetchTopWeeklyBook();
     },[]);
+
 
     const userReq = {
         method: 'GET',
@@ -29,7 +30,9 @@ const ToplistPage = () => {
         })
     }
     
+
     const topReq = {
+
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }, 
     }
@@ -38,6 +41,8 @@ const ToplistPage = () => {
         fetch("/api/toplist?filter=points&order=desc", topReq).then(response => response.json()).then(response => {
             console.log("TOP READER: ", response);
             settopReaderOfWeek(response[0])
+            setTopList(response)
+            console.log("OUR STATE", topList)
         })
     }
 
