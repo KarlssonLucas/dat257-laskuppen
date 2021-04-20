@@ -10,33 +10,33 @@ export default class FAQPage extends React.Component {
                     <h2> FAQ </h2>
                 </div>
                 <div className="m-page-inner-container">
-                    <div className="page-content">
+                    <div className="faq-page-content">
 
-                        <div className="question1">
+                        <div className="faq-question1">
                             <p > Vad får man poäng för? </p>
                         </div>
 
-                        <div className="question2">
+                        <div className="faq-question2">
                             Vad får man poäng för?
                         </div>
 
-                        <div className="question3">
+                        <div className="faq-question3">
                             Vad får man poäng för?
                         </div>
 
-                        <div className="question4">
+                        <div className="faq-question4">
                             Vad får man poäng för?
                         </div>
 
-                        <div className="question5">
+                        <div className="faq-question5">
                             Vad får man poäng för?
                         </div>
 
-                        <div className="question6">
+                        <div className="faq-question6">
                             Vad får man poäng för?
                         </div>
 
-                        <div className="question7">
+                        <div className="faq-question7">
                             Vad får man poäng för?
                         </div>
 
