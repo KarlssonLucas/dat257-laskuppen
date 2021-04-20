@@ -122,6 +122,17 @@ const getUserPoints = (request, response) => {
   });
 };
 
+const searchBookDb = (request, response) => {
+  const id = '%' + request.params.bookname + '%';
+
+  client.query("SELECT * FROM book WHERE lower(title) LIKE $1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
 const deleteUser = (request, response) => {
   const id = parseInt(request.params.id);
 
@@ -184,5 +195,6 @@ module.exports = {
   getClassPoints,
   mostReadBook,
   userReadMost,
-  toplist
+  toplist,
+  searchBookDb
 }
