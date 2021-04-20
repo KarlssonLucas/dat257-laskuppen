@@ -1,7 +1,27 @@
+import fetch from 'node-fetch';
 import React from 'react';
 import "../css/faqpage.css";
 
 export default class FAQPage extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.printQuestions = this.printQuestions.bind(this);
+    }
+
+
+    printQuestions = () => {
+            let arr = [];
+            for(let i=0; i< 50; i++){
+                arr.push(
+                <div className="faq-question">
+                    <p>Q{i+1}: Vad får man poäng för? </p>
+                </div>
+            )
+            }
+            return arr;
+        }
+    
 
     render() {
         return (
@@ -11,35 +31,7 @@ export default class FAQPage extends React.Component {
                 </div>
                 <div className="m-page-inner-container">
                     <div className="faq-page-content">
-
-                        <div className="faq-question1">
-                            <p > Vad får man poäng för? </p>
-                        </div>
-
-                        <div className="faq-question2">
-                            Vad får man poäng för?
-                        </div>
-
-                        <div className="faq-question3">
-                            Vad får man poäng för?
-                        </div>
-
-                        <div className="faq-question4">
-                            Vad får man poäng för?
-                        </div>
-
-                        <div className="faq-question5">
-                            Vad får man poäng för?
-                        </div>
-
-                        <div className="faq-question6">
-                            Vad får man poäng för?
-                        </div>
-
-                        <div className="faq-question7">
-                            Vad får man poäng för?
-                        </div>
-
+                        {this.printQuestions()}
                     </div>
                 </div>
             </div>
