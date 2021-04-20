@@ -112,6 +112,7 @@ const getUserById = (request, response) => {
 };
 
 const getUserPoints = (request, response) => {
+  console.log(request.params.id)
   const id = parseInt(request.params.id);
 
   client.query("SELECT * FROM studentsPoints WHERE uidd = $1", [id], (error, results) => {
@@ -147,6 +148,7 @@ function error(text) {
 const toplist = (request, response) => {
   const filter = request.query.filter
   const order = request.query.order
+
 
   const match1 = ["name", "points", "classname", "booksread"];
   const match2 = ["asc", "desc"];
