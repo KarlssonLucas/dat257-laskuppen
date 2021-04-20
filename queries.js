@@ -47,7 +47,7 @@ const bookssearch = async (request, response) => {
 
   let id = request.params.bookname.replace(" ", "+")
 
-  const books = await fetch("https://www.googleapis.com/books/v1/volumes?q=" + id + "&projection=full&key=" + process.env.GOOGLEAPI_KEY + "&maxResults=40")
+  const books = await fetch("https://www.googleapis.com/books/v1/volumes?q=" + id + "&key=" + process.env.GOOGLEAPI_KEY + "&maxResults=40")
     .then((resp) => resp.json());
 
   let result = books.items.map((book) => {
