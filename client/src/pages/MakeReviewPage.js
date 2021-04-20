@@ -20,7 +20,7 @@ export default class MakeReviewPage extends React.Component {
         return (
             <div className="m-page-general-styling">
             <div className="m-page-header">
-                <h2> Skriv Recension </h2> 
+                <h2> {(this.state.book == null) ? "Välj bok" : "Skriv Recension"} </h2> 
             </div>
             <div className="m-page-inner-container">
                 {(this.state.book == null) ? <ChooseBookComponent setBook={this.setBook}/> : <MakeReviewComponent book={this.state.book}/>}

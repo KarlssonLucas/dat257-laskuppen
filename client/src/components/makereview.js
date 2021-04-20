@@ -27,8 +27,8 @@ const MakeReviewComponent = (props) => {
         title: props.book.title,
         grade: null,
         recommended: null,
-        author: props.book.authors,
-        pages: props.book.pageCount,
+        author: props.book.author,
+        pages: props.book.pages,
         review: null
     });
 
