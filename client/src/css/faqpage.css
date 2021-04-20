@@ -1,49 +1,16 @@
 .faq-page-content {
-    background-color: var(--white);;
+    background-color: var(--white);
     width: 100%;
     height: 100%;
     padding: 1em;
-    display: grid;
-    grid-template-areas: "question1" "question2" "question3" "question4" "question5" "question6" "question7";
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr;
-    gap:1em;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
-.faq-question1, .faq-question2, .faq-question3, .faq-question4, .faq-question5, .faq-question6, .faq-question7 {
+.faq-question{
   background-color: var(--background);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
-}
-
-.faq-question1 {
-    grid-template-areas: question1;
-}
-
-.faq-question2 {
-    grid-template-areas: question2;
-}
-
-.faq-question3 {
-    grid-template-areas: question3;
-}
-
-.faq-question4 {
-    grid-template-areas: question4;
-}
-
-.faq-question5 {
-    grid-template-areas: question5;
-}
-
-.faq-question6 {
-    grid-template-areas: question6;
-}
-
-.faq-question7 {
-    grid-template-areas: question7;
-}
-
-.faq-answer1 {
-    grid-template-areas: answer1;
+  margin: 1em;
 }
