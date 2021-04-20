@@ -1,4 +1,4 @@
-const { request } = require("express");
+const { request, response } = require("express");
 const fetch = require("node-fetch");
 
 if (!process.env.DATABASE_URL) {
@@ -164,6 +164,16 @@ const toplist = (request, response) => {
   }
 }
 
+const getClassPoints =(request, response) => {
+  client.query("select className, SUM(points) as points  from topliststudent GROUP by className order by points desc" ,(error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).send(`User deleted with ID: ${id}`);
+  });
+  
+}
+
 module.exports = {
   getUsers,
   getUserPoints,
@@ -171,6 +181,7 @@ module.exports = {
   deleteUser,
   bookssearch,
   submitreview,
+  getClassPoints,
   mostReadBook,
   userReadMost,
   toplist
