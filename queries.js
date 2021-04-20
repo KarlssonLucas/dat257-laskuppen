@@ -57,10 +57,10 @@ const bookssearch = async (request, response) => {
       return {
         id: book.id,
         title: book.volumeInfo.title,
-        authors: book.volumeInfo.authors,
-        pageCount: book.volumeInfo.pageCount,
+        author: book.volumeInfo.authors,
+        pages: book.volumeInfo.pageCount,
         publishedDate: book.volumeInfo.publishedDate,
-        description: book.volumeInfo.description,
+        desc: book.volumeInfo.description,
         thumbnail: book.volumeInfo.imageLinks
       };
   });
