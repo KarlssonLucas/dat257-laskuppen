@@ -38,15 +38,39 @@
   background-color: var(--topListColor);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
+  grid-template-areas: "top-list-top-part top-list-bottom-part";
   grid-template-rows: 1fr 5fr;
-  grid-template-areas: "tlbp-names tlbp-classes tlbp-points tlbp-read-books"
 }
 
 .top-list-top-part {
+    grid-template-areas: "tltp-header tltp-names tltp-classes tltp-points tltp-read-books";
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.tltp-header {
+    grid-area: tltp-header;
+}
+
+.tltp-names {
+        grid-area: tltp-names;
+}
+
+.tltp-classes {
+        grid-area: tltp-classes;
+}
+
+.tltp-points {
+        grid-area: tltp-points;
+}
+
+.tltp-read-books {
+    grid-area: tltp-read-books;
+}
+
+
+
 .top-list-bottom-part {
+    grid-template-areas: "tlbp-names tlbp-classes tlbp-points tlbp-read-books";
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
