@@ -37,9 +37,15 @@ export default class ToplistPage extends React.Component {
                             <p className="card-text"> Alefen </p>
                         </div>
 
-                        <div className="E">
-                            <p > Topplistor </p>
-                            <p>Elev, klass etc</p>
+                        <div className="top-lists">
+
+                            <div className="top-list-top-part">
+                                <p > Topplistor: </p>
+                            </div>
+
+                            <div className="top-list-bottom-part">
+                                <p>Elev, klass etc</p>
+                            </div>
                         </div>
 
                     </div>

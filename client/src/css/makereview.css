@@ -10,9 +10,9 @@
 
 .A {
   grid-area: a;
-  background-color: #ECDFDF;
+  background-color: var(--background);
   border-radius: 9px 9px 9px 9px;
-  border: solid 2px #C4C4C4;
+  border: var(--borders);
 }
 
 .B {
@@ -21,9 +21,9 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "score score" "likeable likeable";
-  background-color: #FAEBD7;
+  background-color: var(--background);
   border-radius: 9px 9px 9px 9px;
-  border: solid 2px #C4C4C4;
+  border: var(--borders);
 }
 
 .score {
@@ -41,9 +41,9 @@
   grid-template-rows: 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas: "title title pic" "author author pic" "pages pages pic";
-  background-color: #FAEBD7;
+  background-color: var(--background);
   border-radius: 9px 9px 9px 9px;
-  border: solid 2px #C4C4C4;
+  border: var(--borders);
 }
 
 .pages {
@@ -62,9 +62,9 @@
 
 .D {
   grid-area: d;
-  background-color: #FAEBD7;
+  background-color: var(--background);
   border-radius: 9px 9px 9px 9px;
-  border: solid 2px #C4C4C4;
+  border: var(--borders);
 }
 
 .E {

@@ -4,7 +4,11 @@
     --pageHeaderColor: #8c6ad3;
     --pageInnerColor: #7339EE;
     --white: white;
-    --navBgColor: #060b26;
+    --navBgColor: hsl(231, 73%, 9%);
+    --background: #FAEBD7;
+    --borders: solid 2px #C4C4C4;
+    --topListColor:  #d69467;
+
 }
 
 /* in Laskuppen-Component */
