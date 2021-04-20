@@ -43,6 +43,16 @@ const submitreview = (request, response) => {
   // ADD REVIEW TO DATABASE
 };
 
+const latestReview = (request, response) => {
+    client.query("select Book.id, title from review left join book on bookId = Book.id group by Book.id order by max(timeofreview) desc limit 20", (error, results) => {
+    if (error) {
+        throw error
+    }
+    response.status(200).json(results.rows)
+    })
+}
+    
+
 const bookssearch = async (request, response) => {
 
   let id = request.params.bookname.replace(" ", "+")
@@ -83,7 +93,7 @@ const getUsers = (request, response) => {
 };
 
 const mostReadBook = (request, response) => {
-  client.query("SELECT book.id, title FROM Review LEFT JOIN Book ON bookId = Book.id WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') AND review.worthReading = true GROUP BY book.id ORDER BY COUNT(*) DESC LIMIT 1", (error, results) => {
+  client.query("SELECT book.id, title FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)*COUNT(*)) DESC LIMIT 1", (error, results) => {
     if (error) {
       throw error
     }
@@ -115,7 +125,7 @@ const getUserPoints = (request, response) => {
   console.log(request.params.id)
   const id = parseInt(request.params.id);
 
-  client.query("SELECT * FROM studentsPoints WHERE uidd = $1", [id], (error, results) => {
+  client.query("SELECT * FROM allStudPoints WHERE id = $1", [id], (error, results) => {
     if (error) {
       throw error;
     }
@@ -198,5 +208,6 @@ module.exports = {
   mostReadBook,
   userReadMost,
   toplist,
-  searchBookDb
+  searchBookDb,
+  latestReview
 }

@@ -5,11 +5,13 @@ const ToplistPage = () => {
 
     const [points,setPoints] = useState(0)
     const [topReaderOfWeek, settopReaderOfWeek] = useState([])
+    const [topWeeklyBook, setTopWeeklyBook] = useState("")
 
 
     useEffect(() =>{
         fetchPoints();
         fetchTopReader();
+        fetchTopWeeklyBook();
     },[]);
 
     const userReq = {
@@ -20,7 +22,7 @@ const ToplistPage = () => {
 
     const fetchPoints = () =>{
 
-        fetch("/api/users/2/points", userReq).then(response => response.json()).then(response => {
+        fetch("/api/users/1/points", userReq).then(response => response.json()).then(response => {
             console.log("USER: ", response);
             console.log(response[0].points)
             setPoints(response[0].points)
@@ -36,6 +38,12 @@ const ToplistPage = () => {
         fetch("/api/toplist?filter=points&order=desc", topReq).then(response => response.json()).then(response => {
             console.log("TOP READER: ", response);
             settopReaderOfWeek(response[0])
+        })
+    }
+
+    const fetchTopWeeklyBook = () => {
+        fetch("/api/mostreadbook", topReq).then(response => response.json()).then(response => {
+        setTopWeeklyBook(response[0].title)
         })
     }
 
@@ -59,7 +67,7 @@ const ToplistPage = () => {
                     <div className="top-book-card">
                         <p className="card-title"> Veckans bok </p>
                         <hr />
-                        <p className="card-text"> Fiktioner </p>
+                        <p className="card-text"> {topWeeklyBook} </p>
                     </div>
 
                     <div className="my-points">

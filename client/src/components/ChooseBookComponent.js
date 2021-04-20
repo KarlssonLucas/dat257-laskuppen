@@ -25,7 +25,8 @@ const ChooseBookComponent = (props) => {
         }
         );
 
-        fetch("/api/mostreadbook", requestOptions).then(response => response.json()).then(response => {
+        fetch("/api/latestreviews", requestOptions).then(response => response.json()).then(response => {
+            console.log(response);
             setRecentBooks(response);
         }
         );

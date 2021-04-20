@@ -15,6 +15,13 @@ LEFT JOIN ExtraPoints ON userId = id
 LEFT JOIN Classes ON Classes.id = classId
 WHERE studentsPoints.points > 0 OR exPoints > 0;
 
+CREATE OR REPLACE VIEW allStudPoints AS 
+SELECT Users.id, 
+className, COALESCE(studentsPoints.points, 0)+COALESCE(exPoints,0) as points, COALESCE(booksRead, 0) as booksRead
+FROM Users LEFT JOIN studentsPoints ON uidd = id 
+LEFT JOIN ExtraPoints ON userId = id 
+LEFT JOIN Classes ON Classes.id = classId;
+
 CREATE OR REPLACE VIEW acceptedReviews AS
 SELECT title, firstName || ' ' || lastName as name, author, 
 rating || '/' || '10' as grade, worthReading, summary, accepted, published
