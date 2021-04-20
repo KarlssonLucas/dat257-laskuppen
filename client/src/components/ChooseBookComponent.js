@@ -52,13 +52,15 @@ const ChooseBookComponent = (props) => {
             <div>
 
             {books.map((book) => {
+                console.log(book.thumbnail);
                 return (
                     <div className="cbc-book" onClick={() => {props.setBook(book)}}>
                     <div className="cbc-book-title">Titel: {book.title}</div>                
                     <div className="cbc-book-author">Författare: {book.authors}</div>                
                     <div className="cbc-book-pages">Sidor: {book.pageCount}</div>                
                     <div className="cbc-book-img">
-                    <img src="https://www.asme.org/getmedia/c2c8ea5a-b690-4ba7-92bb-34bd1432862b/book_guide_hero_books.png?width=300&height=315&ext=.png" />                
+                        
+                    <img src={(book.thumbnail ) ? book.thumbnail.thumbnail : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"} />                
                 
                         </div> 
                     </div>
