@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import "../css/toplistpage.css";
 
 const ToplistPage = () => {
@@ -7,29 +7,37 @@ const ToplistPage = () => {
     const [topReaderOfWeek, settopReaderOfWeek] = useState([])
 
 
+    useEffect(() =>{
+        fetchPoints();
+        fetchTopReader();
+    },[]);
+
     const userReq = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         id:2
     }
 
-    fetch("/api/users/2/points", userReq).then(response => response.json()).then(response => {
-        console.log("USER: ", response);
-        console.log(response[0].points)
-        setPoints(response[0].points)
-    })
+    const fetchPoints = () =>{
+
+        fetch("/api/users/2/points", userReq).then(response => response.json()).then(response => {
+            console.log("USER: ", response);
+            console.log(response[0].points)
+            setPoints(response[0].points)
+        })
+    }
     
     const topReq = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }, 
     }
 
-    fetch("/api/toplist?filter=points&order=desc", topReq).then(response => response.json()).then(response => {
-        console.log("TOP READER: ", response);
-        settopReaderOfWeek(response[0])
-    })
-
-
+    const fetchTopReader = () => {
+        fetch("/api/toplist?filter=points&order=desc", topReq).then(response => response.json()).then(response => {
+            console.log("TOP READER: ", response);
+            settopReaderOfWeek(response[0])
+        })
+    }
 
     return (
 
