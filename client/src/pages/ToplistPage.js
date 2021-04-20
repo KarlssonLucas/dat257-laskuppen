@@ -5,12 +5,14 @@ const ToplistPage = () => {
 
     const [points,setPoints] = useState(0)
     const [topReaderOfWeek, settopReaderOfWeek] = useState([])
+    const [topList, setTopList] = useState([])
 
 
     useEffect(() =>{
         fetchPoints();
         fetchTopReader();
     },[]);
+
 
     const userReq = {
         method: 'GET',
@@ -20,14 +22,16 @@ const ToplistPage = () => {
 
     const fetchPoints = () =>{
 
-        fetch("/api/users/2/points", userReq).then(response => response.json()).then(response => {
+        fetch("/api/users/1/points", userReq).then(response => response.json()).then(response => {
             console.log("USER: ", response);
             console.log(response[0].points)
             setPoints(response[0].points)
         })
     }
     
+
     const topReq = {
+
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }, 
     }
@@ -36,8 +40,12 @@ const ToplistPage = () => {
         fetch("/api/toplist?filter=points&order=desc", topReq).then(response => response.json()).then(response => {
             console.log("TOP READER: ", response);
             settopReaderOfWeek(response[0])
+            setTopList(response)
+            console.log("OUR STATE", topList)
         })
     }
+
+
 
     return (
 
@@ -59,7 +67,7 @@ const ToplistPage = () => {
                     <div className="top-book-card">
                         <p className="card-title"> Veckans bok </p>
                         <hr />
-                        <p className="card-text"> Fiktioner </p>
+                        <p className="card-text"> {JSON.stringify(topList)} </p>
                     </div>
 
                     <div className="my-points">
