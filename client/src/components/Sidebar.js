@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faTrophy,faAward, faBook, faGraduationCap, faHome, faPenNib, faQuestionCircle, faUser, faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
- import '../css/sidebar.css';
-
+import './css/sidebar.css';
 
 export default class Sidebar extends React.Component {
 
@@ -15,50 +14,63 @@ export default class Sidebar extends React.Component {
                     {
                         title: "Topplista",
                         path: "/toplist",
-                        icon: <FontAwesomeIcon icon={faHome} color='white' size='lg' />,
-                        cName: "nav-text"
+                        icon: <FontAwesomeIcon icon={faAward} color='white' />
                     },
                     {
-                        title: "Skriv Recension",
+                        title: "Recensera",
                         path: "/makereview",
-                        icon: <FontAwesomeIcon icon={faHome} color='white' size='lg' />,
-                        cName: "nav-text"
+                        icon: <FontAwesomeIcon icon={faPenNib} color='white' />
                     },
                     {
                         title: "Böcker",
                         path: "/books",
-                        icon: <FontAwesomeIcon icon={faHome} color='white' size='lg' />,
-                        cName: "nav-text"
+                        icon: <FontAwesomeIcon icon={faBook} color='white' />
+                    },
+                    {
+                        title: "Profil",
+                        path: "/profile",
+                        icon: <FontAwesomeIcon icon={faUser} color='white' size='lg' />
                     },
                     {
                         title: "FAQ",
                         path: "/faq",
-                        icon: <FontAwesomeIcon icon={faHome} color='white' size='lg' />,
-                        cName: "nav-text"
+                        icon: <FontAwesomeIcon icon={faQuestionCircle} color='white' size='lg' />
+                    },
+                    {
+                        title: "Lärare",
+                        path: "/teacher",
+                        icon: <FontAwesomeIcon icon={faGraduationCap} color='green' size='lg' />
+                    },
+                    {
+                        title: "Admin",
+                        path: "/admin",
+                        icon: <FontAwesomeIcon icon={faUserShield} color='red' size='lg' />
                     }
                 ]
         };
     }
 
-    render() {        
+    render() {
         return (
-            <nav className={'nav-menu'}>
-                <h1 className='logo'> Laskuppen </h1>
-                <ul className="nav-menu-items">
+            <div className="sidebar-menu">             
+                <h1 className='sidebar-logo'> <FontAwesomeIcon icon={faTrophy} color='white' size='lg' />Läskuppen </h1>
+                <ul className="sidebar-menu-items">
                     {this.state.sidebarData.map((item, index) => {
                         return (
-                            <li key={index} className={item.cName}>
+                            <li key={index} className="sidebar-item">
                                 <Link to={item.path}>
-                                    {item.icon}
-                                    <span className="nav-menu-item-title">
-                                        {item.title}
-                                    </span>
+                                    <div className="sidebar-link">
+                                        {item.icon}
+                                        <span className="sidebar-link-text">
+                                            {item.title}
+                                        </span>
+                                    </div>
                                 </Link>
                             </li>
                         )
                     })}
                 </ul>
-            </nav>
+            </div>
         )
     }
 }

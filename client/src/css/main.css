@@ -7,9 +7,9 @@
     --navBgColor: hsl(231, 73%, 9%);
     --background: #FAEBD7;
     --borders: solid 2px #C4C4C4;
-    --topListColor:  #d69467;
+    --topListColor: #d69467;
     --barcolor: #ECDFDF;
-
+    --backgroundHover: #faddb7;
 }
 
 /* in Laskuppen-Component */
@@ -33,7 +33,7 @@
 
 /* in each Page-Component*/
 
-.m-page-general-styling {
+.main-page-general-styling {
     height: 100%;
     width: 100%;
     display: grid;
@@ -45,7 +45,7 @@
     /* SHOULD NOT SEE RED ANYWHERE!! */
 }
 
-.m-page-header {
+.main-page-header {
     grid-area: header;
     display: flex;
     background-color: var(--pageHeaderColor);
@@ -55,14 +55,15 @@
     align-items: center;
 }
 
-.m-page-header h2 {
+.main-page-header h2 {
     color: var(--white);
 }
 
-.m-page-inner-container {
+.main-page-inner-container {
     grid-area: innerContent;
     width: 100%;
-    max-height: 93.75vh; /* 15fr/16fr */
+    max-height: 93.75vh;
+    /* 15fr/16fr */
     padding: 1em;
     display: grid;
     background-color: var(--pageInnerColor);

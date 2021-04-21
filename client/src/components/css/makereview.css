@@ -1,4 +1,4 @@
-.page-container {
+.mrc-page-content {
   background-color: var(--white);
   padding: 1em;
   display: grid;
@@ -8,14 +8,14 @@
   gap: 5px 20px;
 }
 
-.A {
+.mrc-A {
   grid-area: a;
   background-color: var(--background);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
 }
 
-.B {
+.mrc-B {
   grid-area: b;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -26,15 +26,15 @@
   border: var(--borders);
 }
 
-.score {
+.mrc-score {
   grid-area: score;
 }
 
-.likeable {
+.mrc-likeable {
   grid-area: likeable;
 }
 
-.C {
+.mrc-C {
   grid-area: c;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -46,27 +46,27 @@
   border: var(--borders);
 }
 
-.pages {
+.mrc-pages {
   grid-area: pages;
 }
 
-.author {
+.mrc-author {
   grid-area: author;
 }
 
-.pic {
+.mrc-pic {
   display: flex;
   align-items: center;
   grid-area: pic;
 }
 
-.D {
+.mrc-D {
   grid-area: d;
   background-color: var(--background);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
 }
 
-.E {
+.mrc-E {
   grid-area: e;
 }

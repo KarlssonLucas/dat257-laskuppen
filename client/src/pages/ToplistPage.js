@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import "../css/toplistpage.css";
+import React, { useEffect, useState } from "react";
+import "./css/toplistpage.css";
 
 const ToplistPage = () => {
     const [points, setPoints] = useState(0);
@@ -40,36 +40,36 @@ const ToplistPage = () => {
 
 
     return (
-        <div className="m-page-general-styling">
-            <div className="m-page-header">
+        <div className="main-page-general-styling">
+            <div className="main-page-header">
                 <h2> Topplista </h2>
             </div>
-            <div className="m-page-inner-container">
-                <div className="page-content">
-                    <div className="top-reader-card">
-                        <p className="card-title"> Veckans toppläsare </p>
+            <div className="main-page-inner-container">
+                <div className="tp-page-content">
+                    <div className="tp-top-reader-card">
+                        <p className="tp-card-title"> Veckans toppläsare </p>
                         <hr />
-                        <p className="card-text">
+                        <p className="tp-card-text">
                             {topReaderOfWeek.name} : {topReaderOfWeek.points}
                         </p>
                     </div>
 
-                    <div className="top-book-card">
-                        <p className="card-title"> Veckans bok </p>
+                    <div className="tp-top-book-card">
+                        <p className="tp-card-title"> Veckans bok </p>
                         <hr />
-                        <p className="card-text"> {topWeeklyBook} </p>
+                        <p className="tp-card-text"> {topWeeklyBook} </p>
                     </div>
 
-                    <div className="my-points">
-                        <p className="card-title"> Mina poäng </p>
+                    <div className="tp-my-points">
+                        <p className="tp-card-title"> Mina poäng </p>
                         <hr />
-                        <p className="card-text"> {points} </p>
+                        <p className="tp-card-text"> {points} </p>
                     </div>
 
-                    <div className="my-recommendation">
-                        <p className="card-title">Bokrekommendation</p>
+                    <div className="tp-my-recommendation">
+                        <p className="tp-card-title">Bokrekommendation</p>
                         <hr />
-                        <div className="inner-recommendation">
+                        <div className="tp-inner-recommendation">
                             <div className="cbc-book-title">Titel: {recBook.title}</div>
                             <div className="cbc-book-author">Författare: {recBook.author}</div>
                             <div className="cbc-book-pages">Sidor: {recBook.pages}</div>
@@ -79,15 +79,15 @@ const ToplistPage = () => {
                         </div>
                     </div>
 
-                    <div className="top-lists">
-                        <div className="top-list-header">
-                            <label className="filter-label"> Filter: </label>
-                            <button className="nameButton" onClick = {() => handleClick("name","asc")}> Elev</button>
-                            <button className="classButton" onClick = {() => handleClick("classname","desc")}> Klass </button>
-                            <button className="pointsButton" onClick = {() => handleClick("points","desc")}> Poäng </button>
-                            <button className="readBooksButton"onClick = {() => handleClick("booksread","desc")}> Lästa böcker </button>
+                    <div className="tp-top-lists">
+                        <div className="tp-top-list-header">
+                            <label className="tp-filter-label"> Filter: </label>
+                            <button className="tp-nameButton" onClick = {() => handleClick("name","asc")}> Elev</button>
+                            <button className="tp-classButton" onClick = {() => handleClick("classname","desc")}> Klass </button>
+                            <button className="tp-pointsButton" onClick = {() => handleClick("points","desc")}> Poäng </button>
+                            <button className="tp-readBooksButton"onClick = {() => handleClick("booksread","desc")}> Lästa böcker </button>
                         </div>
-                        <div className="tableDiv">
+                        <div className="tp-tableDiv">
                             <table class="table table-holder">
                                 <thead>
                                     <tr>
@@ -117,16 +117,3 @@ const ToplistPage = () => {
 };
 
 export default ToplistPage;
-
-/*<>
-                <ul className="list-group list-group-flush">
-                  {topList.map((listItem) => (
-                    <li className="list-group-item">
-                      <span className="student">Elev: {listItem.name}</span>
-                      <span className="class">Klass: {listItem.classname}</span>
-                      <span className="points">Poäng: {listItem.points} </span>
-                      <span className="read-books">Lästa böcker: {listItem.booksread}</span>
-                    </li>
-                  ))}
-                </ul>
-              </>*/

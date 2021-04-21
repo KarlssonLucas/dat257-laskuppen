@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import React from 'react';
-import "../css/faqpage.css";
+import "./css/faqpage.css";
 
 export default class FAQPage extends React.Component {
 
@@ -25,11 +25,11 @@ export default class FAQPage extends React.Component {
 
     render() {
         return (
-            <div className="m-page-general-styling">
-                <div className="m-page-header">
+            <div className="main-page-general-styling">
+                <div className="main-page-header">
                     <h2> FAQ </h2>
                 </div>
-                <div className="m-page-inner-container">
+                <div className="main-page-inner-container">
                     <div className="faq-page-content">
                         {this.printQuestions()}
                     </div>

@@ -1,18 +1,28 @@
-import '../css/makereview.css';
-import { useFormHook } from './useFormHook';
+import './css/makereview.css';
 import Reward from 'react-rewards'
 import React, { useState } from 'react';
+import { Redirect } from "react-router-dom";
 
+const useFormHook = (formValues) => {
+    const [values, handleChange] = useState(formValues);
 
+    return [values, e => {
+        handleChange({
+            ...values,
+            [e.target.name]: e.target.value
+        });
+    }];
+};
 
 const MakeReviewComponent = (props) => {
 
     var reward;
     const press = () => {
         console.log(values);
-
         for (let attr in values) {
-            if (values[attr] == null) { // WRONG INPUT
+            if(attr == "desc")
+                continue
+            if (values[attr] == null || values[attr] == "") { // WRONG INPUT
                 reward.punishMe();
                 return false;
             }
@@ -24,6 +34,8 @@ const MakeReviewComponent = (props) => {
 
     }
 
+    const [submitted,handleSubmit] = useState(false)
+    
     const [values, handleChange] = useFormHook({
         title: props.book.title,
         grade: null,
@@ -31,32 +43,31 @@ const MakeReviewComponent = (props) => {
         author: props.book.author,
         pages: props.book.pages,
         thumbnail: props.book.thumbnail,
-        desc: props.book.desc,
-        review: null
+        desc: (props.book.desc) ? props.book.desc : "Ingen beskrivning tillgänglig.",
+        review: null,
     });
 
-
-    console.log(values);
-    console.log(props.book);
-    function submitForm() {
-
-        
-
+    function submitForm(e) {
+        console.log(e)
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
+
         console.log("BODY: " + JSON.stringify(values));
          fetch("/api/submitreview", requestOptions).then(response => response.json()).then(response => {
-            console.log("FROM BACKEND: ", response);
+            setTimeout(()=>{handleSubmit(true)},1000);
         })
+
+        
     }
 
     return (
-        <div className="page-container">
-            <div className="B">
-                <div className="score">
+        <div className="mrc-page-content">
+            {(submitted) ? <Redirect to="/toplist"/> : null}
+            <div className="mrc-B">
+                <div className="mrc-score">
                     <p> Betyg </p>
                     <input name="grade" type='number' value={values.grade} onChange={(e) => {
                         var val = e.target.value;
@@ -65,36 +76,36 @@ const MakeReviewComponent = (props) => {
                         handleChange(e);
                     }} />
                 </div>
-                <div className="likeable">
+                <div className="mrc-likeable">
                     <p> Läsvärd </p>
                     <input name="recommended" type='radio' value={true} onChange={handleChange} />Ja--
                         <input name="recommended" type='radio' value={false} onChange={handleChange} />Nej
                         </div>
             </div>
-            <div className="C">
-                <div className="title">
+            <div className="mrc-C">
+                <div className="mrc-title">
                     <p> Titel </p>
                     <input name="title" type='text' value={values.title} onChange={handleChange} />
                 </div>
-                <div className="author">
+                <div className="mrc-author">
                     <p> Författare </p>
                     <input name="author" type='text' value={values.author} onChange={handleChange} />
                 </div>
-                <div className="pages">
+                <div className="mrc-pages">
                     <p> Sidor </p>
                     <input name="pages" type='number' value={values.pages} onChange={handleChange} min={0} />
                 </div>
-                <div className="pic">
-                    <img src="https://pbs.twimg.com/profile_images/1181583065811996673/ylZLdBGL_400x400.jpg" height={100} width={100} />
+                <div className="mrc-pic">
+                    <img src={values.thumbnail}/>
 
                 </div>
             </div>
-            <div className="D">
+            <div className="mrc-D">
                 <p> Recension </p>
                 <textarea name="review" type='text' value={values.review} onChange={handleChange} rows={10} cols={100} />
 
             </div>
-            <div className="E">
+            <div className="mrc-E">
                 <Reward ref={ref => { reward = ref }} type='confetti'>
                     <button className="btn btn-success" onClick={press}>Skicka</button>
                 </Reward>

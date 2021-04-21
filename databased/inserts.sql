@@ -16,10 +16,10 @@ INSERT INTO Users VALUES
 (DEFAULT,'bar@gmail.com','Bar','Barson','qwe123',1,1);
 
 INSERT INTO NewReview (title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,summary) VALUES
-('Nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 1, true, 10, 'brabok1'),
-('Nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 10, 'brabok1'),
-('You liked nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 10, 'brabok1'),
-('Dont catch this ples', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, true, 10, 'brabok1');
+('Nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 1, true, 5, 'brabok1'),
+('Nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 4, 'brabok1'),
+('You liked nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 6, 'brabok1'),
+('Dont catch this ples', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, true, 7, 'brabok1');
 
 INSERT INTO ExtraPoints VALUES 
 (2, 20, 'asdasd'),
@@ -28,3 +28,5 @@ INSERT INTO ExtraPoints VALUES
 INSERT INTO RecommendedBooks VALUES
 (1, 1),
 (1, 3);
+
+UPDATE Review SET accepted = true;

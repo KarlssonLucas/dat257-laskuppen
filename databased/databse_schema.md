@@ -1,3 +1,4 @@
+## OBS! NEEDS AN UPDATE x)
 
 School(<ins>id</ins>, name)
 

@@ -1,4 +1,4 @@
-.cbc-page-container {
+.cbc-page-content {
     background-color: #FFFFFF;
     width: 100%;
     height: 100%;
@@ -17,7 +17,7 @@
 }
 
 .cbc-search-result, .cbc-best-result, .cbc-recent-result {
-    height:75vh;
+    height: 75vh;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -38,17 +38,18 @@
     grid-area: d;
 }
 
-.cbc-book:hover{
-    background-color: #faddb7;
-    cursor:pointer;
+.cbc-book:hover {
+    background-color: var(--backgroundHover);
+    cursor: pointer;
 }
+
 .cbc-book {
     display: grid;
     grid-template-areas: "a d" "b d" "c d";
     grid-template-columns: 4fr 2fr;
     grid-template-rows: 1fr 1fr 1fr;
     padding: 1em;
-    width:100%;
+    width: 100%;
     background-color: var(--background);
     border: var(--borders);
 }

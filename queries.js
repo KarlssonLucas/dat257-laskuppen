@@ -30,10 +30,7 @@ const submitreview = (request, response) => {
   let apilink = "google/asd";
   let descr = request.body.desc;
   let thumbnail;
-  console.log(request.body.thumbnail)
   if(request.body.thumbnail.thumbnail){
-    console.log("THUMB")
-
     thumbnail = request.body.thumbnail.thumbnail;
   }
   else{
@@ -55,9 +52,6 @@ const submitreview = (request, response) => {
       response.status(200).send(results.rows);
     }
   );
-  
-  console.log("EPIC")
-  // ADD REVIEW TO DATABASE
 };
 
 const latestReview = (request, response) => {
@@ -110,7 +104,7 @@ const getUsers = (request, response) => {
 };
 
 const mostReadBook = (request, response) => {
-  client.query("SELECT book.id, title,author,pages,descr AS desc,thumbnail FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)*COUNT(*)) DESC LIMIT 1", (error, results) => {
+  client.query("SELECT book.id, title,author,pages,descr AS desc,thumbnail FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)/COUNT(*)) DESC LIMIT 20", (error, results) => {
     if (error) {
       throw error
     }
@@ -150,7 +144,6 @@ const getRandomRecommendation = (request, response) => {
 };
 
 const getUserPoints = (request, response) => {
-  console.log(request.params.id)
   const id = parseInt(request.params.id);
 
   client.query("SELECT * FROM allStudPoints WHERE id = $1", [id], (error, results) => {

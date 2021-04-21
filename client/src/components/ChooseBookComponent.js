@@ -1,8 +1,5 @@
-import '../css/choosebook.css';
-import { useFormHook } from './useFormHook';
+import './css/choosebook.css';
 import React, { useState, useEffect } from 'react';
-
-
 
 const ChooseBookComponent = (props) => {
 
@@ -131,11 +128,10 @@ const ChooseBookComponent = (props) => {
 
 
     return (
-        <div className="cbc-page-container">
+        <div className="cbc-page-content">
             <div className="cbc-search-book">
                 <input
                     type="text"
-                    id="header-text"
                     onChange={updateSearch}
                     placeholder="T.ex. Harry Potter och..."
                 />
@@ -159,12 +155,10 @@ const ChooseBookComponent = (props) => {
 
             </div>
 
-
         </div>
 
     )
+
 }
 
-
 export default ChooseBookComponent;
-

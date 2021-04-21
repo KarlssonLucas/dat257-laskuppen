@@ -1,8 +1,8 @@
 import React from 'react';
-import MakeReviewComponent from '../components/makereview';
+import MakeReviewComponent from '../components/MakeReviewComponent';
 import ChooseBookComponent from '../components/ChooseBookComponent';
 
-export default class MakeReviewPage extends React.Component {
+export default class ReviewPage extends React.Component {
 
     constructor() {
         super();
@@ -18,11 +18,11 @@ export default class MakeReviewPage extends React.Component {
 
     render() {
         return (
-            <div className="m-page-general-styling">
-            <div className="m-page-header">
+            <div className="main-page-general-styling">
+            <div className="main-page-header">
                 <h2> {(this.state.book == null) ? "Välj bok" : "Skriv Recension"} </h2> 
             </div>
-            <div className="m-page-inner-container">
+            <div className="main-page-inner-container">
                 {(this.state.book == null) ? <ChooseBookComponent setBook={this.setBook}/> : <MakeReviewComponent book={this.state.book}/>}
             </div>
         </div>
