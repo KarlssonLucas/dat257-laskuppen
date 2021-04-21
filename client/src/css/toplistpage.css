@@ -36,6 +36,15 @@
   grid-area: my-recommendation;
 }
 
+.inner-recommendation {
+  display: grid;
+  grid-template-areas: "a d" "b d" "c d";
+  grid-template-columns: 4fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  padding: 1em;
+  width:100%;
+}
+
 .top-lists {
   grid-area: top-lists;
   background: var(--white);
@@ -124,6 +133,16 @@ hr {
 .card-title {
   margin: 0px;
   margin-left: 1em;
+}
+
+.cbc-book-img {
+  grid-area: d;
+  padding: 1em;
+}
+
+.cbc-book-img img {
+  width: 100%;
+  height: 100%;
 }
 
 

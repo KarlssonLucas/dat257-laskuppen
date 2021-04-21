@@ -66,11 +66,18 @@ const ToplistPage = () => {
                         <p className="card-text"> {points} </p>
                     </div>
 
-          <div className="my-recommendation">
-            <p className="card-title"> Rekommendation </p>
-            <hr />
-            <p className="card-text"> {recBook.title}, {recBook.author}, {recBook.thumbnail}</p>
-          </div>
+                    <div className="my-recommendation">
+                        <p className="card-title">Bokrekommendation</p>
+                        <hr />
+                        <div className="inner-recommendation">
+                            <div className="cbc-book-title">Titel: {recBook.title}</div>
+                            <div className="cbc-book-author">Författare: {recBook.author}</div>
+                            <div className="cbc-book-pages">Sidor: {recBook.pages}</div>
+                            <div className="cbc-book-img">
+                                <img size= '1g' src={(recBook.thumbnail) ? ((recBook.thumbnail.thumbnail) ? recBook.thumbnail.thumbnail : recBook.thumbnail): "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"} />
+                            </div>
+                        </div>
+                    </div>
 
                     <div className="top-lists">
                         <div className="top-list-header">
