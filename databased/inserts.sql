@@ -25,3 +25,6 @@ INSERT INTO ExtraPoints VALUES
 (2, 20, 'asdasd'),
 (1, 10, 'asd');
 
+INSERT INTO RecommendedBooks VALUES
+(1, 1),
+(1, 3);

@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS Book CASCADE;
 DROP TABLE IF EXISTS FrequentlyAskedQuestions CASCADE;
 DROP TABLE IF EXISTS SchoolSettings CASCADE;
 DROP TABLE IF EXISTS Errors CASCADE;
+DROP TABLE IF EXISTS RecommendedBooks CASCADE;
 
 CREATE TABLE School(
     id SERIAL PRIMARY KEY,
@@ -85,8 +86,9 @@ CREATE TABLE SchoolSettings(
 );
 
 CREATE TABLE RecommendedBooks(
-    schoolId INT REFERENCES School(id) PRIMARY KEY NOT NULL,
-    bookId INT REFERENCES Book(id) NOT NULL 
+    schoolId INT REFERENCES School(id),
+    bookId INT REFERENCES Book(id),
+    PRIMARY KEY (schoolId, bookId)
 );
 
 CREATE TABLE Errors (
