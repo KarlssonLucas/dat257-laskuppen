@@ -8,8 +8,9 @@ import React, { useState } from 'react';
 const MakeReviewComponent = (props) => {
 
     var reward;
-
     const press = () => {
+        console.log(values);
+
         for (let attr in values) {
             if (values[attr] == null) { // WRONG INPUT
                 reward.punishMe();
@@ -29,6 +30,8 @@ const MakeReviewComponent = (props) => {
         recommended: null,
         author: props.book.author,
         pages: props.book.pages,
+        thumbnail: props.book.thumbnail,
+        desc: props.book.desc,
         review: null
     });
 
@@ -37,16 +40,15 @@ const MakeReviewComponent = (props) => {
     console.log(props.book);
     function submitForm() {
 
-
-        console.log(JSON.stringify(values))
+        
 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
-
-        fetch("/api/submitreview", requestOptions).then(response => response.json()).then(response => {
+        console.log("BODY: " + JSON.stringify(values));
+         fetch("/api/submitreview", requestOptions).then(response => response.json()).then(response => {
             console.log("FROM BACKEND: ", response);
         })
     }

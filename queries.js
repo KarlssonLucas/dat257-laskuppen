@@ -20,14 +20,30 @@ const submitreview = (request, response) => {
   let title = request.body.title;
   let pages = request.body.pages;
   let review = request.body.review;
-  let author = request.body.author;
+  let author;
+
+  if(Array.isArray(request.body.author)){
+    author = JSON.stringify(request.body.author)
+  }else{
+    author = request.body.author;
+  }
   let apilink = "google/asd";
-  let descr = "desc";
-  let thumbnail = "img_src";
+  let descr = request.body.desc;
+  let thumbnail;
+  console.log(request.body.thumbnail)
+  if(request.body.thumbnail.thumbnail){
+    console.log("THUMB")
+
+    thumbnail = request.body.thumbnail.thumbnail;
+  }
+  else{
+    thumbnail = request.body.thumbnail;
+  }
   let writtenBy = 1;
   let worthReading = request.body.recommended === "true";
   let rating = parseInt(request.body.grade);
   let summary = request.body.review;
+
 
   client.query(
     "INSERT INTO newreview VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
@@ -39,12 +55,13 @@ const submitreview = (request, response) => {
       response.status(200).send(results.rows);
     }
   );
+  
   console.log("EPIC")
   // ADD REVIEW TO DATABASE
 };
 
 const latestReview = (request, response) => {
-    client.query("select Book.id, title from review left join book on bookId = Book.id group by Book.id order by max(timeofreview) desc limit 20", (error, results) => {
+    client.query("select Book.id, title, author,pages,descr AS desc,thumbnail from review left join book on bookId = Book.id group by Book.id order by max(timeofreview) desc limit 20", (error, results) => {
     if (error) {
         throw error
     }
@@ -93,7 +110,7 @@ const getUsers = (request, response) => {
 };
 
 const mostReadBook = (request, response) => {
-  client.query("SELECT book.id, title FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)*COUNT(*)) DESC LIMIT 1", (error, results) => {
+  client.query("SELECT book.id, title,author,pages,descr AS desc,thumbnail FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)*COUNT(*)) DESC LIMIT 1", (error, results) => {
     if (error) {
       throw error
     }

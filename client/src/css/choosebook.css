@@ -39,8 +39,8 @@
 }
 
 .cbc-book:hover{
-background-color: #faddb7;
-cursor:pointer;
+    background-color: #faddb7;
+    cursor:pointer;
 }
 .cbc-book {
     display: grid;

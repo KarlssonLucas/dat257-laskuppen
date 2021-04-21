@@ -117,10 +117,10 @@ const ChooseBookComponent = (props) => {
                     return (
                         <div className="cbc-book" onClick={() => { props.setBook(book) }}>
                             <div className="cbc-book-title">Titel: {book.title}</div>
-                            <div className="cbc-book-author">Författare: {book.author}</div>
+                            <div className="cbc-book-author">Författare: {(Array.isArray(book.author)) ? book.author : JSON.parse(('"'+book.author.replaceAll('"','\\"')+'"'))}</div>
                             <div className="cbc-book-pages">Sidor: {book.pages}</div>
                             <div className="cbc-book-img">
-                                <img src={(book.thumbnail) ? book.thumbnail.thumbnail : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"} />
+                                <img src={(book.thumbnail) ? ((book.thumbnail.thumbnail) ?book.thumbnail.thumbnail : book.thumbnail): "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"} />
                             </div>
                         </div>
                     )
