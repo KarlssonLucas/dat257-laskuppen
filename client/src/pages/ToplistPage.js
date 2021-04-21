@@ -17,7 +17,9 @@ const ToplistPage = () => {
     }, []);
 
     const handleClick = (filter, order) => {
-        let response = fetchData("/api/toplist?" + filter + "=points&order=" + order)
+        console.log("/api/toplist?filter=" + filter + "&order=" + order)
+        let response = fetchData("/api/toplist?filter=" + filter + "&order=" + order)
+        console.log(response)
         response.then(response => { setTopList(response) })
     }
 
@@ -63,10 +65,10 @@ const ToplistPage = () => {
                     <div className="top-lists">
                         <div className="top-list-header">
                             <label className="filter-label"> Filter: </label>
-                            <button className="nameButton"> Elev </button>
-                            <button className="classButton"> Klass </button>
-                            <button className="pointsButton"> Poäng </button>
-                            <button className="readBooksButton"> Lästa böcker </button>
+                            <button className="nameButton" onClick = {() => handleClick("name","asc")}> Elev</button>
+                            <button className="classButton" onClick = {() => handleClick("classname","desc")}> Klass </button>
+                            <button className="pointsButton" onClick = {() => handleClick("points","desc")}> Poäng </button>
+                            <button className="readBooksButton"onClick = {() => handleClick("booksread","desc")}> Lästa böcker </button>
                         </div>
                         <div className="tableDiv">
                             <table class="table table-holder">
