@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import "../css/toplistpage.css";
 
 const ToplistPage = () => {
+<<<<<<< Updated upstream
     const [points, setPoints] = useState(0);
     const [topReaderOfWeek, settopReaderOfWeek] = useState([]);
     const [topWeeklyBook, setTopWeeklyBook] = useState("");
@@ -15,15 +16,49 @@ const ToplistPage = () => {
         response = fetchData("/api/users/1/points")
         response.then(response => { setPoints(response[0].points); })
     }, []);
+=======
+  const [points, setPoints] = useState(0);
+  const [topReaderOfWeek, settopReaderOfWeek] = useState([]);
+  const [topWeeklyBook, setTopWeeklyBook] = useState("");
+  const [topList, setTopList] = useState([]);
+  const [recBook, setRecBook] = useState([]);
+
+  useEffect(() => {
+    fetchPoints();
+    fetchTopReader();
+    fetchTopWeeklyBook();
+    fetchRec();
+  }, []);
+>>>>>>> Stashed changes
 
     const handleClick = (filter, order) => {
         let response = fetchData("/api/toplist?" + filter + "=points&order=" + order)
         response.then(response => { setTopList(response) })
     }
 
+<<<<<<< Updated upstream
     const fetchData = (query) => {
         let req = { method: "GET", headers: { "Content-Type": "application/json" }, };
         return fetch(query, req).then((response) => response.json())
+=======
+  const fetchRec = () => {
+    fetch("/api/randomrecommended/1", userReq)
+      .then((response) => response.json())
+      .then((response) => {
+        setRecBook(response[0]);
+      });
+  }
+
+  const fetchPoints = () => {
+    fetch("/api/users/1/points", userReq)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("USER: ", response);
+        console.log(response[0].points);
+        setPoints(response[0].points);
+      });
+  };
+>>>>>>> Stashed changes
 
     }
 
@@ -54,11 +89,19 @@ const ToplistPage = () => {
                         <p className="card-text"> {points} </p>
                     </div>
 
+<<<<<<< Updated upstream
                     <div className="my-recommendation">
                         <p className="card-title"> Rekommendation </p>
                         <hr />
                         <p className="card-text"> Alefen (Ljudbok) </p>
                     </div>
+=======
+          <div className="my-recommendation">
+            <p className="card-title"> Rekommendation </p>
+            <hr />
+            <p className="card-text"> {recBook.title}, {recBook.author}, {recBook.thumbnail}</p>
+          </div>
+>>>>>>> Stashed changes
 
                     <div className="top-lists">
                         <div className="top-list-header">
