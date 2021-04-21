@@ -16,9 +16,10 @@ INSERT INTO Users VALUES
 (DEFAULT,'bar@gmail.com','Bar','Barson','qwe123',1,1);
 
 INSERT INTO NewReview (title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,summary) VALUES
-('Harry Potter och de vises sten','jkrow',150,'google/asd','desc','"http://books.google.com/books/content?id=l4ROMQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"',1,true,10,'bra bok'),
-('harry1','jkrow',150,'google/asd','desc','img_src',1,true,10,'bra bok'),
-('harry3','jkrow',150,'google/asd','desc','img_src',1,true,10,'bra bok');
+('Nice book', '["Apa"]', 100, 'google', 'desc', '"asddaasd.com"', 1, true, 10, 'brabok1'),
+('Nice book', '["Apa"]', 100, 'google', 'desc', '"asddaasd.com"', 2, true, 10, 'brabok1'),
+('You liked nice book', '["Apa"]', 100, 'google', 'desc', '"asddaasd.com"', 2, true, 10, 'brabok1'),
+('Dont catch this ples', '["Apa"]', 100, 'google', 'desc', '"asddaasd.com"', 3, true, 10, 'brabok1');
 
 INSERT INTO ExtraPoints VALUES 
 (2, 20, 'asdasd'),
