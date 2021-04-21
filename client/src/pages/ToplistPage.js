@@ -6,6 +6,7 @@ const ToplistPage = () => {
     const [topReaderOfWeek, settopReaderOfWeek] = useState([]);
     const [topWeeklyBook, setTopWeeklyBook] = useState("");
     const [topList, setTopList] = useState([]);
+    const [recBook, setRecBook] = useState([]);
 
     useEffect(() => {
         let response = fetchData("/api/toplist?filter=points&order=desc")
@@ -14,6 +15,7 @@ const ToplistPage = () => {
         response.then(response => { setTopWeeklyBook(response[0].title) })
         response = fetchData("/api/users/1/points")
         response.then(response => { setPoints(response[0].points); })
+        fetchRec();
     }, []);
 
     const handleClick = (filter, order) => {
@@ -26,8 +28,16 @@ const ToplistPage = () => {
     const fetchData = (query) => {
         let req = { method: "GET", headers: { "Content-Type": "application/json" }, };
         return fetch(query, req).then((response) => response.json())
-
     }
+
+  const fetchRec = () => {
+    fetch("/api/randomrecommended/1")
+      .then((response) => response.json())
+      .then((response) => {
+        setRecBook(response[0]);
+      });
+  }
+
 
     return (
         <div className="m-page-general-styling">
@@ -56,11 +66,11 @@ const ToplistPage = () => {
                         <p className="card-text"> {points} </p>
                     </div>
 
-                    <div className="my-recommendation">
-                        <p className="card-title"> Rekommendation </p>
-                        <hr />
-                        <p className="card-text"> Alefen (Ljudbok) </p>
-                    </div>
+          <div className="my-recommendation">
+            <p className="card-title"> Rekommendation </p>
+            <hr />
+            <p className="card-text"> {recBook.title}, {recBook.author}, {recBook.thumbnail}</p>
+          </div>
 
                     <div className="top-lists">
                         <div className="top-list-header">
