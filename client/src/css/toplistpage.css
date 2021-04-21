@@ -1,113 +1,130 @@
 .page-content {
-  background-color: var(--white);
-    width: 100%;
-    height: 100%;
-    padding: 1em;
-    display: grid;
-    grid-template-areas: "top-reader-card top-book-card my-points my-recommendation" "top-lists top-lists top-lists top-lists";
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 2fr;
-    gap:1em;
-
+  background: var(--pageInnerColor) !important;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "top-reader-card top-book-card my-points my-recommendation"
+    "top-lists top-lists top-lists top-lists";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr;
+  gap: 1em;
 }
 
-.top-reader-card, .top-book-card, .my-points, .my-recommendation {
-  background-color: var(--background);
+.top-reader-card,
+.top-book-card,
+.my-points,
+.my-recommendation {
+  background: var(--white);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
 }
 
 .top-reader-card {
-    grid-area: top-reader-card;
+  grid-area: top-reader-card;
 }
 
 .top-book-card {
-    grid-area: top-book-card;
+  grid-area: top-book-card;
 }
 
 .my-points {
-    grid-area: my-points;
+  grid-area: my-points;
 }
 
 .my-recommendation {
-    grid-area: my-recommendation;
+  grid-area: my-recommendation;
 }
 
 .top-lists {
   grid-area: top-lists;
-  background-color: var(--topListColor);
+  background: var(--white);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
-  grid-template-areas: "top-list-top-part top-list-bottom-part";
-  grid-template-rows: 1fr 5fr;
+  display: grid;
+  grid-template-areas:
+    "header"
+    "table";
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 6fr ;
 }
 
-.top-list-top-part {
-    grid-template-areas: "tltp-header tltp-names tltp-classes tltp-points tltp-read-books";
+.top-list-header {
+    background: var(--barcolor);
+    grid-area: "header";
+    padding-top: 1%;
+    display: grid;
+    gap: 1%;
+    grid-template-areas:
+    "filter student class points readbooks";
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-.tltp-header {
-    grid-area: tltp-header;
+.tableDiv {
+    border-radius: 9px 9px 9px 9px;
+    padding: 3%;
+    grid-area: table;
+    background: var(--white);
 }
 
-.tltp-names {
-        grid-area: tltp-names;
+.filter-label {
+    grid-area: filter;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
 }
 
-.tltp-classes {
-        grid-area: tltp-classes;
+.nameButton{
+    border: var(--borders);
+    background: var(--barcolor);
+    grid-area: student;
+    border-radius: 9px 9px 0px 0px !important;
+    border-style: solid solid hidden solid;
 }
 
-.tltp-points {
-        grid-area: tltp-points;
+.classButton{
+    border: var(--borders);
+    background: var(--barcolor);
+    grid-area: class;
+    border-radius: 9px 9px 0px 0px !important;
+    border-style: solid solid hidden solid;
 }
 
-.tltp-read-books {
-    grid-area: tltp-read-books;
+.pointsButton{
+    border: var(--borders);
+    background: var(--barcolor);
+    grid-area: points;
+    border-radius: 9px 9px 0px 0px !important;
+    border-style: solid solid hidden solid;
+    
 }
 
-
-
-.top-list-bottom-part {
-    grid-template-areas: "tlbp-names tlbp-classes tlbp-points tlbp-read-books";
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+.readBooksButton{
+    border: var(--borders);
+    background: var(--barcolor);
+    grid-area: readbooks;
+    border-radius: 9px 9px 0px 0px !important;
+    border-style: solid solid hidden solid;
+    
 }
 
-.tlbp-names {
-    grid-area: tlbp-names;
-}
-
-.tlbp-classes {
-    grid-area: tlbp-classes;
-}
-
-.tlbp-points {
-    grid-area: tlbp-points;
-}
-
-.tlbp-read-books {
-    grid-area: tlbp-read-books;
+.table-holder{
+    border: var(--borders);
+    background: var(--background);
 }
 
 hr {
-width:90%;
-border-color:black;
-margin:0px;
-margin-left:1em;
+  width: 90%;
+  border-color: black;
+  margin: 0px;
+  margin-left: 1em;
 }
 
 .card-title {
-    margin:0px;
-    margin-left:1em;
+  margin: 0px;
+  margin-left: 1em;
 }
 
-.card-text {
-    margin:0px;
-    margin-left:2em;
-    margin-top: 2em;
-}
 
-.pic {
-    margin:0px;
-}
+
