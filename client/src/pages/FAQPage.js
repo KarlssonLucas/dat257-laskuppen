@@ -5,22 +5,22 @@ import "./css/faqpage.css";
 
 export default class FAQPage extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.printQuestions = this.printQuestions.bind(this);
     }
 
 
     printQuestions = () => {
-            let arr = [];
-            for(let i=0; i< 50; i++){
-                arr.push(
-                <FAQCardComponent question="Fråga" answer="Svar"/>
-                )
-            }
-            return arr;
+        let arr = [];
+        for (let i = 0; i < 50; i++) {
+            arr.push(
+                <FAQCardComponent question="Q1:" answer="A1:" />
+            )
         }
-    
+        return arr;
+    }
+
 
     render() {
         return (

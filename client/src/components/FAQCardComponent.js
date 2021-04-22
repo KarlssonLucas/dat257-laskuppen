@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 export default class FAQCardComponent extends React.Component {
 
@@ -10,29 +12,21 @@ export default class FAQCardComponent extends React.Component {
 
     expand() {
 
-        var expand = this.expand;
-
-        if (this.state.expand = null) {
-            this.state.expand = expand;
-
-        } else {
-            expand = null;
-        }
-
         console.log("test");
     }
 
     render() {
+        const triangle = <FontAwesomeIcon icon={faCaretUp} />;
         const { expand } = this.state;
         return (
             <div>
                 <div className="faq-question" onClick={() => this.setState(
-                    { expand: !expand })}> {this.props.question}
-
+                    { expand: !expand })}>
+                    <p> {this.props.question} {triangle} </p>
 
                     {expand
                         ? <div className="faq-answer">
-                            {this.props.answer}
+                            <p> {this.props.answer} </p>
                         </div>
                         : null
                     }
