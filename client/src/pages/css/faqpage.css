@@ -13,3 +13,7 @@
   border: var(--borders);
   margin: 1em;
 }
+
+.expand {
+    background-color: red;
+}

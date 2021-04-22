@@ -2,20 +2,41 @@ import React from 'react';
 
 export default class FAQCardComponent extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {}
-        this.method = this.method.bind(this);
+        this.state = { expand: null }
+        this.expand = this.expand.bind(this);
     }
 
-    method(){
+    expand() {
 
+        var expand = this.expand;
+
+        if (this.state.expand = null) {
+            this.state.expand = expand;
+
+        } else {
+            expand = null;
+        }
+
+        console.log("test");
     }
 
-    render() { 
+    render() {
+        const { expand } = this.state;
         return (
-            <div className="faq-question">
-                {this.props.question}
+            <div>
+                <div className="faq-question" onClick={() => this.setState(
+                    { expand: !expand })}> {this.props.question}
+
+
+                    {expand
+                        ? <div className="faq-answer">
+                            {this.props.answer}
+                        </div>
+                        : null
+                    }
+                </div>
             </div>
         )
     }
