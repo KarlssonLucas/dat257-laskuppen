@@ -1,0 +1,77 @@
+.cbc-page-content {
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: "a a a " "b c d";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 7fr;
+    padding: 1em;
+    gap: 1em;
+}
+
+.cbc-search-book, .cbc-search-result, .cbc-best-result, .cbc-recent-result {
+    background-color: var(--background);
+    border-radius: 9px 9px 9px 9px;
+    border: var(--borders);
+}
+
+.cbc-search-result, .cbc-best-result, .cbc-recent-result {
+    height: 75vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.cbc-search-book {
+    grid-area: a;
+}
+
+.cbc-search-result {
+    grid-area: b;
+}
+
+.cbc-best-result {
+    grid-area: c;
+}
+
+.cbc-recent-result {
+    grid-area: d;
+}
+
+.cbc-book:hover {
+    background-color: var(--backgroundHover);
+    cursor: pointer;
+}
+
+.cbc-book {
+    display: grid;
+    grid-template-areas: "a d" "b d" "c d";
+    grid-template-columns: 4fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 1em;
+    width: 100%;
+    background-color: var(--background);
+    border: var(--borders);
+}
+
+.cbc-book-title {
+    grid-area: a;
+}
+
+.cbc-book-author {
+    grid-area: b;
+}
+
+.cbc-book-pages {
+    grid-area: c;
+}
+
+.cbc-book-img {
+    grid-area: d;
+    padding: 1em;
+}
+
+.cbc-book-img img {
+    width: 100%;
+    height: 100%;
+}
