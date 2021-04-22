@@ -24,7 +24,7 @@ const ToplistPage = () => {
         console.log(response)
         response.then(response => { setTopList(response) })
     }
-
+    
     const fetchData = (query) => {
         let req = { method: "GET", headers: { "Content-Type": "application/json" }, };
         return fetch(query, req).then((response) => response.json())

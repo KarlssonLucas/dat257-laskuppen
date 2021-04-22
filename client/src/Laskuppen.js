@@ -6,6 +6,8 @@ import ReviewPage from './pages/ReviewPage';
 import BooksPage from './pages/BooksPage';
 import ProfilePage from './pages/ProfilePage';
 import FAQPage from './pages/FAQPage';
+import LoginPage from './pages/LoginPage'
+
 import './css/main.css';
 
 export default class Laskuppen extends React.Component {
@@ -16,6 +18,7 @@ export default class Laskuppen extends React.Component {
 
     render() {
         return (
+            
             <BrowserRouter>
                 <div className="main-general-styling">
                     <div className="main-sidebar-container">
@@ -23,6 +26,7 @@ export default class Laskuppen extends React.Component {
                     </div>
                     <div className="main-page-container">
                         <Switch>
+                        <Route exact path="/teacher" render={(props) => <LoginPage {...props} />} />
                             <Route exact path="/toplist" render={(props) => <ToplistPage {...props} />} />
                             <Route exact path="/makereview" render={(props) => <ReviewPage  {...props} />} />
                             <Route exact path="/books" render={(props) => <BooksPage {...props} />} />
