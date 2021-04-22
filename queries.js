@@ -24,6 +24,12 @@ const hasSession = (request, response) => {
   }
 }
 
+
+const logout = (request, response) => {
+  request.session.destroy();
+  response.status(200).send(true);
+}
+
 const login = (request, response) => {
 
   const mail = request.body.mail;
@@ -44,9 +50,11 @@ const login = (request, response) => {
         request.session.name = result.rows[0].firstname + " " + result.rows[0].lastname;
         console.log("SESSION SET")
 
-        response.status(200).send();
+        response.status(200).send(true);
       }
       else {
+        console.log("SESSION DESTROY")
+        request.session.destroy();
         response.status(400).send(errorMsg("Wrong credentials"));
       }
     }
@@ -344,5 +352,6 @@ module.exports = {
   latestReview,
   getRandomRecommendation,
   login,
-  getSession
+  getSession,
+  logout
 }

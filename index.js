@@ -34,6 +34,7 @@ app.get('/api/toplist', db.toplist)
 app.get('/api/classpoints', db.getClassPoints)
 app.delete('/api/users/:id', db.deleteUser)
 app.get('/api/session', db.getSession)
+app.get('/api/logout', db.logout)
 
 
 // Load react frontend

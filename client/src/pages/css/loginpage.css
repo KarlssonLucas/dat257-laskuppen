@@ -64,7 +64,8 @@ header {
     transform-origin: top left;
 
 }
-h1{
+
+.login-page-content h1{
     margin: 5%;
     padding: 7%;
     font:  40px;
