@@ -19,7 +19,7 @@ app.use(session({
   
   
 // Create all API-requests
-app.get('/api/login/:id', db.login)
+app.post('/api/login', db.login)
 app.get('/api/users', db.getUsers)
 app.get('/api/recommendation', db.getRandomRecommendation)
 app.get('/api/latestreviews', db.latestReview)

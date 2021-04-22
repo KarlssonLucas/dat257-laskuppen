@@ -15,9 +15,19 @@ export default class Laskuppen extends React.Component {
     }
 
     componentDidMount(){
-        fetch("/api/login/1").then(response => response.json()).then(response => {
-            console.log("LOGGED IN")   
-        });
+        // DUMMY FOR AUTO LOGIN OR ELSE THE SITE IS BROKEN
+        let values = {mail:"jjaokk@gmail.com", password:"qwe123"};
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(values)
+        };
+
+        console.log("BODY: " + JSON.stringify(values));
+         fetch("/api/login", requestOptions).then(response => response.json()).then(response => {
+            console.log("LOGGED IN");
+        })
     }
 
     render() {
