@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import React from 'react';
+import FAQCardComponent from '../components/FAQCardComponent';
 import "./css/faqpage.css";
 
 export default class FAQPage extends React.Component {
@@ -14,10 +15,8 @@ export default class FAQPage extends React.Component {
             let arr = [];
             for(let i=0; i< 50; i++){
                 arr.push(
-                <div className="faq-question">
-                    <p>Q{i+1}: Vad får man poäng för? </p>
-                </div>
-            )
+                <FAQCardComponent question="Fråga" answer="Svar"/>
+                )
             }
             return arr;
         }
