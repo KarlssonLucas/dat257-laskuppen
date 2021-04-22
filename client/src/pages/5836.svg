@@ -47,7 +47,7 @@
        id="clipPath92"><path
          d="M 0,2160 H 18730 V 0 H 0 Z"
          id="path90" /></clipPath></defs><sodipodi:namedview
-     pagecolor="#ffffff"
+     pagecolor="transparent"
      bordercolor="#666666"
      borderopacity="1"
      objecttolerance="10"
@@ -61,7 +61,7 @@
      id="g10"
      inkscape:groupmode="layer"
      inkscape:label="ink_ext_XXXXXX"
-     transform="matrix(1.3333333,0,0,-1.3333333,0,2666.6667)"><g
+     transform="matrix(1.3333333,0,0,-1.3333333,0,2666.6667)" stroke="none"><g
        id="g12"
        transform="scale(0.1)"><g
          id="g14"><g

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css/loginpage.css";
-import mypic from "./5836.svg";
+import mypic from "./EPIC.png";
 
 const LoginPage = () => {
   const [credentials, setCredentials] = useState({
@@ -20,16 +20,19 @@ const LoginPage = () => {
         </header>
       </div>
       <div className="login-page-form">
-        <p>Email</p>
+        <div className="center-login">
+        Email<br/>
         <input name="email" type="text" />
-        <p>Lösenord</p>
+        <br/><br/>Lösenord<br/>
         <input name="password" type="password"/>
-        <p></p>
+        <br/> <small className="resetPassword"><a href="google.se"> Återställ Lösenord </a></small>
+        <br/>
         <button type="button" class="btn btn-primary button-gradient">Logga in</button> 
+        </div>
       </div>
       <div className="login-page-loginart">
-      <img src={mypic} alt="cool bild" height="100%" width="100%"/>
-    
+      <img className="pic" src={mypic} alt="cool bild" height="100%" width="100%"/>
+
       </div>
       
     </div>
