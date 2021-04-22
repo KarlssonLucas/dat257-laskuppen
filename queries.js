@@ -55,9 +55,9 @@ const login = (request, response) => {
 
 const getSession = (request, response) => {
   const session = {
-    login : request.session.isLoggedIn === true,
+    login: request.session.isLoggedIn === true,
     id: request.session.userId,
-    role : request.session.role,
+    role: request.session.role,
     name: request.session.name
   }
   response.status(200).send(session);
@@ -101,7 +101,9 @@ const submitreview = (request, response) => {
       if (error) {
         response.status(500).send(errorMsg("Internal server error"));
       }
-      response.status(200).send(results.rows);
+      else {
+        response.status(200).send(results.rows);
+      }
     }
   );
 };
@@ -114,7 +116,9 @@ const latestReview = (request, response) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
-    response.status(200).json(results.rows)
+    else {
+      response.status(200).json(results.rows)
+    }
   })
 }
 
@@ -162,8 +166,9 @@ const getUsers = (request, response) => {
   client.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows);
     }
-    response.status(200).json(results.rows);
   });
 };
 
@@ -174,8 +179,9 @@ const mostReadBook = (request, response) => {
   client.query("SELECT book.id, title,author,pages,descr AS desc,thumbnail FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)/COUNT(*)) DESC LIMIT 20", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows)
     }
-    response.status(200).json(results.rows)
   })
 }
 
@@ -186,8 +192,9 @@ const userReadMost = (request, response) => {
   client.query("SELECT Users.id, firstName || ' ' || lastName AS name, SUM(COALESCE(pages,0)) as points FROM Review LEFT JOIN Users ON writtenBy = users.id LEFT JOIN Book ON Book.id = bookId WHERE accepted = true AND review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY users.id ORDER BY points DESC LIMIT 1", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows)
     }
-    response.status(200).json(results.rows)
   })
 }
 
@@ -200,8 +207,9 @@ const getUserById = (request, response) => {
   client.query("SELECT * FROM users WHERE id = $1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows);
     }
-    response.status(200).json(results.rows);
   });
 };
 
@@ -219,8 +227,9 @@ const getRandomRecommendation = (request, response) => {
   client.query("WITH test1 AS(SELECT bookid, writtenby, rating, title from review LEFT JOIN Book on bookid=book.id where writtenby=$1), test2 AS(SELECT bookid, writtenby, rating, title from review left join book on bookid=book.id where writtenby != $1), test3 AS (SELECT test2.bookid, test2.writtenby, test2.rating, test2.title FROM test1 JOIN test2 ON test1.bookid = test2.bookid),test4 AS ((SELECT bookid FROM review WHERE writtenBy IN (SELECT writtenBy FROM test3) AND bookid NOT IN (SELECT bookid FROM test3 ORDER BY RATING DESC LIMIT 5)) UNION (SELECT bookid from recommendedBooks)) SELECT id, title, author, descr, pages, thumbnail FROM test4 JOIN book ON id = bookid ORDER BY RANDOM() LIMIT 1", [id], (error, results) => {
     if (error) {
       throw error;
+    } else {
+      response.status(200).json(results.rows);
     }
-    response.status(200).json(results.rows);
   });
 };
 
@@ -233,8 +242,9 @@ const getUserPoints = (request, response) => {
   client.query("SELECT * FROM allStudPoints WHERE id = $1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows);
     }
-    response.status(200).json(results.rows);
   });
 };
 
@@ -247,8 +257,9 @@ const searchBookDb = (request, response) => {
   client.query("SELECT * FROM book WHERE lower(title) LIKE $1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows);
     }
-    response.status(200).json(results.rows);
   });
 };
 
@@ -261,8 +272,9 @@ const deleteUser = (request, response) => {
   client.query("DELETE FROM users WHERE id = $1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).send(`User deleted with ID: ${id}`);
     }
-    response.status(200).send(`User deleted with ID: ${id}`);
   });
 };
 
@@ -293,8 +305,9 @@ const toplist = (request, response) => {
     client.query('SELECT * FROM topliststudent ORDER BY ' + filter + ' ' + order, (error, results) => {
       if (error) {
         response.status(500).send(errorMsg("Internal server error"));
+      } else {
+        response.status(200).json(results.rows)
       }
-      response.status(200).json(results.rows)
     })
   }
   else {
@@ -309,8 +322,9 @@ const getClassPoints = (request, response) => {
   client.query("select className, SUM(points) as points  from topliststudent GROUP by className order by points desc", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).send(`User deleted with ID: ${id}`);
     }
-    response.status(200).send(`User deleted with ID: ${id}`);
   });
 
 }
