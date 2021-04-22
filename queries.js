@@ -104,7 +104,7 @@ const getUsers = (request, response) => {
 };
 
 const getReviews = (request, response) => {
-  client.query("SELECT * FROM Review LEFT JOIN Book ON bookid=Book.id", (error, results) => {
+  client.query("SELECT review.id AS rid, writtenby, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id", (error, results) => {
     if (error) {
       throw error;
     }
@@ -112,6 +112,15 @@ const getReviews = (request, response) => {
   });
 };
 
+const acceptReview = (request, response) => {
+  const id = parseInt(request.params.id)
+  client.query("UPDATE Review SET accepted=true WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).send(`Review updated with ID: ${id}`);
+  });
+};
 
 
 const mostReadBook = (request, response) => {
@@ -243,5 +252,6 @@ module.exports = {
   searchBookDb,
   latestReview,
   getRandomRecommendation,
-  getReviews
+  getReviews,
+  acceptReview
 }
