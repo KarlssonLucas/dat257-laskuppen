@@ -1,6 +1,3 @@
-const { request, response } = require("express");
-const fetch = require("node-fetch");
-
 if (!process.env.DATABASE_URL) {
   require("dotenv").config();
 }
@@ -16,7 +13,35 @@ const client = new Client({
 
 client.connect();
 
+const hasSession = (request,response) => {
+  if(request.session.isLoggedIn && request.session.isLoggedIn == true){
+    return true;
+  }
+  else{
+    console.log("NOT LOGGED IN")
+    response.status(400).json(error("No session. Please log in."));
+    return false;
+  }
+}
+
+const login = (request, response) => {
+  request.session.isLoggedIn = true;
+  request.session.userId = parseInt(request.params.id);
+  response.status(200).json("successfully logged in as user: " + request.session.userId);
+}
+
+const getSession = (request, response) => {
+  const login = request.session.isLoggedIn === true
+  response.status(200).send(login);
+}
+
+
 const submitreview = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
+
+  let id = getUserId(request);
   let title = request.body.title;
   let pages = request.body.pages;
   let review = request.body.review;
@@ -36,11 +61,10 @@ const submitreview = (request, response) => {
   else{
     thumbnail = request.body.thumbnail;
   }
-  let writtenBy = 1;
+  let writtenBy = id;
   let worthReading = request.body.recommended === "true";
   let rating = parseInt(request.body.grade);
-  let summary = request.body.review;
-
+  let summary = review;
 
   client.query(
     "INSERT INTO newreview VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
@@ -55,6 +79,9 @@ const submitreview = (request, response) => {
 };
 
 const latestReview = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
     client.query("select Book.id, title, author,pages,descr AS desc,thumbnail from review left join book on bookId = Book.id group by Book.id order by max(timeofreview) desc limit 20", (error, results) => {
     if (error) {
         throw error
@@ -65,7 +92,9 @@ const latestReview = (request, response) => {
     
 
 const bookssearch = async (request, response) => {
-
+  if(!hasSession(request,response)){
+    return;
+  }
   let id = request.params.bookname.replace(" ", "+")
 
   const books = await fetch("https://www.googleapis.com/books/v1/volumes?q=" + id + "&key=" + process.env.GOOGLEAPI_KEY + "&maxResults=40")
@@ -95,6 +124,13 @@ const bookssearch = async (request, response) => {
 }
 
 const getUsers = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
+  if(!hasSession(request,response)){
+    return;
+  }
+
   client.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
     if (error) {
       throw error;
@@ -104,6 +140,9 @@ const getUsers = (request, response) => {
 };
 
 const mostReadBook = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
   client.query("SELECT book.id, title,author,pages,descr AS desc,thumbnail FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)/COUNT(*)) DESC LIMIT 20", (error, results) => {
     if (error) {
       throw error
@@ -113,6 +152,9 @@ const mostReadBook = (request, response) => {
 }
 
 const userReadMost = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
   client.query("SELECT Users.id, firstName || ' ' || lastName AS name, SUM(COALESCE(pages,0)) as points FROM Review LEFT JOIN Users ON writtenBy = users.id LEFT JOIN Book ON Book.id = bookId WHERE accepted = true AND review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY users.id ORDER BY points DESC LIMIT 1", (error, results) => {
     if (error) {
       throw error
@@ -122,6 +164,9 @@ const userReadMost = (request, response) => {
 }
 
 const getUserById = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
   const id = parseInt(request.params.id);
 
   client.query("SELECT * FROM users WHERE id = $1", [id], (error, results) => {
@@ -132,8 +177,16 @@ const getUserById = (request, response) => {
   });
 };
 
+
+const getUserId = (request) => {
+  return parseInt(request.session.userId);
+}
+
 const getRandomRecommendation = (request, response) => {
-  const id = parseInt(request.params.id);
+  if(!hasSession(request,response)){
+    return;
+  }
+  const id = getUserId(request);
 
   client.query("WITH test1 AS(SELECT bookid, writtenby, rating, title from review LEFT JOIN Book on bookid=book.id where writtenby=$1), test2 AS(SELECT bookid, writtenby, rating, title from review left join book on bookid=book.id where writtenby != $1), test3 AS (SELECT test2.bookid, test2.writtenby, test2.rating, test2.title FROM test1 JOIN test2 ON test1.bookid = test2.bookid),test4 AS ((SELECT bookid FROM review WHERE writtenBy IN (SELECT writtenBy FROM test3) AND bookid NOT IN (SELECT bookid FROM test3 ORDER BY RATING DESC LIMIT 5)) UNION (SELECT bookid from recommendedBooks)) SELECT id, title, author, descr, pages, thumbnail FROM test4 JOIN book ON id = bookid ORDER BY RANDOM() LIMIT 1", [id], (error, results) => {
     if (error) {
@@ -144,7 +197,10 @@ const getRandomRecommendation = (request, response) => {
 };
 
 const getUserPoints = (request, response) => {
-  const id = parseInt(request.params.id);
+  if(!hasSession(request,response)){
+    return;
+  }
+  const id = getUserId(request);
 
   client.query("SELECT * FROM allStudPoints WHERE id = $1", [id], (error, results) => {
     if (error) {
@@ -155,6 +211,9 @@ const getUserPoints = (request, response) => {
 };
 
 const searchBookDb = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
   const id = '%' + request.params.bookname + '%';
 
   client.query("SELECT * FROM book WHERE lower(title) LIKE $1", [id], (error, results) => {
@@ -166,6 +225,9 @@ const searchBookDb = (request, response) => {
 };
 
 const deleteUser = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
   const id = parseInt(request.params.id);
 
   client.query("DELETE FROM users WHERE id = $1", [id], (error, results) => {
@@ -177,6 +239,7 @@ const deleteUser = (request, response) => {
 };
 
 function escape(input, match) {
+  
   if (match.includes(input.toLowerCase())) {
     return true;
   }
@@ -188,6 +251,9 @@ function error(text) {
 }
 
 const toplist = (request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
   const filter = request.query.filter
   const order = request.query.order
 
@@ -209,6 +275,9 @@ const toplist = (request, response) => {
 }
 
 const getClassPoints =(request, response) => {
+  if(!hasSession(request,response)){
+    return;
+  }
   client.query("select className, SUM(points) as points  from topliststudent GROUP by className order by points desc" ,(error, results) => {
     if (error) {
       throw error;
@@ -231,5 +300,7 @@ module.exports = {
   toplist,
   searchBookDb,
   latestReview,
-  getRandomRecommendation
+  getRandomRecommendation,
+  login,
+  getSession
 }

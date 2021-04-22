@@ -13,7 +13,7 @@ const ToplistPage = () => {
         response.then(response => { settopReaderOfWeek(response[0]); setTopList(response) })
         response = fetchData("/api/mostreadbook")
         response.then(response => { setTopWeeklyBook(response[0].title) })
-        response = fetchData("/api/users/1/points")
+        response = fetchData("/api/userpoints")
         response.then(response => { setPoints(response[0].points); })
         fetchRec();
     }, []);
@@ -31,7 +31,7 @@ const ToplistPage = () => {
     }
 
   const fetchRec = () => {
-    fetch("/api/randomrecommended/1")
+    fetch("/api/recommendation")
       .then((response) => response.json())
       .then((response) => {
         setRecBook(response[0]);

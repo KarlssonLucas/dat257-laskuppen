@@ -14,6 +14,12 @@ export default class Laskuppen extends React.Component {
         super();
     }
 
+    componentDidMount(){
+        fetch("/api/login/1").then(response => response.json()).then(response => {
+            console.log("LOGGED IN")   
+        });
+    }
+
     render() {
         return (
             <BrowserRouter>
