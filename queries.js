@@ -103,6 +103,17 @@ const getUsers = (request, response) => {
   });
 };
 
+const getReviews = (request, response) => {
+  client.query("SELECT * FROM Review LEFT JOIN Book ON bookid=Book.id", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
+
+
 const mostReadBook = (request, response) => {
   client.query("SELECT book.id, title,author,pages,descr AS desc,thumbnail FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)/COUNT(*)) DESC LIMIT 20", (error, results) => {
     if (error) {
@@ -231,5 +242,6 @@ module.exports = {
   toplist,
   searchBookDb,
   latestReview,
-  getRandomRecommendation
+  getRandomRecommendation,
+  getReviews
 }

@@ -1,0 +1,47 @@
+.rlc-page-content {
+    display:block;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    gap: 1em;
+}
+
+.rlc-search-result {
+    background-color: var(--background);
+    border-radius: 9px 9px 9px 9px;
+    border: var(--borders);
+    height: 75vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.rlc-book:hover {
+    background-color: var(--backgroundHover);
+    cursor: pointer;
+}
+
+.rlc-book {
+    padding: 1em;
+    width: 100%;
+    background-color: var(--background);
+    border: var(--borders);
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    grid-template-rows: repeat(5, 1fr); 
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+}
+.rlc-book-title { grid-area: 1 / 1 / 2 / 2; } 
+.rlc-book-author { grid-area: 2 / 1 / 3 / 2; } 
+.rlc-book-pages { grid-area: 3 / 1 / 4 / 2; } 
+.rlc-book-writtenby { grid-area: 3 / 2 / 4 / 3; } 
+.rlc-book-bookid { grid-area: 2 / 2 / 3 / 3; } 
+.rlc-book-reviewid { grid-area: 1 / 2 / 2 / 3; } 
+.rlc-book-review { grid-area: 2 / 3 / 3 / 4; } 
+.rlc-book-accepted { 
+    padding-left: 5em;
+    grid-area: 2 / 4 / 3 / 5; }
+.rlc-acc-checkbox {
+    padding-left: 1em;
+}
