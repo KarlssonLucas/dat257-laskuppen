@@ -16,7 +16,7 @@ header {
     "header header"
     "login loginart";
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2fr 4fr;
+    grid-template-rows: 1fr 4fr;
 }
 
 .login-page-header {
@@ -25,9 +25,10 @@ header {
 }
 
 .login-page-form {
-    height: 70%;
-    width: 75%;
-    margin: 5%;
+    justify-self: center;
+    width: 60%;
+    margin-top: 12%;
+    aspect-ratio: 1/1;
     grid-area: login;
     display: flex;
     justify-content: center;
@@ -48,6 +49,7 @@ header {
     grid-area: loginart;
     width: 100%;
     aspect-ratio: 100/75;
+    margin-top: 2%;
 
 }
 
@@ -64,14 +66,13 @@ header {
     transform-origin: top left;
 
 }
-
 .login-page-content h1{
-    margin: 5%;
-    padding: 7%;
-    font:  40px;
+    margin-top: 1%;
+    font-size: 50px;
     text-align: center;
 
 }
+
 
 header h1 {
     position: relative;
