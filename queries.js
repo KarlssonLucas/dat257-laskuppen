@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 if (!process.env.DATABASE_URL) {
   require("dotenv").config();
 }
