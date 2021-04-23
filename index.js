@@ -10,6 +10,9 @@ app.use(express.urlencoded({ extended: false }));
 // Create all API-requests
 app.get('/api/users', db.getUsers)
 app.get('/api/accrev/:id', db.acceptReview)
+app.get('/api/rejrev/:id', db.rejectReview)
+app.get('/api/unpubrev/:id', db.unpublishReview)
+app.get('/api/pubrev/:id', db.publishReview)
 app.get('/api/reviews', db.getReviews)
 app.get('/api/randomrecommended/:id', db.getRandomRecommendation)
 app.get('/api/latestreviews', db.latestReview)

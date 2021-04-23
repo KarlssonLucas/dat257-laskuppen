@@ -118,10 +118,40 @@ const acceptReview = (request, response) => {
     if (error) {
       throw error;
     }
-    response.status(200).send(`Review updated with ID: ${id}`);
+    response.status(200).json(`Review updated with ID: ${id}`);
   });
 };
 
+const rejectReview = (request, response) => {
+  const id = parseInt(request.params.id)
+  console.log(id);
+  client.query("UPDATE Review SET accepted=false WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(`Review updated with ID: ${id}`);
+  });
+};
+
+const publishReview = (request, response) => {
+  const id = parseInt(request.params.id)
+  client.query("UPDATE Review SET published=true WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(`Review updated with ID: ${id}`);
+  });
+};
+
+const unpublishReview = (request, response) => {
+  const id = parseInt(request.params.id)
+  client.query("UPDATE Review SET published=false WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(`Review updated with ID: ${id}`);
+  });
+};
 
 const mostReadBook = (request, response) => {
   client.query("SELECT book.id, title,author,pages,descr AS desc,thumbnail FROM Review LEFT JOIN Book ON Book.id = bookId WHERE review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY book.id ORDER BY (SUM(rating)/COUNT(*)) DESC LIMIT 20", (error, results) => {
@@ -253,5 +283,8 @@ module.exports = {
   latestReview,
   getRandomRecommendation,
   getReviews,
-  acceptReview
+  acceptReview,
+  publishReview,
+  rejectReview,
+  unpublishReview
 }
