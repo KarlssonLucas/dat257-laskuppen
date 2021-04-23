@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 
 const ReviewListComponent = (props) => {
     const [books, setBooks] = useState([]);
-    const [pendAccepting, setPendAccepting] = useState([]);
+    const pendAccepting = [];
 
     useEffect(() => {
         fetchReviews();
@@ -22,20 +22,52 @@ const ReviewListComponent = (props) => {
         });
     }
 
-    const checkChecked = (book) => {
-        if (book.accepted == true) {
-            return "checked";
-        } else {
-            return "";
-        }
-    }
-
     const acceptBooks =  () => {
         pendAccepting.map((item) => (
             fetch("/api/accrev/"+item.rid).then(response => response.json()).then(response => {
                 console.log(response)
             })
         ))
+    }
+
+    const rejectBooks =  () => {
+        pendAccepting.map((item) => (
+            fetch("/api/rejrev/"+item.rid).then(response => response.json()).then(response => {
+                console.log(response)
+            })
+        ))
+    }
+
+    const publishBooks =  () => {
+        pendAccepting.map((item) => (
+            fetch("/api/pubrev/"+item.rid).then(response => response.json()).then(response => {
+                console.log(response)
+            })
+        ))
+    }
+
+    const unpublishBooks =  () => {
+        pendAccepting.map((item) => (
+            fetch("/api/unpubrev/"+item.rid).then(response => response.json()).then(response => {
+                console.log(response)
+            })
+        ))
+    }
+
+    const clearSelection =  () => {
+       pendAccepting.length = 0
+    }
+
+    const addBook = (book, e) => {
+        console.log(e.target.checked)
+        if(e.target.checked) {
+            pendAccepting.push(book)
+        } else {
+            const index = pendAccepting.indexOf(book);
+            if (index > -1) {
+              pendAccepting.splice(index, 1);
+            }
+        }
     }
 
     const showResult = (books) => {
@@ -45,8 +77,8 @@ const ReviewListComponent = (props) => {
                     return (
                         <div className="cbc-book">
                             <div className="rlc-mul"> 
-                                <label class="rlc-acc-checkbox" onChange={() => setPendAccepting(oldArray => [...oldArray, book])}>
-                                    <input type="checkbox"/> 
+                                <label class="rlc-acc-checkbox">
+                                    <input type="checkbox" onChange={(e) => addBook(book, e)}/> 
                                 </label>
                             </div>
                             <div className="rlc-book-title">title: {book.title}</div>
@@ -58,7 +90,12 @@ const ReviewListComponent = (props) => {
                             <div className="rlc-book-review">review: {book.summary}</div>
                             <div className="rlc-book-accepted">accepted: 
                                 <label className="rlc-acc-checkbox">
-                                    <input type="checkbox" checked={checkChecked(book)}/> 
+                                    <input type="checkbox" checked={book.accepted}/> 
+                                </label>
+                            </div>
+                            <div className="rlc-book-published">published: 
+                                <label className="rlc-acc-checkbox">
+                                    <input type="checkbox" checked={book.published}/> 
                                 </label>
                             </div>
                         </div>
@@ -76,7 +113,15 @@ const ReviewListComponent = (props) => {
                 {showResult(books)}
             </div>
             <div>
-                <button type="button" onClick={acceptBooks()}>accpet</button>
+                <button type="button" onClick={() => acceptBooks()}>accept</button>
+                <button type="button" onClick={() => rejectBooks()}>reject</button>
+            </div>
+            <div>
+                <button type="button" onClick={() => publishBooks()}>publish</button>
+                <button type="button" onClick={() => unpublishBooks()}>unpublish</button>
+            </div>
+            <div>
+                <button type="button" onClick={() => clearSelection()}>clear</button>
             </div>
         </div>
     )
