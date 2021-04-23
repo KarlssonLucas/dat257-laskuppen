@@ -180,6 +180,56 @@ const getUsers = (request, response) => {
   });
 };
 
+const getReviews = (request, response) => {
+  client.query("SELECT review.id AS rid, writtenby, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id", (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
+const acceptReview = (request, response) => {
+  const id = parseInt(request.params.id)
+  client.query("UPDATE Review SET accepted=true WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    response.status(200).json(`Review updated with ID: ${id}`);
+  });
+};
+
+const rejectReview = (request, response) => {
+  const id = parseInt(request.params.id)
+  console.log(id);
+  client.query("UPDATE Review SET accepted=false WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    response.status(200).json(`Review updated with ID: ${id}`);
+  });
+};
+
+const publishReview = (request, response) => {
+  const id = parseInt(request.params.id)
+  client.query("UPDATE Review SET published=true WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    response.status(200).json(`Review updated with ID: ${id}`);
+  });
+};
+
+const unpublishReview = (request, response) => {
+  const id = parseInt(request.params.id)
+  client.query("UPDATE Review SET published=false WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    response.status(200).json(`Review updated with ID: ${id}`);
+  });
+};
+
 const mostReadBook = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -353,5 +403,10 @@ module.exports = {
   getRandomRecommendation,
   login,
   getSession,
-  logout
+  logout,
+  getReviews,
+  acceptReview,
+  publishReview,
+  rejectReview,
+  unpublishReview
 }

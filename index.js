@@ -10,18 +10,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Cookie
-app.use(session({ 
+app.use(session({
   secret: process.env.COOKIE_SECRET,
   resave: false,
-  saveUninitialized: true, 
+  saveUninitialized: true,
   cookie: { maxAge: 60*60*1000 }}) // Inloggad max 1 timme?
   )
-  
-  
+
+
 // Create all API-requests
 app.post('/api/login', db.login)
 app.get('/api/users', db.getUsers)
 app.get('/api/recommendation', db.getRandomRecommendation)
+app.get('/api/accrev/:id', db.acceptReview)
+app.get('/api/rejrev/:id', db.rejectReview)
+app.get('/api/unpubrev/:id', db.unpublishReview)
+app.get('/api/pubrev/:id', db.publishReview)
+app.get('/api/reviews', db.getReviews)
 app.get('/api/latestreviews', db.latestReview)
 app.get('/api/booksearch/:bookname', db.searchBookDb)
 app.get('/api/users/:id', db.getUserById)

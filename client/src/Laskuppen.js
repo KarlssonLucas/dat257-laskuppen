@@ -7,7 +7,7 @@ import BooksPage from './pages/BooksPage';
 import ProfilePage from './pages/ProfilePage';
 import FAQPage from './pages/FAQPage';
 import LoginPage from './pages/LoginPage'
-
+import AdminPage from './pages/AdminPage';
 import './css/main.css';
 
 export default class Laskuppen extends React.Component {
@@ -47,8 +47,8 @@ export default class Laskuppen extends React.Component {
                                     <Route exact path="/books" render={(props) => <BooksPage {...props} />} />
                                     <Route exact path="/profile" render={(props) => <ProfilePage {...props} />} />
                                     <Route exact path="/faq" render={(props) => <FAQPage {...props} />} />
+                                    <Route exact path="/admin" render={(props) => <AdminPage {...props} />} />
                                 </div>
-
                                 : ""
                             }
                         </Switch>
