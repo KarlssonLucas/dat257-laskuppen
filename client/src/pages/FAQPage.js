@@ -12,7 +12,7 @@ export default class FAQPage extends React.Component {
 
     printQuestions = () => {
             let arr = [];
-            for(let i=0; i< 50; i++){
+            for(let i=0; i< 5; i++){
                 arr.push(
                 <div className="faq-question">
                     <p>Q{i+1}: Vad får man poäng för? </p>

@@ -34,7 +34,7 @@
 /* in each Page-Component*/
 
 .main-page-general-styling {
-    height : 100vh;
+    height: 100vh;
     width: 100%;
     display: grid;
     grid-template-areas: "header" "innerContent";
@@ -62,7 +62,8 @@
 .main-page-inner-container {
     grid-area: innerContent;
     width: 100%;
-    max-height: 100vh;
+    height: 100%;
+    max-height: 93.75vh;
     /* 15fr/16fr */
     padding: 1em;
     display: grid;
