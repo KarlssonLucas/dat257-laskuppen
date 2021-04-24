@@ -45,31 +45,31 @@ const ToplistPage = () => {
                 <h2> Topplista </h2>
             </div>
             <div className="main-page-inner-container">
-                <div className="tp-page-content">
-                    <div className="tp-top-reader-card">
-                        <p className="tp-card-title"> Veckans toppläsare </p>
+                <div className="main-page-content top-page-content">
+                    <div className="top-top-reader-card">
+                        <p className="top-card-title"> Veckans toppläsare </p>
                         <hr />
-                        <p className="tp-card-text">
+                        <p className="top-card-text">
                             {topReaderOfWeek.name} : {topReaderOfWeek.points}
                         </p>
                     </div>
 
-                    <div className="tp-top-book-card">
-                        <p className="tp-card-title"> Veckans bok </p>
+                    <div className="top-top-book-card">
+                        <p className="top-card-title"> Veckans bok </p>
                         <hr />
-                        <p className="tp-card-text"> {topWeeklyBook} </p>
+                        <p className="top-card-text"> {topWeeklyBook} </p>
                     </div>
 
-                    <div className="tp-my-points">
-                        <p className="tp-card-title"> Mina poäng </p>
+                    <div className="top-my-points">
+                        <p className="top-card-title"> Mina poäng </p>
                         <hr />
-                        <p className="tp-card-text"> {points} </p>
+                        <p className="top-card-text"> {points} </p>
                     </div>
 
-                    <div className="tp-my-recommendation">
-                        <p className="tp-card-title">Bokrekommendation</p>
+                    <div className="top-my-recommendation">
+                        <p className="top-card-title">Bokrekommendation</p>
                         <hr />
-                        <div className="tp-inner-recommendation">
+                        <div className="top-inner-recommendation">
                             <div className="cbc-book-title">Titel: {recBook.title}</div>
                             <div className="cbc-book-author">Författare: {recBook.author}</div>
                             <div className="cbc-book-pages">Sidor: {recBook.pages}</div>
@@ -79,15 +79,15 @@ const ToplistPage = () => {
                         </div>
                     </div>
 
-                    <div className="tp-top-lists">
-                        <div className="tp-top-list-header">
-                            <label className="tp-filter-label"> Filter: </label>
-                            <button className="tp-nameButton" onClick = {() => handleClick("name","asc")}> Elev</button>
-                            <button className="tp-classButton" onClick = {() => handleClick("classname","desc")}> Klass </button>
-                            <button className="tp-pointsButton" onClick = {() => handleClick("points","desc")}> Poäng </button>
-                            <button className="tp-readBooksButton"onClick = {() => handleClick("booksread","desc")}> Lästa böcker </button>
+                    <div className="top-top-lists">
+                        <div className="top-top-list-header">
+                            <label className="top-filter-label"> Filter: </label>
+                            <button className="top-nameButton" onClick = {() => handleClick("name","asc")}> Elev</button>
+                            <button className="top-classButton" onClick = {() => handleClick("classname","desc")}> Klass </button>
+                            <button className="top-pointsButton" onClick = {() => handleClick("points","desc")}> Poäng </button>
+                            <button className="top-readBooksButton"onClick = {() => handleClick("booksread","desc")}> Lästa böcker </button>
                         </div>
-                        <div className="tp-tableDiv">
+                        <div className="top-tableDiv">
                             <table class="table table-holder">
                                 <thead>
                                     <tr>

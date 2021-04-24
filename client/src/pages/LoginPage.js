@@ -67,7 +67,7 @@ const LoginPage = (props) => {
   }
 
   return (
-    <div className="login-page-content">
+    <div className="main-page-content login-page-content">
       {(loggedIn) ? <Redirect to="/toplist" /> : <Redirect to="/login" />}
       <div className="login-page-header">
         <header>

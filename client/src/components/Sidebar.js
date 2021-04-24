@@ -11,7 +11,8 @@ export default class Sidebar extends React.Component {
         super(props);
 
         this.state = {
-            sidebarData: []
+            sidebarData: [],
+            session: null
         };
     }
 
@@ -24,6 +25,7 @@ export default class Sidebar extends React.Component {
                 path: "/login",
                 icon: <FontAwesomeIcon icon={faSignInAlt} color='white' />
             }];
+            this.setState({ session: response })
 
             if (response.role > 0) {
                 sidebarData = [];
@@ -42,11 +44,6 @@ export default class Sidebar extends React.Component {
                         title: "Böcker",
                         path: "/books",
                         icon: <FontAwesomeIcon icon={faBook} color='white' />
-                    },
-                    {
-                        title: "Profil",
-                        path: "/profile",
-                        icon: <FontAwesomeIcon icon={faUser} color='white' size='lg' />
                     },
                     {
                         title: "FAQ",
@@ -91,7 +88,27 @@ export default class Sidebar extends React.Component {
             <div className="sidebar-menu">
                 {(this.state.sidebarData.length === 1) ? <Redirect to="/login" /> : ""}
                 <h1 className='sidebar-logo'> <FontAwesomeIcon icon={faTrophy} color='white' size='lg' />Läskuppen </h1>
+
                 <ul className="sidebar-menu-items">
+
+                    {(this.state.session && this.state.session.login != false) ? 
+                    <div>
+                    <li className="sidebar-item">
+                        
+                        <Link to="/profile">
+                            <div className="sidebar-link">
+                                <FontAwesomeIcon icon={faUser} color='white' size='lg' />
+                                <span className="sidebar-link-text">
+                                    {this.state.session.name}
+                                </span>
+                            </div>
+                        </Link>
+                        
+                    </li>
+                    <hr/>
+                    </div>
+:""}
+
                     {this.state.sidebarData.map((item, index) => {
                         return (
                             <li key={index} className="sidebar-item">
