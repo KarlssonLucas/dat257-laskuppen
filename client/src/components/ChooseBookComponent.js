@@ -146,13 +146,13 @@ const ChooseBookComponent = (props) => {
             </div>
 
             <div className="cbc-best-result">
-                <div className="">Bästa böckerna just nu:</div>
+                <div className="">Populära böcker:</div>
                 {showResult(bestBooks)}
 
             </div>
 
             <div className="cbc-recent-result">
-                <div className="">Senast recenserade böckerna:</div>
+                <div className="">Nyligen recenserade:</div>
                 {showResult(recentBooks)}
 
             </div>
