@@ -33,7 +33,12 @@
     grid-row-gap: 0px; 
 }
 
-.rlc-mul { grid-area: 1 / 1 / 4 / 2; padding-top: 2em;}
+.rlc-checkb {
+    width: 20px;
+    height: 20px;
+}
+
+.rlc-mul { grid-area: 2 / 1 / 4 / 2; justify-self: center;}
 .rlc-book-title { grid-area: 1 / 2 / 2 / 3;}
 .rlc-book-author { grid-area: 2 / 2 / 3 / 3; }
 .rlc-book-pages { grid-area: 3 / 2 / 4 / 3; }

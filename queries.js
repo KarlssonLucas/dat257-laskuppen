@@ -183,7 +183,7 @@ const getUsers = (request, response) => {
 };
 
 const getReviews = (request, response) => {
-  client.query("SELECT review.id AS rid, writtenby, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id", (error, results) => {
+  client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }

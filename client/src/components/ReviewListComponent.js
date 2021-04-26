@@ -78,13 +78,13 @@ const ReviewListComponent = (props) => {
                         <div className="cbc-book">
                             <div className="rlc-mul"> 
                                 <label class="rlc-acc-checkbox">
-                                    <input type="checkbox" onChange={(e) => addBook(book, e)}/> 
+                                    <input className="rlc-checkb" type="checkbox" onChange={(e) => addBook(book, e)}/> 
                                 </label>
                             </div>
                             <div className="rlc-book-title">title: {book.title}</div>
                             <div className="rlc-book-author">author: {book.author}</div>
                             <div className="rlc-book-pages">pages: {book.pages}</div>
-                            <div className="rlc-book-writtenby">writtenby: {book.writtenby}</div>
+                            <div className="rlc-book-writtenby">writtenby: {book.name}</div>
                             <div className="rlc-book-bookid">bookid: {book.bookid}</div>
                             <div className="rlc-book-reviewid">reviewid: {book.rid}</div>
                             <div className="rlc-book-review">review: {book.summary}</div>
@@ -121,7 +121,8 @@ const ReviewListComponent = (props) => {
                 <button type="button" onClick={() => unpublishBooks()}>unpublish</button>
             </div>
             <div>
-                <button type="button" onClick={() => clearSelection()}>clear</button>
+                <button type="button" onClick={() => books.map((book) => (fetch("/api/accrev/"+book.rid).then(response => response.json()).then(response => {
+                console.log(response)})))}>Accept All</button>
             </div>
         </div>
     )
