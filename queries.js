@@ -333,7 +333,6 @@ const deleteUser = (request, response) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
-      console.log(response.rows)
       response.status(200).send(`User deleted with ID: ${id}`);
     }
   });
@@ -439,6 +438,23 @@ const faqPut = (request, response) => {
 
 }
 
+const FAQAdd = (request, response) => {
+  if (!hasSession(request, response)) {
+    return;
+  }
+  let question = request.body.question
+  let answer = request.body.answer
+
+  client.query("INSERT INTO FrequentlyAskedQuestions (question, answer) VALUES($1,$2)",[question,answer], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).send(`Questions added`);
+    }
+  });
+
+}
+
 
 module.exports = {
   getUsers,
@@ -464,5 +480,6 @@ module.exports = {
   unpublishReview,
   faqGet,
   faqDel,
-  faqPut
+  faqPut,
+  FAQAdd
 }
