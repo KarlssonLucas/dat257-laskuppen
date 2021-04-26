@@ -30,8 +30,8 @@ INSERT INTO RecommendedBooks VALUES
 (3);
 
 INSERT INTO FrequentlyAskedQuestions (question, answer) VALUES
-('Vad Ã¤r en groda utan ben?','HopplÃ¶s'),
-('Vilket Ã¤r det stÃ¶rsta djuret i skogen?','En orm'),
+('Vad är en groda utan ben?','Hopplös'),
+('Vilket är det största djuret i skogen?','En orm'),
 ('Vad heter Mc Donalds nya fiskburgare?','Mc Rill');
 
 UPDATE Review SET accepted = true;
