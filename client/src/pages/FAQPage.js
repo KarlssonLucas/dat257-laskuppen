@@ -7,6 +7,20 @@ export default class FAQPage extends React.Component {
     constructor(props){
         super(props);
         this.printQuestions = this.printQuestions.bind(this);
+        this.fetchFAQ = this.fetchFAQ.bind(this)
+        this.fetchFAQ()
+    }
+
+    fetchFAQ = () => {
+        fetch("/api/faqget")
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response);
+          });
+      }
+
+    delFAQ = (id) => {
+        fetch("/api/faqdel/" + id)
     }
 
 

@@ -40,7 +40,9 @@ app.get('/api/classpoints', db.getClassPoints)
 app.delete('/api/users/:id', db.deleteUser)
 app.get('/api/session', db.getSession)
 app.get('/api/logout', db.logout)
-
+app.get('/api/faqget',db.faqGet)
+app.delete('/api/faqdel/:id',db.faqDel)
+app.put('/api/faqput/',db.faqPut)
 
 // Load react frontend
 app.use(express.static('client/build'));

@@ -333,6 +333,7 @@ const deleteUser = (request, response) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
+      console.log(response.rows)
       response.status(200).send(`User deleted with ID: ${id}`);
     }
   });
@@ -383,11 +384,61 @@ const getClassPoints = (request, response) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
-      response.status(200).send(`User deleted with ID: ${id}`);
+      response.status(200).json(results.rows);
     }
   });
 
 }
+
+const faqGet = (request, response) => {
+  if (!hasSession(request, response)) {
+    return;
+  }
+  client.query("select * from FrequentlyAskedQuestions", (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+
+}
+
+const faqDel = (request, response) => {
+  if (!hasSession(request, response)) {
+    return;
+  }
+
+  let id = parseInt(request.params.id)
+
+  client.query("delete from FrequentlyAskedQuestions where id = $1",[id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).send(`Questions deleted with ID: ${id}`);
+    }
+  });
+
+}
+
+const faqPut = (request, response) => {
+  if (!hasSession(request, response)) {
+    return;
+  }
+  let id = parseInt(request.body.id);
+  let question = request.body.question
+  let answer = request.body.answer
+
+  client.query("update FrequentlyAskedQuestions set question= $1, answer=$2 where id = $3",[question,answer,id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).send(`Questions updated with ID: ${id}`);
+    }
+  });
+
+}
+
 
 module.exports = {
   getUsers,
@@ -410,5 +461,8 @@ module.exports = {
   acceptReview,
   publishReview,
   rejectReview,
-  unpublishReview
+  unpublishReview,
+  faqGet,
+  faqDel,
+  faqPut
 }
