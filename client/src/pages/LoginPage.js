@@ -21,7 +21,9 @@ const LoginPage = (props) => {
   
   var reward;
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const [wrongCredentials, setWrongCredentials] = useState(false);
+  const [correctCredentials, setCorrectCredentials] = useState(false);
+  
   const [credentials, setCredentials] = useLoginHook({
     mail: "teacher@gmail.com",
     password: null
@@ -57,18 +59,19 @@ const LoginPage = (props) => {
     fetch("/api/login", requestOptions).then(response => response.json()).then(response => {
       if (response === true) {
         reward.rewardMe();
-        console.log("SUCCESS")
+        setWrongCredentials(false);
+        setCorrectCredentials(true);
         setTimeout(()=> window.location.reload(),1000)
       }
       else {
         reward.punishMe();
-        console.log(response.error);
+        setWrongCredentials(true);
+       console.log(response.error);
       }
 
     })
 
-
-  }
+  };
 
   return (
     <div className="main-page-content login-page-content">
@@ -81,23 +84,25 @@ const LoginPage = (props) => {
       </div>
       <div className="login-page-form">
         <div className="center-login">
-          Email<br />
-          <input value={credentials.mail} name="mail" type="text" onChange={setCredentials} />
+
+          Användarnamn<br />
+          <input value={credentials.mail} name="mail" type="text" onChange={setCredentials} /> 
           <br /><br />Lösenord (qwe123)<br />
-          <input name="password" type="password" onChange={setCredentials} />
-          <br /> <small className="resetPassword"><a href="google.se"> Återställ Lösenord </a></small>
+          <input name="password" type="password" onChange={setCredentials} /> 
           <br />
           <Reward ref={ref => { reward = ref }} type='memphis'>
-
-          <button type="button" onClick={() => { login() }} class="btn btn-primary button-gradient">Logga in</button>
+            <button type="button" onClick={() => { login() }} class="btn btn-primary button-gradient">Logga in</button>
+            <br/>
+            {(wrongCredentials) ? <span style={{color:"red"}}>Fel uppgifter</span> : null }
+            {(correctCredentials) ? <span style={{color:"green"}}>Välkommen!</span> : null }
           </Reward>
         </div>
       </div>
       <div className="login-page-loginart">
-        <img className="pic" src={mypic} alt="cool bild" height="100%" width="100%" />
+      <img className="pic" src={mypic} alt="cool bild" height="100%" width="100%"/>
 
       </div>
-
+      
     </div>
   );
 };
