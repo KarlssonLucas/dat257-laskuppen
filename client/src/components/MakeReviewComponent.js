@@ -64,7 +64,7 @@ const MakeReviewComponent = (props) => {
     }
 
     return (
-        <div className="mrc-page-content">
+        <div className="main-page-content  mrc-page-content">
             {(submitted) ? <Redirect to="/toplist"/> : null}
             <div className="mrc-B">
                 <div className="mrc-score">
@@ -103,13 +103,11 @@ const MakeReviewComponent = (props) => {
             <div className="mrc-D">
                 <p> Recension </p>
                 <textarea name="review" type='text' value={values.review} onChange={handleChange} rows={10} cols={100} />
-
-            </div>
-            <div className="mrc-E">
                 <Reward ref={ref => { reward = ref }} type='confetti'>
                     <button className="btn btn-success" onClick={press}>Skicka</button>
                 </Reward>
             </div>
+            
         </div>
 
     )

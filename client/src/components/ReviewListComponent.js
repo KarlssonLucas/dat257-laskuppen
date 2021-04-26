@@ -107,7 +107,7 @@ const ReviewListComponent = (props) => {
 
 
     return (
-        <div className="rlc-page-content">
+        <div className="main-page-content rlc-page-content">
             <div className="rlc-search-result">
                 <div className="">Recensioner:</div>
                 {showResult(books)}

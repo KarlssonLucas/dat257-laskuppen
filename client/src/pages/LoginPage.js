@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import React, { useEffect, useState } from "react";
+import Reward from "react-rewards";
 import { Redirect } from "react-router";
 import "./css/loginpage.css";
 import mypic from "./EPIC.png";
@@ -17,7 +18,8 @@ const useLoginHook = (formValues) => {
 };
 
 const LoginPage = (props) => {
-
+  
+  var reward;
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [credentials, setCredentials] = useLoginHook({
@@ -54,10 +56,12 @@ const LoginPage = (props) => {
 
     fetch("/api/login", requestOptions).then(response => response.json()).then(response => {
       if (response === true) {
+        reward.rewardMe();
         console.log("SUCCESS")
-        window.location.reload();
+        setTimeout(()=> window.location.reload(),1000)
       }
       else {
+        reward.punishMe();
         console.log(response.error);
       }
 
@@ -67,7 +71,7 @@ const LoginPage = (props) => {
   }
 
   return (
-    <div className="login-page-content">
+    <div className="main-page-content login-page-content">
       {(loggedIn) ? <Redirect to="/toplist" /> : <Redirect to="/login" />}
       <div className="login-page-header">
         <header>
@@ -83,7 +87,10 @@ const LoginPage = (props) => {
           <input name="password" type="password" onChange={setCredentials} />
           <br /> <small className="resetPassword"><a href="google.se"> Återställ Lösenord </a></small>
           <br />
+          <Reward ref={ref => { reward = ref }} type='memphis'>
+
           <button type="button" onClick={() => { login() }} class="btn btn-primary button-gradient">Logga in</button>
+          </Reward>
         </div>
       </div>
       <div className="login-page-loginart">

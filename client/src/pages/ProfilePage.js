@@ -10,7 +10,7 @@ export default class ProfilePage extends React.Component {
                     <h2> Profil </h2> 
                 </div>
                 <div className="main-page-inner-container">
-                    <div className="pp-page-content">
+                    <div className="main-page-content  pp-page-content">
                         Content
                     </div>
                 </div>

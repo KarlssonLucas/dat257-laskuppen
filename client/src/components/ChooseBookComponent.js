@@ -54,9 +54,9 @@ const ChooseBookComponent = (props) => {
         }
 
         if (str != search) {
-            console.log(str," MISSMATCH ", search);
+            console.log(str, " MISSMATCH ", search);
             await fetchFromDatabase(search);
-        } 
+        }
 
     }
 
@@ -69,37 +69,37 @@ const ChooseBookComponent = (props) => {
         };
 
         await fetch("/api/books/".concat(str), requestOptions).then(response => response.json()).then(response => {
-            console.log(str," SET BOOKS GOOGLE: ", response);
+            console.log(str, " SET BOOKS GOOGLE: ", response);
             setBooks(response);
         }
         );
 
-        
+
 
     }
 
 
     const fetchData = async (str) => {
-      
+
         await fetchFromDatabase(str);
-        console.log("FETCHING DONE",str)
+        console.log("FETCHING DONE", str)
         fetching = false;
     }
 
     const updateSearch = event => {
         search = event.target.value;
-        console.log("UPDATE SEARCH ",search)
+        console.log("UPDATE SEARCH ", search)
 
-        if(search.length == 0){
+        if (search.length == 0) {
             setBooks([])
         }
         else if (!fetching) {
             fetching = true;
-            console.log("FETCHING",search)
+            console.log("FETCHING", search)
             fetchData(search)
         }
 
-        console.log("UPDATE SEARCH DONE",search)
+        console.log("UPDATE SEARCH DONE", search)
 
     };
 
@@ -108,16 +108,16 @@ const ChooseBookComponent = (props) => {
 
 
         return (
-            <div>
+            <div className="cbc-book-results">
 
                 {books.map((book) => {
                     return (
                         <div className="cbc-book" onClick={() => { props.setBook(book) }}>
                             <div className="cbc-book-title">Titel: {book.title}</div>
-                            <div className="cbc-book-author">Författare: {(Array.isArray(book.author)) ? book.author : JSON.parse(('"'+book.author.replaceAll('"','\\"')+'"'))}</div>
+                            <div className="cbc-book-author">Författare: {(Array.isArray(book.author)) ? book.author : JSON.parse(('"' + book.author.replaceAll('"', '\\"') + '"'))}</div>
                             <div className="cbc-book-pages">Sidor: {book.pages}</div>
                             <div className="cbc-book-img">
-                                <img src={(book.thumbnail) ? ((book.thumbnail.thumbnail) ?book.thumbnail.thumbnail : book.thumbnail): "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"} />
+                                <img src={(book.thumbnail) ? ((book.thumbnail.thumbnail) ? book.thumbnail.thumbnail : book.thumbnail) : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"} />
                             </div>
                         </div>
                     )
@@ -128,29 +128,31 @@ const ChooseBookComponent = (props) => {
 
 
     return (
-        <div className="cbc-page-content">
-            <div className="cbc-search-book">
-                <input
-                    type="text"
-                    onChange={updateSearch}
-                    placeholder="T.ex. Harry Potter och..."
-                />
-                {(books[0] == undefined) ? "No book" : JSON.stringify(books[0].title) + " " + JSON.stringify(books[0].authors) + " " + JSON.stringify(books[0].pageCount)}
-            </div>
+        <div className="main-page-content cbc-page-content">
+
 
             <div className="cbc-search-result">
-                <div className="">Sökresultat:</div>
+                <div className="cbc-search-bar">
+                    <span>Sök bok:</span>
+                        <input
+                        type="text"
+                        onChange={updateSearch}
+                        placeholder="Boktitel"
+                    />
+                </div>
+
+
                 {showResult(books)}
             </div>
 
             <div className="cbc-best-result">
-                <div className="">Bästa böckerna just nu:</div>
+                <div className="">Populära böcker:</div>
                 {showResult(bestBooks)}
 
             </div>
 
             <div className="cbc-recent-result">
-                <div className="">Senast recenserade böckerna:</div>
+                <div className="">Nyligen recenserade:</div>
                 {showResult(recentBooks)}
 
             </div>

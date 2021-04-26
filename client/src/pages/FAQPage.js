@@ -30,7 +30,7 @@ export default class FAQPage extends React.Component {
                     <h2> FAQ </h2>
                 </div>
                 <div className="main-page-inner-container">
-                    <div className="faq-page-content">
+                    <div className="main-page-content faq-page-content">
                         {this.printQuestions()}
                     </div>
                 </div>
