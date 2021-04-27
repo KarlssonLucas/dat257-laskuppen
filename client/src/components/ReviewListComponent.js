@@ -69,15 +69,31 @@ const ReviewListComponent = (props) => {
             }
         }
     }
+    
+    const checkAcc = (b, e) => {
+        if (b.accepted) {
+            return "accepted"
+        } else {
+            return "not accepted"
+        }
+    }
+
+    const checkPub = (b) => {
+        if (b.published) {
+            return "published"
+        } else {
+            return "not published"
+        }
+    }
 
     const showResult = (books) => {
         return (
             <div>
                 {books.map((book) => {
                     return (
-                        <div className="cbc-book">
+                        <div className="rlc-book">
                             <div className="rlc-mul"> 
-                                <label class="rlc-acc-checkbox">
+                                <label className="rlc-acc-checkbox">
                                     <input className="rlc-checkb" type="checkbox" onChange={(e) => addBook(book, e)}/> 
                                 </label>
                             </div>
@@ -88,16 +104,10 @@ const ReviewListComponent = (props) => {
                             <div className="rlc-book-bookid">bookid: {book.bookid}</div>
                             <div className="rlc-book-reviewid">reviewid: {book.rid}</div>
                             <div className="rlc-book-review">review: {book.summary}</div>
-                            <div className="rlc-book-accepted">accepted: 
-                                <label className="rlc-acc-checkbox">
-                                    <input type="checkbox" checked={book.accepted}/> 
-                                </label>
-                            </div>
-                            <div className="rlc-book-published">published: 
-                                <label className="rlc-acc-checkbox">
-                                    <input type="checkbox" checked={book.published}/> 
-                                </label>
-                            </div>
+                            <div className="rlc-book-accepted">
+                                {(e) => checkAcc(book, e)}
+                             </div>
+                            <div className="rlc-book-published">{checkPub(book)}</div>
                         </div>
                     )
                 })}
@@ -107,7 +117,7 @@ const ReviewListComponent = (props) => {
 
 
     return (
-        <div className="main-page-content rlc-page-content">
+        <div className="rlc-page-content">
             <div className="rlc-search-result">
                 <div className="">Recensioner:</div>
                 {showResult(books)}
