@@ -1,5 +1,6 @@
 import './css/reviewlist.css';
 import React, { useState, useEffect } from 'react';
+import Accordion from "./Accordion";
 import { render } from 'react-dom';
 
 const ReviewListComponent = (props) => {
@@ -125,24 +126,44 @@ const ReviewListComponent = (props) => {
             <div>
                 {books.map((book) => {
                     return (
-                        <div className="rlc-book">
+
+                        <Accordion
+                            title={<div className="rlc-book">
                             <div className="rlc-mul"> 
                                 <label className="rlc-acc-checkbox">
                                     <input className="rlc-checkb" name="foo" type="checkbox" onChange={(e) => addBook(book, e)}/> 
                                 </label>
                             </div>
-                            <div className="rlc-book-title">title: {book.title}</div>
-                            <div className="rlc-book-author">author: {book.author}</div>
-                            <div className="rlc-book-pages">pages: {book.pages}</div>
-                            <div className="rlc-book-writtenby">writtenby: {book.name}</div>
-                            <div className="rlc-book-bookid">bookid: {book.bookid}</div>
-                            <div className="rlc-book-reviewid">reviewid: {book.rid}</div>
-                            <div className="rlc-book-review">review: {book.summary}</div>
+                            <div className="rlc-book-title">Titel: {book.title}</div>
+                            <div className="rlc-book-author">Författare: {book.author}</div>
+                            <div className="rlc-book-pages">Sidor: {book.pages}</div>
+                            <div className="rlc-book-writtenby">Recensent: {book.name}</div>
+                            <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
+                            <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
+                            <div className="rlc-book-review">Recension: {book.summary}</div>
                             <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
                             <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
-                        </div>
+                        </div>}
+                            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        />
+                        /*<div className="rlc-book">
+                            <div className="rlc-mul"> 
+                                <label className="rlc-acc-checkbox">
+                                    <input className="rlc-checkb" name="foo" type="checkbox" onChange={(e) => addBook(book, e)}/> 
+                                </label>
+                            </div>
+                            <div className="rlc-book-title">Titel: {book.title}</div>
+                            <div className="rlc-book-author">Författare: {book.author}</div>
+                            <div className="rlc-book-pages">Sidor: {book.pages}</div>
+                            <div className="rlc-book-writtenby">Recensent: {book.name}</div>
+                            <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
+                            <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
+                            <div className="rlc-book-review">Recension: {book.summary}</div>
+                            <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
+                            <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
+                        </div>*/
                     )
-                })}
+                })} 
             </div>
         )
     }
