@@ -7,16 +7,31 @@ export default class FAQPage extends React.Component {
     constructor(props) {
         super(props);
         this.printQuestions = this.printQuestions.bind(this);
+        this.state = {FAQs:null}
+        this.printQuestions();
+
     }
 
     printQuestions = () => {
-        let arr = [];
-        for (let i = 0; i < 50; i++) {
-            arr.push(
-                <FAQCardComponent question="Q1:" answer="A1:" />
-            )
-        }
-        return arr;
+        let FAQs = [];
+
+        fetch("/api/faq")
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+                response.map((faq) => {
+                    FAQs.push(
+                        <FAQCardComponent
+                            question={faq.question}
+                            answer={faq.answer} />
+                    );
+                }
+                );
+                console.log("STATE", FAQs)
+                this.setState({FAQs})
+            });
+
+
     }
 
 
@@ -28,7 +43,7 @@ export default class FAQPage extends React.Component {
                 </div>
                 <div className="main-page-inner-container">
                     <div className="main-page-content faq-page-content">
-                        {this.printQuestions()}
+                        {this.state.FAQs}
                     </div>
                 </div>
             </div>
