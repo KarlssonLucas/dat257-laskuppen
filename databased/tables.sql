@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS School CASCADE;
 DROP TABLE IF EXISTS Classes CASCADE;
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Roles CASCADE;
@@ -10,17 +9,11 @@ DROP TABLE IF EXISTS SchoolSettings CASCADE;
 DROP TABLE IF EXISTS Errors CASCADE;
 DROP TABLE IF EXISTS RecommendedBooks CASCADE;
 
-CREATE TABLE School(
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL
-);
 
 CREATE TABLE Classes(
     id SERIAL PRIMARY KEY,
     className TEXT NOT NULL,
-    schoolId INT NOT NULL,
-    FOREIGN KEY(schoolId) REFERENCES School(id),
-    UNIQUE (schoolId,className) -- ONE UNIQUE CLASS PER SCHOOL
+    UNIQUE (className) -- UNIQUE CLASS
 );
 
 CREATE TABLE Roles(
@@ -73,22 +66,19 @@ CREATE TABLE Review(
 
 CREATE TABLE FrequentlyAskedQuestions(
     id SERIAL PRIMARY KEY,
-    schoolId INT REFERENCES School(id) NOT NULL,
     question TEXT NOT NULL,
     answer TEXT NOT NULL
 );
 
 CREATE TABLE SchoolSettings(
-    schoolId INT REFERENCES School(id) PRIMARY KEY NOT NULL,
     weeklyBook INT REFERENCES Book(id), -- CAN BE NULL
     minimumReviewLength INT DEFAULT 1 NOT NULL,
     CHECK (minimumReviewLength > 0)
 );
 
 CREATE TABLE RecommendedBooks(
-    schoolId INT REFERENCES School(id),
     bookId INT REFERENCES Book(id),
-    PRIMARY KEY (schoolId, bookId)
+    PRIMARY KEY (bookId)
 );
 
 CREATE TABLE Errors (

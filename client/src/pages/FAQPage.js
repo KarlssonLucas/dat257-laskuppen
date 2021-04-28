@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch, { Body } from 'node-fetch';
 import React from 'react';
 import "./css/faqpage.css";
 
@@ -7,6 +7,58 @@ export default class FAQPage extends React.Component {
     constructor(props){
         super(props);
         this.printQuestions = this.printQuestions.bind(this);
+        this.fetchFAQ = this.fetchFAQ.bind(this)
+        this.delFAQ = this.delFAQ.bind(this)
+        this.updateFAQ = this.updateFAQ.bind(this)
+        this.addFAQ = this.addFAQ.bind(this)
+    }
+
+
+    fetchFAQ = () => {
+        let req = { method: "GET", headers: { "Content-Type": "application/json" }}
+        fetch("/api/faq",req)
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response);
+          });
+      }
+
+      updateFAQ = () => {
+        let req = { method: "PUT", 
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({id: 1 , question: "hej", answer: "coolt"})
+
+        }
+        fetch("/api/faq",req)
+          .then((response) => response.text())
+          .then((response) => {
+            console.log(response);
+          });
+      }
+
+
+      addFAQ = () => {
+        let req = { method: "POST", 
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({question: "New q", answer: "new a"})
+
+        }
+        fetch("/api/faq",req)
+          .then((response) => response.text())
+          .then((response) => {
+            console.log(response);
+          });
+      }
+
+
+      
+
+    delFAQ = (id) => {
+        let req = { method: "DELETE", headers: { "Content-Type": "application/json" }}
+        fetch("/api/faq/"+id,req).then((response) => response.text())
+        .then((response) => {
+          console.log(response);
+        });
     }
 
 
