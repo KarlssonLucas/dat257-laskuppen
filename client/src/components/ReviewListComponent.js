@@ -28,6 +28,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
+        setBooks([])
+        fetchReviews()
     }
 
     const rejectBooks =  () => {
@@ -36,6 +38,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
+        setBooks([])
+        fetchReviews()
     }
 
     const publishBooks =  () => {
@@ -44,6 +48,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
+        setBooks([])
+        fetchReviews()
     }
 
     const unpublishBooks =  () => {
@@ -52,6 +58,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
+        setBooks([])
+        fetchReviews()
     }
 
     const giveBonusPoints = (points) => {
@@ -60,6 +68,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
+        setBooks([])
+        fetchReviews()
     }
 
     const clearSelection =  () => {
@@ -118,7 +128,7 @@ const ReviewListComponent = (props) => {
                         <div className="rlc-book">
                             <div className="rlc-mul"> 
                                 <label className="rlc-acc-checkbox">
-                                    <input className="rlc-checkb" type="checkbox" onChange={(e) => addBook(book, e)}/> 
+                                    <input className="rlc-checkb" name="foo" type="checkbox" onChange={(e) => addBook(book, e)}/> 
                                 </label>
                             </div>
                             <div className="rlc-book-title">title: {book.title}</div>
@@ -137,6 +147,13 @@ const ReviewListComponent = (props) => {
         )
     }
 
+    function toggle() {
+        const checkboxes = document.getElementsByName('foo');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].click()
+        }
+        console.log(checkboxes)
+    }
 
     return (
         <div className="rlc-page-content">
@@ -153,8 +170,7 @@ const ReviewListComponent = (props) => {
                 <button type="button" onClick={() => unpublishBooks()}>unpublish</button>
             </div>
             <div>
-                <button type="button" onClick={() => books.map((book) => (fetch("/api/accrev/"+book.rid).then(response => response.json()).then(response => {
-                console.log(response)})))}>Accept All</button>
+                <button type="button" onClick={() => toggle()}>Mark All</button>
             </div>
         </div>
     )
