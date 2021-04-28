@@ -1,8 +1,8 @@
 INSERT INTO School VALUES(DEFAULT,'Chalmers'); -- schoolId = 1
 
 INSERT INTO Classes VALUES
-(DEFAULT,'IT',1),
-(DEFAULT, 'TE2A', 1);
+(DEFAULT,'IT'),
+(DEFAULT, 'TE2A');
 
 INSERT INTO Roles VALUES
 (1,'Student'),
@@ -12,7 +12,7 @@ INSERT INTO Roles VALUES
 INSERT INTO Users VALUES
 (DEFAULT,'teacher@gmail.com','Linda','Efson','qwe123',1,3),
 (DEFAULT,'jjaokk@gmail.com','Joakim','Ohlsson','qwe123',1,2),
-(DEFAULT,'foo@gmail.com','Foo','Fooson','qwe123',1,1),
+(DEFAULT,'foo@gmail.com','Foo','Fooson','qwe123',2,1),
 (DEFAULT,'bar@gmail.com','Bar','Barson','qwe123',1,1);
 
 INSERT INTO NewReview (title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,summary) VALUES
@@ -22,11 +22,16 @@ INSERT INTO NewReview (title,author,pages,apiLink,descr,thumbnail,writtenBy,wort
 ('Dont catch this ples', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, true, 7, 'brabok1');
 
 INSERT INTO ExtraPoints VALUES 
-(2, 20, 'asdasd'),
-(1, 10, 'asd');
+(2, 20),
+(1, 10);
 
 INSERT INTO RecommendedBooks VALUES
-(1, 1),
-(1, 3);
+(1),
+(3);
+
+INSERT INTO FrequentlyAskedQuestions (question, answer) VALUES
+('Vad är en groda utan ben?','Hopplös'),
+('Vilket är det största djuret i skogen?','En orm'),
+('Vad heter Mc Donalds nya fiskburgare?','Mc Rill');
 
 UPDATE Review SET accepted = true;

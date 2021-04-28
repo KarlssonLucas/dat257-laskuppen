@@ -1,7 +1,5 @@
-.tp-page-content {
+.top-page-content {
   background: var(--pageInnerColor) !important;
-  width: 100%;
-  height: 100%;
   display: grid;
   grid-template-areas: "top-reader-card top-book-card my-points my-recommendation" "top-lists top-lists top-lists top-lists";
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -9,29 +7,29 @@
   gap: 1em;
 }
 
-.tp-top-reader-card, .tp-top-book-card, .tp-my-points, .tp-my-recommendation {
+.top-top-reader-card, .top-top-book-card, .top-my-points, .top-my-recommendation {
   background: var(--white);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
 }
 
-.tp-top-reader-card {
+.top-top-reader-card {
   grid-area: top-reader-card;
 }
 
-.tp-top-book-card {
+.top-top-book-card {
   grid-area: top-book-card;
 }
 
-.tp-my-points {
+.top-my-points {
   grid-area: my-points;
 }
 
-.tp-my-recommendation {
+.top-my-recommendation {
   grid-area: my-recommendation;
 }
 
-.tp-inner-recommendation {
+.top-inner-recommendation {
   display: grid;
   grid-template-areas: "a d" "b d" "c d";
   grid-template-columns: 4fr 2fr;
@@ -40,7 +38,7 @@
   width: 100%;
 }
 
-.tp-top-lists {
+.top-top-lists {
   grid-area: top-lists;
   background: var(--white);
   border-radius: 9px 9px 9px 9px;
@@ -51,7 +49,7 @@
   grid-template-rows: 1fr 6fr;
 }
 
-.tp-top-list-header {
+.top-top-list-header {
   background: var(--barcolor);
   grid-area: "header";
   padding-top: 1%;
@@ -61,21 +59,21 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-.tp-tableDiv {
+.top-tableDiv {
   border-radius: 9px 9px 9px 9px;
   padding: 3%;
   grid-area: table;
   background: var(--white);
 }
 
-.tp-filter-label {
+.top-filter-label {
   grid-area: filter;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.tp-nameButton {
+.top-nameButton {
   border: var(--borders);
   background: var(--barcolor);
   grid-area: student;
@@ -83,7 +81,7 @@
   border-style: solid solid hidden solid;
 }
 
-.tp-classButton {
+.top-classButton {
   border: var(--borders);
   background: var(--barcolor);
   grid-area: class;
@@ -91,7 +89,7 @@
   border-style: solid solid hidden solid;
 }
 
-.tp-pointsButton {
+.top-pointsButton {
   border: var(--borders);
   background: var(--barcolor);
   grid-area: points;
@@ -99,7 +97,7 @@
   border-style: solid solid hidden solid;
 }
 
-.tp-readBooksButton {
+.top-readBooksButton {
   border: var(--borders);
   background: var(--barcolor);
   grid-area: readbooks;
@@ -107,7 +105,7 @@
   border-style: solid solid hidden solid;
 }
 
-.tp-table-holder {
+.top-table-holder {
   border: var(--borders);
   background: var(--background);
 }
@@ -119,7 +117,7 @@ hr {
   margin-left: 1em;
 }
 
-.tp-card-title {
+.top-card-title {
   margin: 0px;
   margin-left: 1em;
 }

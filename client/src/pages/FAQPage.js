@@ -1,27 +1,39 @@
-import fetch from 'node-fetch';
 import React from 'react';
+import FAQCardComponent from '../components/FAQCardComponent';
 import "./css/faqpage.css";
 
 export default class FAQPage extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.printQuestions = this.printQuestions.bind(this);
+        this.state = {FAQs:null}
+        this.printQuestions();
+
     }
 
-
     printQuestions = () => {
-            let arr = [];
-            for(let i=0; i< 50; i++){
-                arr.push(
-                <div className="faq-question">
-                    <p>Q{i+1}: Vad får man poäng för? </p>
-                </div>
-            )
-            }
-            return arr;
-        }
-    
+        let FAQs = [];
+
+        fetch("/api/faq")
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+                response.map((faq) => {
+                    FAQs.push(
+                        <FAQCardComponent
+                            question={faq.question}
+                            answer={faq.answer} />
+                    );
+                }
+                );
+                console.log("STATE", FAQs)
+                this.setState({FAQs})
+            });
+
+
+    }
+
 
     render() {
         return (
@@ -30,8 +42,8 @@ export default class FAQPage extends React.Component {
                     <h2> FAQ </h2>
                 </div>
                 <div className="main-page-inner-container">
-                    <div className="faq-page-content">
-                        {this.printQuestions()}
+                    <div className="main-page-content faq-page-content">
+                        {this.state.FAQs}
                     </div>
                 </div>
             </div>

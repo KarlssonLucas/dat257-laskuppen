@@ -1,11 +1,6 @@
 .faq-page-content {
-  background-color: var(--white);
-  width: 100%;
-  height: 100%;
   padding: 1em;
-  display: flex;
   flex-direction: column;
-  overflow-y: auto;
 }
 
 .faq-question {
@@ -13,4 +8,20 @@
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
   margin: 1em;
+  
 }
+
+.tri {
+  text-align: right;
+  margin-right: 0.5%;
+  margin-top: -2.8%;
+} 
+
+.faq-answer {
+      
+    }
+
+.expand {
+    background-color: red;
+}
+

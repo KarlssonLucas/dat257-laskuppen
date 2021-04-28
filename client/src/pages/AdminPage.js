@@ -1,18 +1,17 @@
 import React from 'react';
-import "./css/bookspage.css";
+import "./css/adminpage.css";
+import ReviewListComponent from '../components/ReviewListComponent';
 
-export default class BooksPage extends React.Component {
+export default class AdminPage extends React.Component {
 
     render() { 
         return (
             <div className="main-page-general-styling">
                 <div className="main-page-header">
-                    <h2> Böcker </h2> 
+                    <h2> Admin </h2> 
                 </div>
                 <div className="main-page-inner-container">
-                    <div className="main-page-content bp-page-content">
-                        Content
-                    </div>
+                    <ReviewListComponent></ReviewListComponent> 
                 </div>
             </div>
         )

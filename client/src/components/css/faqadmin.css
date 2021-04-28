@@ -1,0 +1,34 @@
+
+.faq-admin-FAQ {
+    background-color: var(--background);
+    border-radius: 9px 9px 9px 9px;
+    border: var(--borders);
+    margin: 1em;
+    display: flex;
+  }
+  
+  .faq-admin-FAQ:hover {
+    background-color: var(--backgroundHover);
+    cursor: pointer;
+  }
+  
+  .faq-admin-FAQ svg {
+    height: 50px !important;
+    width: 50px !important;
+    margin-left: 10px
+  }
+  
+  .faq-admin-FAQ svg:hover {
+    color: red;
+  }
+  
+  .faq-admin-FAQ-text {
+    width: 80%;
+  }
+  
+  .faq-admin-FAQ-buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 20%;
+  }
