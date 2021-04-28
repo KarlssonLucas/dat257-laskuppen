@@ -24,6 +24,32 @@ export default class FAQAdminComponent extends React.Component {
         }
     }
 
+    updateFAQ = () => {
+        let req = { method: "PUT", 
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({id: 1 , question: "hej", answer: "coolt"})
+
+        }
+        fetch("/api/faq",req)
+          .then((response) => response.text())
+          .then((response) => {
+            console.log(response);
+          });
+      }
+
+
+      addFAQ = () => {
+        let req = { method: "POST", 
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({question: "New q", answer: "new a"})
+        }
+        fetch("/api/faq",req)
+          .then((response) => response.text())
+          .then((response) => {
+            console.log(response);
+          });
+      }
+
 
     printQuestions = () => {
 
