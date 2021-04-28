@@ -1,25 +1,24 @@
 import React from 'react';
+import FAQCardComponent from '../components/FAQCardComponent';
 import "./css/faqpage.css";
 
 export default class FAQPage extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.printQuestions = this.printQuestions.bind(this);
     }
 
     printQuestions = () => {
-            let arr = [];
-            for(let i=0; i< 50; i++){
-                arr.push(
-                <div className="faq-question">
-                    <p>Q{i+1}: Vad får man poäng för? </p>
-                </div>
+        let arr = [];
+        for (let i = 0; i < 50; i++) {
+            arr.push(
+                <FAQCardComponent question="Q1:" answer="A1:" />
             )
-            }
-            return arr;
         }
-    
+        return arr;
+    }
+
 
     render() {
         return (
