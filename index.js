@@ -36,6 +36,7 @@ app.post('/api/submitreview',db.submitreview);
 app.get('/api/mostreadbook', db.mostReadBook)
 app.get('/api/userreadmost', db.userReadMost)
 app.get('/api/toplist', db.toplist)
+app.get('/api/bonus', db.bonusPoints)
 app.get('/api/classpoints', db.getClassPoints)
 app.delete('/api/users/:id', db.deleteUser)
 app.get('/api/session', db.getSession)

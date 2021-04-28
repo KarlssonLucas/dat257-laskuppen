@@ -1,79 +1,39 @@
-import fetch, { Body } from 'node-fetch';
 import React from 'react';
+import FAQCardComponent from '../components/FAQCardComponent';
 import "./css/faqpage.css";
 
 export default class FAQPage extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.printQuestions = this.printQuestions.bind(this);
-        this.fetchFAQ = this.fetchFAQ.bind(this)
-        this.delFAQ = this.delFAQ.bind(this)
-        this.updateFAQ = this.updateFAQ.bind(this)
-        this.addFAQ = this.addFAQ.bind(this)
+        this.state = {FAQs:null}
+        this.printQuestions();
+
     }
-
-
-    fetchFAQ = () => {
-        let req = { method: "GET", headers: { "Content-Type": "application/json" }}
-        fetch("/api/faq",req)
-          .then((response) => response.json())
-          .then((response) => {
-            console.log(response);
-          });
-      }
-
-      updateFAQ = () => {
-        let req = { method: "PUT", 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({id: 1 , question: "hej", answer: "coolt"})
-
-        }
-        fetch("/api/faq",req)
-          .then((response) => response.text())
-          .then((response) => {
-            console.log(response);
-          });
-      }
-
-
-      addFAQ = () => {
-        let req = { method: "POST", 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({question: "New q", answer: "new a"})
-
-        }
-        fetch("/api/faq",req)
-          .then((response) => response.text())
-          .then((response) => {
-            console.log(response);
-          });
-      }
-
-
-      
-
-    delFAQ = (id) => {
-        let req = { method: "DELETE", headers: { "Content-Type": "application/json" }}
-        fetch("/api/faq/"+id,req).then((response) => response.text())
-        .then((response) => {
-          console.log(response);
-        });
-    }
-
 
     printQuestions = () => {
-            let arr = [];
-            for(let i=0; i< 50; i++){
-                arr.push(
-                <div className="faq-question">
-                    <p>Q{i+1}: Vad får man poäng för? </p>
-                </div>
-            )
-            }
-            return arr;
-        }
-    
+        let FAQs = [];
+
+        fetch("/api/faq")
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+                response.map((faq) => {
+                    FAQs.push(
+                        <FAQCardComponent
+                            question={faq.question}
+                            answer={faq.answer} />
+                    );
+                }
+                );
+                console.log("STATE", FAQs)
+                this.setState({FAQs})
+            });
+
+
+    }
+
 
     render() {
         return (
@@ -83,7 +43,7 @@ export default class FAQPage extends React.Component {
                 </div>
                 <div className="main-page-inner-container">
                     <div className="main-page-content faq-page-content">
-                        {this.printQuestions()}
+                        {this.state.FAQs}
                     </div>
                 </div>
             </div>

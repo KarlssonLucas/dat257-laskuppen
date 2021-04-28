@@ -54,6 +54,14 @@ const ReviewListComponent = (props) => {
         ))
     }
 
+    const giveBonusPoints = (points) => {
+         pendAccepting.map((item) => (
+            fetch("/api/bonus/"+item.rid+"/"+points).then(response => response.json()).then(response => {
+                console.log(response)
+            })
+        ))
+    }
+
     const clearSelection =  () => {
        pendAccepting.length = 0
     }
@@ -69,35 +77,59 @@ const ReviewListComponent = (props) => {
             }
         }
     }
+    
+    const checkAcc = (b, e) => {
+        if (b.accepted) {
+            return "accepted"
+        } else {
+            return "not accepted"
+        }
+    }
+
+    const checkPub = (b) => {
+        if (b.published) {
+            return "published"
+        } else {
+            return "not published"
+        }
+    }
+
+    const greenOrRed = (b, s) => {
+        if (s == "pub") {
+            if (b.published) {
+                return "rlc-book-published"
+            } else {
+                return "rlc-book-notpublished"
+            }
+        } else {
+            if (b.accepted) {
+                return "rlc-book-accepted"
+            } else {
+                return "rlc-book-notaccepted"
+            }
+        }
+    }
 
     const showResult = (books) => {
         return (
             <div>
                 {books.map((book) => {
                     return (
-                        <div className="cbc-book">
+                        <div className="rlc-book">
                             <div className="rlc-mul"> 
-                                <label class="rlc-acc-checkbox">
-                                    <input type="checkbox" onChange={(e) => addBook(book, e)}/> 
+                                <label className="rlc-acc-checkbox">
+                                    <input className="rlc-checkb" type="checkbox" onChange={(e) => addBook(book, e)}/> 
                                 </label>
                             </div>
                             <div className="rlc-book-title">title: {book.title}</div>
                             <div className="rlc-book-author">author: {book.author}</div>
                             <div className="rlc-book-pages">pages: {book.pages}</div>
-                            <div className="rlc-book-writtenby">writtenby: {book.writtenby}</div>
+                            <div className="rlc-book-writtenby">writtenby: {book.name}</div>
                             <div className="rlc-book-bookid">bookid: {book.bookid}</div>
                             <div className="rlc-book-reviewid">reviewid: {book.rid}</div>
                             <div className="rlc-book-review">review: {book.summary}</div>
-                            <div className="rlc-book-accepted">accepted: 
-                                <label className="rlc-acc-checkbox">
-                                    <input type="checkbox" checked={book.accepted}/> 
-                                </label>
-                            </div>
-                            <div className="rlc-book-published">published: 
-                                <label className="rlc-acc-checkbox">
-                                    <input type="checkbox" checked={book.published}/> 
-                                </label>
-                            </div>
+                            <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
+                            <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
                         </div>
                     )
                 })}
@@ -107,7 +139,7 @@ const ReviewListComponent = (props) => {
 
 
     return (
-        <div className="main-page-content rlc-page-content">
+        <div className="rlc-page-content">
             <div className="rlc-search-result">
                 <div className="">Recensioner:</div>
                 {showResult(books)}
@@ -121,7 +153,8 @@ const ReviewListComponent = (props) => {
                 <button type="button" onClick={() => unpublishBooks()}>unpublish</button>
             </div>
             <div>
-                <button type="button" onClick={() => clearSelection()}>clear</button>
+                <button type="button" onClick={() => books.map((book) => (fetch("/api/accrev/"+book.rid).then(response => response.json()).then(response => {
+                console.log(response)})))}>Accept All</button>
             </div>
         </div>
     )
