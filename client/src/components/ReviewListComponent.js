@@ -54,6 +54,14 @@ const ReviewListComponent = (props) => {
         ))
     }
 
+    const giveBonusPoints = (points) => {
+         pendAccepting.map((item) => (
+            fetch("/api/bonus/"+item.rid+"/"+points).then(response => response.json()).then(response => {
+                console.log(response)
+            })
+        ))
+    }
+
     const clearSelection =  () => {
        pendAccepting.length = 0
     }
@@ -86,6 +94,22 @@ const ReviewListComponent = (props) => {
         }
     }
 
+    const greenOrRed = (b, s) => {
+        if (s == "pub") {
+            if (b.published) {
+                return "rlc-book-published"
+            } else {
+                return "rlc-book-notpublished"
+            }
+        } else {
+            if (b.accepted) {
+                return "rlc-book-accepted"
+            } else {
+                return "rlc-book-notaccepted"
+            }
+        }
+    }
+
     const showResult = (books) => {
         return (
             <div>
@@ -104,10 +128,8 @@ const ReviewListComponent = (props) => {
                             <div className="rlc-book-bookid">bookid: {book.bookid}</div>
                             <div className="rlc-book-reviewid">reviewid: {book.rid}</div>
                             <div className="rlc-book-review">review: {book.summary}</div>
-                            <div className="rlc-book-accepted">
-                                {(e) => checkAcc(book, e)}
-                             </div>
-                            <div className="rlc-book-published">{checkPub(book)}</div>
+                            <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
+                            <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
                         </div>
                     )
                 })}

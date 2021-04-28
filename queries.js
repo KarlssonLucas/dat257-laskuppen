@@ -350,6 +350,24 @@ function errorMsg(text) {
   return { error: text };
 }
 
+const bonusPoints = (request, response) => {
+  if (!hasSession(request, response)) {
+    return;
+  }
+
+  const id = request.query.id
+  const points = request.query.points
+
+    client.query('WITH asd AS (select COALESCE(expoints, 0) as epoints from extrapoints where userid=$1) insert into extrapoints values($1, $2) on conflict (userId) do update set expoints = $2 + (SELECT epoints FROM asd);', [id, points], (error, results) => {
+      if (error) {
+        response.status(500).send(errorMsg("Internal server error"));
+      } else {
+        response.status(200).json(results.rows)
+      }
+    })
+  }
+
+
 const toplist = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -481,5 +499,6 @@ module.exports = {
   faqGet,
   faqDel,
   faqPut,
-  FAQAdd
+  FAQAdd,
+  bonusPoints
 }

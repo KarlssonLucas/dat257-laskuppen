@@ -22,8 +22,8 @@ INSERT INTO NewReview (title,author,pages,apiLink,descr,thumbnail,writtenBy,wort
 ('Dont catch this ples', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, true, 7, 'brabok1');
 
 INSERT INTO ExtraPoints VALUES 
-(2, 20, 'asdasd'),
-(1, 10, 'asd');
+(2, 20),
+(1, 10);
 
 INSERT INTO RecommendedBooks VALUES
 (1),

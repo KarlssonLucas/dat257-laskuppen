@@ -32,9 +32,8 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE ExtraPoints(
-    userId INT REFERENCES Users(id),
+    userId INT PRIMARY KEY REFERENCES Users(id),
     exPoints INT NOT NULL,
-    reason TEXT NOT NULL,
     CHECK (exPoints > 0)
 );
 
