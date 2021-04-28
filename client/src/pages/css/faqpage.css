@@ -12,7 +12,14 @@
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
   margin: 1em;
+  
 }
+
+.tri {
+  text-align: right;
+  margin-right: 0.5%;
+  margin-top: -2.8%;
+} 
 
 .faq-answer {
       

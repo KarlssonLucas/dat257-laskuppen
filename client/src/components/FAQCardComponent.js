@@ -25,12 +25,14 @@ export default class FAQCardComponent extends React.Component {
         const triangle = <FontAwesomeIcon icon={expand ? faCaretDown : faCaretUp} />;
         return (
             <div>
+
                 <div className="faq-question" onClick={() => this.setState(
                     { expand: !expand })}>
-                    <p> {this.props.question} {triangle} </p>
+                    <p>  {this.props.question} </p>
 
-
-
+                    <div className="tri">
+                        <p> {triangle} </p>
+                    </div>
 
                     {expand
                         ? <div className="faq-answer">
