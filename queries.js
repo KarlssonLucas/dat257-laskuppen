@@ -1,3 +1,4 @@
+const { request, response } = require("express");
 const fetch = require("node-fetch");
 
 if (!process.env.DATABASE_URL) {
@@ -274,6 +275,23 @@ const getUserById = (request, response) => {
 };
 
 
+const reviewedBooks = (request, response) => {
+
+  if (!hasSession(request, response)) {
+    return;
+  }
+
+  client.query("SELECT * from booksRead", (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+};
+
+
+
 const getUserId = (request) => {
   return parseInt(request.session.userId);
 }
@@ -500,5 +518,6 @@ module.exports = {
   faqDel,
   faqPut,
   FAQAdd,
-  bonusPoints
+  bonusPoints,
+  reviewedBooks
 }

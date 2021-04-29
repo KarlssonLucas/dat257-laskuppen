@@ -45,6 +45,8 @@ app.get('/api/faq',db.faqGet)
 app.delete('/api/faq/:id',db.faqDel)
 app.put('/api/faq',db.faqPut)
 app.post('/api/faq',db.FAQAdd)
+//DAvid fick feber här
+app.get('/api/reviewedbooks', db.reviewedBooks)
 
 // Load react frontend
 app.use(express.static('client/build'));

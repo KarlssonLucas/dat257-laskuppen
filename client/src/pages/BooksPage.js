@@ -1,23 +1,8 @@
 import React from "react";
 import "./css/bookspage.css";
+import BooklistComponent from '../components/BooklistComponet'
 
 export default class BooksPage extends React.Component {
-
-
-    constructor() {
-        super();
-        this.state = {};
-        
-        this.setReviewedBooks = this.setReviewedBooks.bind(this)
-    }
-
-    fetchReviewBooks(){
-        fetch()
-    }
-
-
-
-
 
   render() {
     return (
@@ -42,16 +27,7 @@ export default class BooksPage extends React.Component {
                 <button>Filtrera sökresultat</button>
               </div>
               <div className="table-container">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Titel</th>
-                      <th scope="col">Författare</th>
-                      <th scope="col">Sidor</th>
-                      <th scope="col">Snittbetyg</th>
-                    </tr>
-                  </thead>
-                </table>
+                <BooklistComponent filter="hej"/>
               </div>
             </div>
           </div>
@@ -60,3 +36,5 @@ export default class BooksPage extends React.Component {
     );
   }
 }
+
+//title author pages grade
