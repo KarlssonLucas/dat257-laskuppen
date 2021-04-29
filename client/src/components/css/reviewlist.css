@@ -5,6 +5,7 @@
     height: 100%;
     padding: 1em;
     gap: 1em;
+    position: relative;
 }
 
 .rlc-search-result {
@@ -12,20 +13,14 @@
     overflow-y: scroll;
     height: 78vh;
     overflow-x: hidden;
-    display:flex;
+    display: flex;
     flex-direction: column;
     min-width: 200px;
     padding: 5px 5px 0px 5px;
     align-items: center;
 }
 
-.rlc-book:hover {
-    background-color: var(--backgroundHover);
-    cursor: pointer;
-}
-
 .rlc-book {
-    padding: 1em;
     width: 100%;
     height: 20vh;
     background-color: var(--background);
@@ -34,22 +29,29 @@
     grid-template-rows: repeat(5, 1fr); 
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
+    padding: 0;
 }
 
 .rlc-checkb {
     zoom: 2;
 }
 
+.rlc-bonusfield {
+    position: absolute;
+    right: 10%;
+    bottom: 4%;
+}
+
 .rlc-mul { grid-area: 2 / 1 / 4 / 2; justify-self: center;}
-.rlc-book-title { grid-area: 1 / 2 / 2 / 3;}
-.rlc-book-author { grid-area: 2 / 2 / 3 / 3; }
-.rlc-book-pages { grid-area: 3 / 2 / 4 / 3; }
-.rlc-book-writtenby { grid-area: 1 / 3 / 2 / 4;}
-.rlc-book-bookid { grid-area: 2 / 3 / 3 / 4;}
-.rlc-book-reviewid { grid-area: 3 / 3 / 4 / 4;}
+.rlc-book-title { grid-area: 2 / 2 / 2 / 3;}
+.rlc-book-author { grid-area: 3 / 2 / 3 / 3; }
+.rlc-book-pages { grid-area: 4 / 2 / 4 / 3; }
+.rlc-book-writtenby { grid-area: 2 / 3 / 2 / 4;}
+.rlc-book-bookid { grid-area: 3 / 3 / 3 / 4;}
+.rlc-book-reviewid { grid-area: 4 / 3 / 4 / 4;}
 .rlc-book-review { grid-area: 1 / 4 / 4 / 5;}
-.rlc-book-accepted { grid-area: 1 / 5 / 2 / 6; color: green;}
-.rlc-book-notaccepted { grid-area: 1 / 5 / 2 / 6; color: red;}
-.rlc-book-published { grid-area: 2 / 5 / 3 / 6; color: green;}
-.rlc-book-notpublished { grid-area: 2 / 5 / 3 / 6; color: red;}
+.rlc-book-accepted { grid-area: 2 / 5 / 2 / 6; color: green;}
+.rlc-book-notaccepted { grid-area: 2 / 5 / 2 / 6; color: red;}
+.rlc-book-published { grid-area: 4 / 5 / 4 / 6; color: green;}
+.rlc-book-notpublished { grid-area: 4 / 5 / 4 / 6; color: red;}
 

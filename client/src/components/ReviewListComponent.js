@@ -63,20 +63,6 @@ const ReviewListComponent = (props) => {
         fetchReviews()
     }
 
-    const giveBonusPoints = (points) => {
-         pendAccepting.map((item) => (
-            fetch("/api/bonus/"+item.rid+"/"+points).then(response => response.json()).then(response => {
-                console.log(response)
-            })
-        ))
-        setBooks([])
-        fetchReviews()
-    }
-
-    const clearSelection =  () => {
-       pendAccepting.length = 0
-    }
-
     const addBook = (book, e) => {
         console.log(e.target.checked)
         if(e.target.checked) {
@@ -87,6 +73,25 @@ const ReviewListComponent = (props) => {
               pendAccepting.splice(index, 1);
             }
         }
+    }
+
+    const bonusPoints = event => {
+        const points = parseInt(document.getElementById("inputBonus").value);
+        const alegibleForPoints = ([])
+
+        pendAccepting.map((item) => (
+            alegibleForPoints.push(item.uid)
+        ))
+
+        const uniquePoints = Array.from(new Set(alegibleForPoints))
+
+        uniquePoints.map((item) => (
+                fetch("/api/bonus?id="+item+"&points="+points).then(response => response.json()).then(response => {
+                    console.log(response)
+                })
+        ))
+        setBooks([])
+        fetchReviews()
     }
     
     const checkAcc = (b, e) => {
@@ -128,40 +133,28 @@ const ReviewListComponent = (props) => {
                     return (
 
                         <Accordion
-                            title={<div className="rlc-book">
-                            <div className="rlc-mul"> 
-                                <label className="rlc-acc-checkbox">
-                                    <input className="rlc-checkb" name="foo" type="checkbox" onChange={(e) => addBook(book, e)}/> 
-                                </label>
-                            </div>
-                            <div className="rlc-book-title">Titel: {book.title}</div>
-                            <div className="rlc-book-author">Författare: {book.author}</div>
-                            <div className="rlc-book-pages">Sidor: {book.pages}</div>
-                            <div className="rlc-book-writtenby">Recensent: {book.name}</div>
-                            <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
-                            <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
-                            <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
-                            <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
-                        </div>}
-                            content={book.summary
+                            checkbutton= {
+                                <div className="rlc-mul"> 
+                                    <label className="rlc-acc-checkbox">
+                                        <input className="rlc-checkb" name="foo" type="checkbox" onChange={(e) => addBook(book, e)}/> 
+                                    </label>
+                                </div>
                             }
+
+                            title={
+                            <div className="rlc-book"> 
+                                <div className="rlc-book-title">Titel: {book.title}</div>
+                                <div className="rlc-book-author">Författare: {book.author}</div>
+                                <div className="rlc-book-pages">Sidor: {book.pages}</div>
+                                <div className="rlc-book-writtenby">Recensent: {book.name}</div>
+                                <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
+                                <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
+                                <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
+                                <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
+                            </div>}
+                            
+                            content={book.summary}
                         />
-                        /*<div className="rlc-book">
-                            <div className="rlc-mul"> 
-                                <label className="rlc-acc-checkbox">
-                                    <input className="rlc-checkb" name="foo" type="checkbox" onChange={(e) => addBook(book, e)}/> 
-                                </label>
-                            </div>
-                            <div className="rlc-book-title">Titel: {book.title}</div>
-                            <div className="rlc-book-author">Författare: {book.author}</div>
-                            <div className="rlc-book-pages">Sidor: {book.pages}</div>
-                            <div className="rlc-book-writtenby">Recensent: {book.name}</div>
-                            <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
-                            <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
-                            <div className="rlc-book-review">Recension: {book.summary}</div>
-                            <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
-                            <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
-                        </div>*/
                     )
                 })} 
             </div>
@@ -183,15 +176,23 @@ const ReviewListComponent = (props) => {
                 {showResult(books)}
             </div>
             <div>
-                <button type="button" onClick={() => acceptBooks()}>accept</button>
-                <button type="button" onClick={() => rejectBooks()}>reject</button>
+                <button type="button" onClick={() => acceptBooks()}>Acceptera</button>
+                <button type="button" onClick={() => rejectBooks()}>Avslå</button>
             </div>
             <div>
-                <button type="button" onClick={() => publishBooks()}>publish</button>
-                <button type="button" onClick={() => unpublishBooks()}>unpublish</button>
+                <button type="button" onClick={() => publishBooks()}>Publicera</button>
+                <button type="button" onClick={() => unpublishBooks()}>Avpublicera</button>
             </div>
             <div>
-                <button type="button" onClick={() => toggle()}>Mark All</button>
+                <button type="button" onClick={() => toggle()}>Markera alla</button>
+            </div>
+            <div className="rlc-bonusfield">
+                <input
+                type="text"
+                placeholder="Poäng..."
+                id="inputBonus"
+            />
+                <button type="button" onClick={bonusPoints}>Ge bonuspoäng</button>
             </div>
         </div>
     )

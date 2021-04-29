@@ -22,15 +22,11 @@ function Accordion(props) {
 
   return (
     <div className="accordion__section">
-      <div className="accordion__title">
-        {props.title}
-        <button className="chevronButton" onClick={toggleAccordion}>
-          Klicka Här För Mer Info
-        <div className="chevronarrow">
-        <Chevron className={`${setRotate}`} width={15} fill={"#777"} />
-        </div>
+      <div className="test">{props.checkbutton}</div>
+      <button className={`accordion ${setActive}`} onClick={toggleAccordion}>
+        <p className="accordion__title">{props.title}</p>
+        <Chevron className={`${setRotate}`} width={20}/>
       </button>
-      </div>
       <div
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
