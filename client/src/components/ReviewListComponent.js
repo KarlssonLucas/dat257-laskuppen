@@ -140,11 +140,11 @@ const ReviewListComponent = (props) => {
                             <div className="rlc-book-writtenby">Recensent: {book.name}</div>
                             <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
                             <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
-                            <div className="rlc-book-review">Recension: {book.summary}</div>
                             <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
                             <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
                         </div>}
-                            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                            content={book.summary
+                            }
                         />
                         /*<div className="rlc-book">
                             <div className="rlc-mul"> 
