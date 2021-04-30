@@ -411,6 +411,7 @@ const faqGet = (request, response) => {
   if (!hasSession(request, response)) {
     return;
   }
+  // WHERE LENGTH(answer) > 0 AND LENGTH(question) > 0 
   client.query("select * from FrequentlyAskedQuestions", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
@@ -460,14 +461,13 @@ const FAQAdd = (request, response) => {
   if (!hasSession(request, response)) {
     return;
   }
-  let question = request.body.question
-  let answer = request.body.answer
 
-  client.query("INSERT INTO FrequentlyAskedQuestions (question, answer) VALUES($1,$2)",[question,answer], (error, results) => {
+
+  client.query("INSERT INTO FrequentlyAskedQuestions (question, answer) VALUES('','')", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
-      response.status(200).send(`Questions added`);
+      response.status(200).send(`FAQ added`);
     }
   });
 

@@ -1,6 +1,9 @@
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import "./css/faqadmin.css";
 import FAQAdminQuestionComponent from './FAQAdminQuestionComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 export default class FAQAdminComponent extends React.Component {
 
@@ -9,7 +12,7 @@ export default class FAQAdminComponent extends React.Component {
         this.state = { FAQs: null }
         this.printQuestions = this.printQuestions.bind(this);
         this.delFAQ = this.delFAQ.bind(this);
-        this.addFAQ = this.addFAQ.bind(this);
+        this.addNewFAQ = this.addNewFAQ.bind(this);
         this.printQuestions();
     }
 
@@ -25,32 +28,20 @@ export default class FAQAdminComponent extends React.Component {
         }
     }
 
-    updateFAQ = (id, question, answer) => {
-        let req = {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id, question, answer })
-
-        }
-        fetch("/api/faq", req)
-            .then((response) => response.text())
-            .then((response) => {
-                console.log(response);
-            });
-    }
+    
 
 
-    addFAQ = (question, answer) => {
+    addNewFAQ = () => {
         let req = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question, answer })
+            headers: { "Content-Type": "application/json" }
         }
         fetch("/api/faq", req)
             .then((response) => response.text())
             .then((response) => {
                 console.log(response);
             });
+        this.printQuestions();
     }
 
 
@@ -85,6 +76,8 @@ export default class FAQAdminComponent extends React.Component {
     render() {
         return (
             <div className="main-page-content faq-page-content">
+                 <FontAwesomeIcon className="faq-admin-FAQ-add" onClick={() => { this.addNewFAQ() }} icon={faPlus} color='gray' />
+
                 {this.state.FAQs}
             </div>
         )
