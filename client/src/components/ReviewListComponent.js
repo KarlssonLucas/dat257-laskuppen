@@ -1,6 +1,8 @@
 import './css/reviewlist.css';
 import React, { useState, useEffect } from 'react';
 import Accordion from "./Accordion";
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { render } from 'react-dom';
 
 const ReviewListComponent = (props) => {
@@ -75,6 +77,17 @@ const ReviewListComponent = (props) => {
         }
     }
 
+    const deleteBook = (book) => {
+        if (window.confirm("Är du säker?")) {
+            let req = { method: "DELETE", headers: { "Content-Type": "application/json" } }
+            fetch("/api/deletereview/" + book.rid, req).then((response) => response.text())
+                .then((response) => {
+                    console.log(response);
+                });
+            fetchReviews()
+        }
+    }
+
     const bonusPoints = event => {
         const points = parseInt(document.getElementById("inputBonus").value);
         const alegibleForPoints = ([])
@@ -139,6 +152,10 @@ const ReviewListComponent = (props) => {
                                         <input className="rlc-checkb" name="foo" type="checkbox" onChange={(e) => addBook(book, e)}/> 
                                     </label>
                                 </div>
+                            }
+
+                            removeButton= {
+                                <button onClick={() => deleteBook(book)}>Ta bort</button>                     
                             }
 
                             title={

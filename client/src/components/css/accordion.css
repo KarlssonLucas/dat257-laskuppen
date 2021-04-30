@@ -45,6 +45,14 @@
   margin-top: 5em;
 }
 
+.rButton {
+  position: absolute;
+  right: 0;
+  margin-right: 1em;
+  margin-top: 1em;
+  border: none;
+}
+
 .accordion__text {
   font-weight: 400;
   font-size: 14px;

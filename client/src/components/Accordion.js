@@ -22,6 +22,7 @@ function Accordion(props) {
 
   return (
     <div className="accordion__section">
+      <div className="rButton">{props.removeButton}</div>
       <div className="test">{props.checkbutton}</div>
       <button className={`accordion ${setActive}`} onClick={toggleAccordion}>
         <p className="accordion__title">{props.title}</p>
