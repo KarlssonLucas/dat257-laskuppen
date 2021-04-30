@@ -9,6 +9,7 @@ export default class FAQAdminComponent extends React.Component {
         this.state = { FAQs: null }
         this.printQuestions = this.printQuestions.bind(this);
         this.delFAQ = this.delFAQ.bind(this);
+        this.addFAQ = this.addFAQ.bind(this);
         this.printQuestions();
     }
 
@@ -24,31 +25,33 @@ export default class FAQAdminComponent extends React.Component {
         }
     }
 
-    updateFAQ = () => {
-        let req = { method: "PUT", 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({id: 1 , question: "hej", answer: "coolt"})
+    updateFAQ = (id, question, answer) => {
+        let req = {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id, question, answer })
 
         }
-        fetch("/api/faq",req)
-          .then((response) => response.text())
-          .then((response) => {
-            console.log(response);
-          });
-      }
+        fetch("/api/faq", req)
+            .then((response) => response.text())
+            .then((response) => {
+                console.log(response);
+            });
+    }
 
 
-      addFAQ = () => {
-        let req = { method: "POST", 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({question: "New q", answer: "new a"})
+    addFAQ = (question, answer) => {
+        let req = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question, answer })
         }
-        fetch("/api/faq",req)
-          .then((response) => response.text())
-          .then((response) => {
-            console.log(response);
-          });
-      }
+        fetch("/api/faq", req)
+            .then((response) => response.text())
+            .then((response) => {
+                console.log(response);
+            });
+    }
 
 
     printQuestions = () => {
@@ -65,7 +68,8 @@ export default class FAQAdminComponent extends React.Component {
                             onDelete={this.delFAQ}
                             id={faq.id}
                             question={faq.question}
-                            answer={faq.answer} />
+                            answer={faq.answer}
+                            onAdd={this.addFAQ} />
                     );
                 }
                 );

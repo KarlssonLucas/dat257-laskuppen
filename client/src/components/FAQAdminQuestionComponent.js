@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default class FAQAdminQuestionComponent extends React.Component {
 
@@ -14,22 +14,25 @@ export default class FAQAdminQuestionComponent extends React.Component {
     }
 
 
-    edit(){
+    edit() {
+        // this.onAdd()...
         this.setState({
-            question: <input value={this.props.question}/>,
-            answer: <input value={this.props.answer}/>
+            question: <input defaultValue={this.props.question} />,
+            answer: <input defaultValue={this.props.answer} />
         });
     }
+
 
     render() {
         return (
             <div className="faq-admin-FAQ">
                 <div className="faq-admin-FAQ-text">
                     {this.state.question}
-                    <br/>
+                    <br />
                     {this.state.answer}
                 </div>
                 <div className="faq-admin-FAQ-buttons">
+                    <FontAwesomeIcon onClick={() => { this.edit() }} icon={faPlus} color='gray' />
                     <FontAwesomeIcon onClick={() => { this.props.onDelete(this.props.id) }} icon={faTrash} color='gray' />
                     <FontAwesomeIcon onClick={() => { this.edit() }} icon={faEdit} color='gray' />
                 </div>
