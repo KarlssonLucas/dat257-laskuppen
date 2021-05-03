@@ -18,7 +18,7 @@ export default class Laskuppen extends React.Component {
         this.state = { loggedIn: false }
     }
 
-    componentDidMount() {
+        componentDidMount() {
         fetch("/api/session").then(response => response.json()).then(response => {
             if (response.login !== true) {
                 console.log("NOT LOGGED IN")

@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/bookspage.css";
-import BooklistComponent from '../components/BooklistComponet'
+import BooklistComponent from '../components/BooklistComponet';
 import Select from 'react-select';
 
 const options = [
@@ -12,12 +12,11 @@ const options = [
 ];
 
 export default class BooksPage extends React.Component {
-    state = {selectedOption: null};
-    
-  
-  
 
-  handleChange = selectedOption => {
+    state = {selectedOption: null};
+
+
+    handleChange = selectedOption => {
     this.setState(
       { selectedOption },
       () => console.log(`Option selected:`, this.state.selectedOption)
@@ -25,9 +24,10 @@ export default class BooksPage extends React.Component {
   };
 
 
-  render() {
-    const { selectedOption } = this.state;
-    return (
+    render() { 
+            const { selectedOption } = this.state;
+
+        return (
       <div className="main-page-general-styling">
         <div className="main-page-header">
           <h2> Böcker </h2>
@@ -46,11 +46,11 @@ export default class BooksPage extends React.Component {
                 />
               </div>
               <div className="filter">
-              <Select
-                value={selectedOption}
-                onChange={this.handleChange}
-                options={options}
-              />
+            <Select
+                 value={selectedOption}
+                 onChange={this.handleChange}
+                 options={options}
+               />
               </div>
               <div className="table-container">
                 <BooklistComponent filter={selectedOption?.value}/>
@@ -62,5 +62,3 @@ export default class BooksPage extends React.Component {
     );
   }
 }
-
-//title author pages grade
