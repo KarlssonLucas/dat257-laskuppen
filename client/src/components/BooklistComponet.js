@@ -6,7 +6,9 @@ const BooklistComponent = (filter) => {
   useEffect(() => {
     fetchReviewBooks();
     console.log(filter)
-  }, []);
+  }, [filter]);
+
+  
 
   const fetchReviewBooks = () => {
     fetch("/api/reviewedbooks")
@@ -16,6 +18,8 @@ const BooklistComponent = (filter) => {
           setBooks(response);
       });
   };
+
+  
 
   return (
     <table class="table">

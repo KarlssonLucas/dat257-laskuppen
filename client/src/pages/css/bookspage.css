@@ -9,11 +9,17 @@
 
 .searchbar{
     grid-area: searchbar;
+    justify-self: start;
+    align-self:center ;
+    margin-left: 10%;
 }
 
-.filter{
+.filter{ 
+    min-width: 20%;
     grid-area: filter;
     justify-self: end;
+    margin-right: 10%;
+    align-self:center ;
 }
 
 .table-container{

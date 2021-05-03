@@ -1,10 +1,32 @@
 import React from "react";
 import "./css/bookspage.css";
 import BooklistComponent from '../components/BooklistComponet'
+import Select from 'react-select';
+
+const options = [
+  { value: 'grade', label: 'Betyg' },
+  { value: 'mostread', label: 'Mest Lästa' },
+  { value: 'title', label: 'Namn' },
+  { value: 'pages', label: 'Sidor' },
+  { value: 'author', label: 'Författare' }
+];
 
 export default class BooksPage extends React.Component {
+    state = {selectedOption: null};
+    
+  
+  
+
+  handleChange = selectedOption => {
+    this.setState(
+      { selectedOption },
+      () => console.log(`Option selected:`, this.state.selectedOption)
+    );
+  };
+
 
   render() {
+    const { selectedOption } = this.state;
     return (
       <div className="main-page-general-styling">
         <div className="main-page-header">
@@ -24,10 +46,14 @@ export default class BooksPage extends React.Component {
                 />
               </div>
               <div className="filter">
-                <button>Filtrera sökresultat</button>
+              <Select
+                value={selectedOption}
+                onChange={this.handleChange}
+                options={options}
+              />
               </div>
               <div className="table-container">
-                <BooklistComponent filter="hej"/>
+                <BooklistComponent filter={selectedOption?.value}/>
               </div>
             </div>
           </div>
