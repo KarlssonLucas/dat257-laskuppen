@@ -5,23 +5,21 @@ import Select from 'react-select';
 
 const options = [
   { value: 'grade', label: 'Betyg' },
-  { value: 'mostread', label: 'Mest Lästa' },
+  { value: 'grade', label: 'Mest Lästa' },
   { value: 'title', label: 'Namn' },
   { value: 'pages', label: 'Sidor' },
   { value: 'author', label: 'Författare' }
 ];
 
 export default class BooksPage extends React.Component {
-    state = {selectedOption: null};
-    
-  
-  
+    state = {selectedOption: options[2]};
 
   handleChange = selectedOption => {
     this.setState(
       { selectedOption },
       () => console.log(`Option selected:`, this.state.selectedOption)
     );
+    console.log("change: " + selectedOption?.value)
   };
 
 

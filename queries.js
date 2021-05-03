@@ -281,13 +281,22 @@ const reviewedBooks = (request, response) => {
     return;
   }
 
-  client.query("SELECT * from booksRead", (error, results) => {
+  let filter = request.params.filter
+
+  console.log(filter)
+
+  const filters = ["grade","title","pages","author"]
+if(escape(filter,filters)){
+  client.query("SELECT * from booksRead order by " + filter + ' desc',(error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
       response.status(200).json(results.rows);
     }
   });
+}
+
+  
 };
 
 

@@ -1,17 +1,17 @@
 import React,{useEffect, useState} from "react";
 
-const BooklistComponent = (filter) => {
+const BooklistComponent = (props) => {
   const [Books, setBooks] = useState([]);
 
   useEffect(() => {
     fetchReviewBooks();
-    console.log(filter)
-  }, [filter]);
+    console.log("props: " + props.filter)
+  }, [props.filter]);
 
   
 
   const fetchReviewBooks = () => {
-    fetch("/api/reviewedbooks")
+    fetch("/api/reviewedbooks/" + props.filter)
       .then((response) => response.json())
       .then((response) => {
           console.log(response)
