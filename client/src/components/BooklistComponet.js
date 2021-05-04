@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from "react";
+import {useHistory} from 'react-router-dom';
 
 const BooklistComponent = (filter) => {
   const [Books, setBooks] = useState([]);
@@ -19,7 +20,7 @@ const BooklistComponent = (filter) => {
       });
   };
 
-  
+  const history = useHistory();
 
   return (
     <table class="table">
@@ -33,7 +34,7 @@ const BooklistComponent = (filter) => {
       </thead>
       <tbody>
         {Books.map((listItem) => (
-          <tr>
+          <tr onClick={() => history.push('/books/'+listItem.id)}>
             <td>{listItem.title}</td>
             <td>{listItem.author}</td>
             <td>{listItem.pages}</td>
