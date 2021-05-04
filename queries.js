@@ -133,6 +133,23 @@ const latestReview = (request, response) => {
   })
 }
 
+const getBook = (request, response) => {
+    if (!hasSession(request, response)) {
+        return;
+    }
+
+    let id = request.params.id
+
+client.query("select * from Book where id = $1", [id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    else {
+      response.status(200).json(results.rows)
+    }
+  })
+}
+
 
 const bookssearch = async (request, response) => {
   if (!hasSession(request, response)) {
@@ -185,6 +202,16 @@ const getUsers = (request, response) => {
 
 const getReviews = (request, response) => {
   client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby", (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
+const getReview = (request, response) => {
+    let id = request.params.id
+  client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Book.id = $1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
@@ -537,5 +564,7 @@ module.exports = {
   faqPut,
   FAQAdd,
   bonusPoints,
-  reviewedBooks
+  reviewedBooks,
+  getBook,
+  getReview
 }

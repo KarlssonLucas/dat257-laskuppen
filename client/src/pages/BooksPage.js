@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/bookspage.css";
-import BooklistComponent from '../components/BooklistComponet'
+import BooklistComponent from '../components/BooklistComponet';
 import Select from 'react-select';
 
 const options = [
@@ -16,7 +16,7 @@ export default class BooksPage extends React.Component {
 
 
   //Updates our filter state which triggers the 
-  //booklist component to update 
+  //booklist component to update
   handleChange = selectedOption => {
     this.setState(
       { selectedOption },
@@ -25,16 +25,17 @@ export default class BooksPage extends React.Component {
     console.log("change: " + selectedOption?.value)
   };
 
-  //Updates our search state which triggers the 
-  //booklist component to update 
+  //Updates our search state which triggers the
+  //booklist component to update
   handleSearch = event =>{
     this.setState({searchInput: event.target.value})
   }
 
 
-  render() {
-    const { selectedOption } = this.state;
-    return (
+    render() {
+            const { selectedOption } = this.state;
+
+        return (
       <div className="main-page-general-styling">
         <div className="main-page-header">
           <h2> Böcker </h2>
@@ -52,11 +53,11 @@ export default class BooksPage extends React.Component {
                 />
               </div>
               <div className="filter">
-              <Select
-                value={selectedOption}
-                onChange={this.handleChange}
-                options={options}
-              />
+            <Select
+                 value={selectedOption}
+                 onChange={this.handleChange}
+                 options={options}
+               />
               </div>
               <div className="table-container">
                 <BooklistComponent filter={selectedOption?.value} search={this.state.searchInput}/>
@@ -68,5 +69,3 @@ export default class BooksPage extends React.Component {
     );
   }
 }
-
-//title author pages grade

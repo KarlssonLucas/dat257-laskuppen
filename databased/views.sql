@@ -31,8 +31,8 @@ LEFT JOIN Book ON Book.id = bookId; --add where accepted = true for "läs recens
 -- hitta böcker
 CREATE OR REPLACE VIEW booksRead AS
 SELECT title, author, pages, ROUND(AVG(rating)) || '/' || 10 as grade,
-descr, thumbnail
-FROM Review LEFT JOIN Book ON review.id = bookId
+descr, thumbnail, book.id
+FROM Review LEFT JOIN Book ON book.id = bookId
 GROUP BY book.id;
 
 -- topplista över mest lästa böckerna
