@@ -27,10 +27,10 @@ const BooklistComponent = (props) => {
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Titel</th>
-          <th scope="col">Författare</th>
-          <th scope="col">Sidor</th>
-          <th scope="col">Snittbetyg</th>
+          <th width="40%" scope="col">Titel</th>
+          <th width="20%" scope="col">Författare</th>
+          <th width="20%" scope="col">Sidor</th>
+          <th width="20%" scope="col">Snittbetyg</th>
         </tr>
       </thead>
       <tbody>

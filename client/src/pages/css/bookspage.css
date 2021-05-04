@@ -15,7 +15,7 @@
 }
 
 .filter{ 
-    min-width: 20%;
+    min-width: 40%;
     grid-area: filter;
     justify-self: end;
     margin-right: 10%;
@@ -23,5 +23,6 @@
 }
 
 .table-container{
+    min-height: 100%;
     grid-area: table;
 }
