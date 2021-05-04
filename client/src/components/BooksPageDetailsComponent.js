@@ -38,9 +38,9 @@ const BooksPageDetailsComponent = (props) => {
             <div>
                 {reviews.map((review) => {
                     return (
-                        <div className="">
-                            <div className="">reviewid: {review.rid}</div>
-                            <div className="">review: {review.summary}</div>
+                        <div className="bpd-book">
+                            <div className="div20">{review.name}</div>
+                            <div className="div10">{review.summary}</div>
                         </div>
                     )
                 })}
@@ -51,8 +51,6 @@ const BooksPageDetailsComponent = (props) => {
 
     return (
         <div className="bpd-page-content">
-            <div className="bookdetails">
-            </div>
             <div className="bpd-header">
                 <div className="div1">Titel: {book.title}</div>
                 <div className="div2">Författare: {book.author}</div>
