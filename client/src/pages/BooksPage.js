@@ -12,8 +12,11 @@ const options = [
 ];
 
 export default class BooksPage extends React.Component {
-    state = {selectedOption: options[2]};
+    state = {selectedOption: options[2], searchInput:""};
 
+
+  //Updates our filter state which triggers the 
+  //booklist component to update 
   handleChange = selectedOption => {
     this.setState(
       { selectedOption },
@@ -21,6 +24,12 @@ export default class BooksPage extends React.Component {
     );
     console.log("change: " + selectedOption?.value)
   };
+
+  //Updates our search state which triggers the 
+  //booklist component to update 
+  handleSearch = event =>{
+    this.setState({searchInput: event.target.value})
+  }
 
 
   render() {
@@ -37,9 +46,8 @@ export default class BooksPage extends React.Component {
                 <span>Sök efter bok:</span>
                 <input
                   type="text"
-                  onChange={() => {
-                    console.log("Search Updated");
-                  }}
+                  value = {this.state.searchInput}
+                  onChange={this.handleSearch}
                   placeholder="Boktitel"
                 />
               </div>
@@ -51,7 +59,7 @@ export default class BooksPage extends React.Component {
               />
               </div>
               <div className="table-container">
-                <BooklistComponent filter={selectedOption?.value}/>
+                <BooklistComponent filter={selectedOption?.value} search={this.state.searchInput}/>
               </div>
             </div>
           </div>

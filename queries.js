@@ -274,30 +274,39 @@ const getUserById = (request, response) => {
   });
 };
 
-
+// Query to get all the reviewed books in the database
+//With the possibility to apply filters and searches for books
 const reviewedBooks = (request, response) => {
 
   if (!hasSession(request, response)) {
     return;
   }
-
-  let filter = request.params.filter
-
-  console.log(filter)
-
+  //The accepted filters
   const filters = ["grade","title","pages","author"]
+  const orders = ["asc", "desc"];
+
+  let filter = request.query.filter 
+  //String formatting
+  let search =  '%' + request.query.search + '%'
+  search = search.toLowerCase()
+  let order = orders[1]
+
+  //Orders on asc for title and author as Z > A
+  if(filter == "title" || filter == "author"){
+    order = orders[0]
+  }
+
+
+//checks that the filter is ok and not a bad input
 if(escape(filter,filters)){
-  client.query("SELECT * from booksRead order by " + filter + ' desc',(error, results) => {
+  client.query("SELECT * from booksRead where translate(lower(title),'?!_,','') like $1 OR lower(author) like $1 order by " + filter +" "+ order,[search] ,(error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
       response.status(200).json(results.rows);
     }
   });
-}
-
-  
-};
+}};
 
 
 

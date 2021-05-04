@@ -6,12 +6,14 @@ const BooklistComponent = (props) => {
   useEffect(() => {
     fetchReviewBooks();
     console.log("props: " + props.filter)
-  }, [props.filter]);
+  }, [props.filter,props.search]);
 
   
-
+  //Fetches the books from DB with filters and search
   const fetchReviewBooks = () => {
-    fetch("/api/reviewedbooks/" + props.filter)
+    let req = { method: "GET", headers: { "Content-Type": "application/json" }}
+
+    fetch("/api/reviewedbooks?filter=" + props.filter+"&search=" + props.search,req)
       .then((response) => response.json())
       .then((response) => {
           console.log(response)
