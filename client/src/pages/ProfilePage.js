@@ -1,4 +1,5 @@
 import React from 'react';
+import ArchiveComponent from '../components/ArchiveComponent';
 import "./css/profilepage.css";
 
 export default class ProfilePage extends React.Component {
@@ -10,8 +11,8 @@ export default class ProfilePage extends React.Component {
                     <h2> Profil </h2> 
                 </div>
                 <div className="main-page-inner-container">
-                    <div className="main-page-content  pp-page-content">
-                        Content
+                    <div className="main-page-content pp-page-content">
+                        <ArchiveComponent />
                     </div>
                 </div>
             </div>

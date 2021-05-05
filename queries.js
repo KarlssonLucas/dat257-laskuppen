@@ -200,6 +200,18 @@ const getUsers = (request, response) => {
   });
 };
 
+const getUserReviews = (request, response) => {
+
+  let uid = request.session.userId
+
+  client.query("SELECT review.id AS rid, bookid, thumbnail, accepted, published, worthReading, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Users.id = $1",[uid], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
 const getReviews = (request, response) => {
   client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby", (error, results) => {
     if (error) {
@@ -566,5 +578,6 @@ module.exports = {
   bonusPoints,
   reviewedBooks,
   getBook,
-  getReview
+  getReview,
+  getUserReviews
 }
