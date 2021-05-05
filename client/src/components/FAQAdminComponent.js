@@ -1,6 +1,9 @@
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import "./css/faqadmin.css";
 import FAQAdminQuestionComponent from './FAQAdminQuestionComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 export default class FAQAdminComponent extends React.Component {
 
@@ -9,6 +12,7 @@ export default class FAQAdminComponent extends React.Component {
         this.state = { FAQs: null }
         this.printQuestions = this.printQuestions.bind(this);
         this.delFAQ = this.delFAQ.bind(this);
+        this.addNewFAQ = this.addNewFAQ.bind(this);
         this.printQuestions();
     }
 
@@ -24,31 +28,21 @@ export default class FAQAdminComponent extends React.Component {
         }
     }
 
-    updateFAQ = () => {
-        let req = { method: "PUT", 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({id: 1 , question: "hej", answer: "coolt"})
 
+
+
+    addNewFAQ = () => {
+        let req = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
         }
-        fetch("/api/faq",req)
-          .then((response) => response.text())
-          .then((response) => {
-            console.log(response);
-          });
-      }
-
-
-      addFAQ = () => {
-        let req = { method: "POST", 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({question: "New q", answer: "new a"})
-        }
-        fetch("/api/faq",req)
-          .then((response) => response.text())
-          .then((response) => {
-            console.log(response);
-          });
-      }
+        fetch("/api/faq", req)
+            .then((response) => response.text())
+            .then((response) => {
+                console.log(response);
+            });
+        this.printQuestions();
+    }
 
 
     printQuestions = () => {
@@ -65,7 +59,8 @@ export default class FAQAdminComponent extends React.Component {
                             onDelete={this.delFAQ}
                             id={faq.id}
                             question={faq.question}
-                            answer={faq.answer} />
+                            answer={faq.answer}
+                            onAdd={this.addFAQ} />
                     );
                 }
                 );
@@ -81,6 +76,8 @@ export default class FAQAdminComponent extends React.Component {
     render() {
         return (
             <div className="main-page-content faq-page-content">
+                 <FontAwesomeIcon className="faq-admin-FAQ-add" onClick={() => { this.addNewFAQ() }} icon={faPlus} color='gray' />
+
                 {this.state.FAQs}
             </div>
         )

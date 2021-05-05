@@ -53,3 +53,4 @@ ORDER BY averageRating DESC;
 CREATE OR REPLACE VIEW NewReview AS 
 SELECT title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,summary
 FROM Book RIGHT JOIN Review ON Book.id = Review.bookId;
+

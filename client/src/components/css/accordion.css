@@ -1,0 +1,60 @@
+.accordion__section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.accordion {
+  background-color: var(--background);
+  color: #444;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  outline: none;
+  transition: background-color 0.3s ease;
+  border: 1px solid black;
+}
+
+.accordion__title {
+  font-size: 14px;
+  text-align: left;
+  width: 100%;
+}
+
+.accordion__icon {
+  transition: transform 0.3s ease;
+  float: left;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.accordion__content {
+  background-color: white;
+  overflow: auto;
+  transition: max-height 0.3s ease;
+}
+
+.test {
+  position: absolute;
+  margin-left: 5em;
+  margin-top: 5em;
+}
+
+.rButton {
+  position: absolute;
+  right: 0;
+  margin-right: 1em;
+  margin-top: 1em;
+  border: none;
+}
+
+.accordion__text {
+  font-weight: 400;
+  font-size: 14px;
+  padding: 18px;
+}
