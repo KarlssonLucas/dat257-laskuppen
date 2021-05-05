@@ -1,3 +1,4 @@
+const { request, response } = require("express");
 const fetch = require("node-fetch");
 
 if (!process.env.DATABASE_URL) {
@@ -132,6 +133,23 @@ const latestReview = (request, response) => {
   })
 }
 
+const getBook = (request, response) => {
+    if (!hasSession(request, response)) {
+        return;
+    }
+
+    let id = request.params.id
+
+client.query("select * from Book where id = $1", [id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    else {
+      response.status(200).json(results.rows)
+    }
+  })
+}
+
 
 const bookssearch = async (request, response) => {
   if (!hasSession(request, response)) {
@@ -169,6 +187,9 @@ const getUsers = (request, response) => {
   if (!hasSession(request, response)) {
     return;
   }
+  if (!hasSession(request, response)) {
+    return;
+  }
 
   client.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
     if (error) {
@@ -179,11 +200,11 @@ const getUsers = (request, response) => {
   });
 };
 
-const getReviews = (request, response) => {
-  if (!hasSession(request, response)) {
-    return;
-  }
-  client.query("SELECT Users.id AS uid, review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby", (error, results) => {
+const getUserReviews = (request, response) => {
+
+  let uid = request.session.userId
+
+  client.query("SELECT review.id AS rid, bookid, thumbnail, accepted, published, worthReading, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Users.id = $1",[uid], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
@@ -191,23 +212,26 @@ const getReviews = (request, response) => {
   });
 };
 
-const deleteReview = (request, response) => {
-  if (!hasSession(request, response)) {
-    return;
-  }
-  const id = parseInt(request.params.id)
-  client.query("DELETE FROM Review WHERE id = $1", [id], (error, results) => {
+const getReviews = (request, response) => {
+  client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
-    response.status(200).json(`Review updated with ID: ${id}`);
+    response.status(200).json(results.rows);
+  });
+};
+
+const getReview = (request, response) => {
+    let id = request.params.id
+  client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Book.id = $1", [id], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    }
+    response.status(200).json(results.rows);
   });
 };
 
 const acceptReview = (request, response) => {
-  if (!hasSession(request, response)) {
-    return;
-  }
   const id = parseInt(request.params.id)
   client.query("UPDATE Review SET accepted=true WHERE id=$1", [id], (error, results) => {
     if (error) {
@@ -218,10 +242,8 @@ const acceptReview = (request, response) => {
 };
 
 const rejectReview = (request, response) => {
-  if (!hasSession(request, response)) {
-    return;
-  }
   const id = parseInt(request.params.id)
+  console.log(id);
   client.query("UPDATE Review SET accepted=false WHERE id=$1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
@@ -231,9 +253,6 @@ const rejectReview = (request, response) => {
 };
 
 const publishReview = (request, response) => {
-  if (!hasSession(request, response)) {
-    return;
-  }
   const id = parseInt(request.params.id)
   client.query("UPDATE Review SET published=true WHERE id=$1", [id], (error, results) => {
     if (error) {
@@ -244,9 +263,6 @@ const publishReview = (request, response) => {
 };
 
 const unpublishReview = (request, response) => {
-  if (!hasSession(request, response)) {
-    return;
-  }
   const id = parseInt(request.params.id)
   client.query("UPDATE Review SET published=false WHERE id=$1", [id], (error, results) => {
     if (error) {
@@ -296,6 +312,41 @@ const getUserById = (request, response) => {
     }
   });
 };
+
+// Query to get all the reviewed books in the database
+//With the possibility to apply filters and searches for books
+const reviewedBooks = (request, response) => {
+
+  if (!hasSession(request, response)) {
+    return;
+  }
+  //The accepted filters
+  const filters = ["grade","title","pages","author"]
+  const orders = ["asc", "desc"];
+
+  let filter = request.query.filter 
+  //String formatting
+  let search =  '%' + request.query.search + '%'
+  search = search.toLowerCase()
+  let order = orders[1]
+
+  //Orders on asc for title and author as Z > A
+  if(filter == "title" || filter == "author"){
+    order = orders[0]
+  }
+
+
+//checks that the filter is ok and not a bad input
+if(escape(filter,filters)){
+  client.query("SELECT * from booksRead where translate(lower(title),'?!_,','') like $1 OR lower(author) like $1 order by " + filter +" "+ order,[search] ,(error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+}};
+
 
 
 const getUserId = (request) => {
@@ -525,5 +576,8 @@ module.exports = {
   faqPut,
   FAQAdd,
   bonusPoints,
-  deleteReview
+  reviewedBooks,
+  getBook,
+  getReview,
+  getUserReviews
 }
