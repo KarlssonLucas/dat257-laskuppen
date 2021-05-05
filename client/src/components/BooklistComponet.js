@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from "react";
 import {useHistory} from 'react-router-dom';
+import "./css/bookslist.css";
 
 const BooklistComponent = (props) => {
   const [Books, setBooks] = useState([]);
@@ -25,7 +26,7 @@ const BooklistComponent = (props) => {
   const history = useHistory();
 
   return (
-    <table class="table">
+    <table className="table">
       <thead>
         <tr>
           <th width="40%" scope="col">Titel</th>
@@ -36,7 +37,7 @@ const BooklistComponent = (props) => {
       </thead>
       <tbody>
         {Books.map((listItem) => (
-          <tr onClick={() => history.push('/books/'+listItem.id)}>
+          <tr className="row-pliancy" onClick={() => history.push('/books/'+listItem.id)}>
             <td>{listItem.title}</td>
             <td>{listItem.author}</td>
             <td>{listItem.pages}</td>

@@ -59,7 +59,7 @@ export default class BooksPage extends React.Component {
                  options={options}
                />
               </div>
-              <div className="table-container">
+              <div className="container-table">
                 <BooklistComponent filter={selectedOption?.value} search={this.state.searchInput}/>
               </div>
             </div>

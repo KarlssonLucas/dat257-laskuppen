@@ -12,7 +12,9 @@ export default class BooksPageDetails extends React.Component {
                     <h2> Böcker </h2>
                 </div>
                 <div className="main-page-inner-container">
+                <div className="main-page-content">
                     <BooksPageDetailsComponent id={this.props.match.params.id} />
+                </div>
                 </div>
             </div>
         );

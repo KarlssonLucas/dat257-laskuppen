@@ -1,6 +1,9 @@
 import './css/bookspagedetails.css';
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {useHistory} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const BooksPageDetailsComponent = (props) => {
     const [book, setBook] = useState({});
@@ -38,9 +41,9 @@ const BooksPageDetailsComponent = (props) => {
             <div>
                 {reviews.map((review) => {
                     return (
-                        <div className="bpd-book">
-                            <div className="div20">{review.name}</div>
-                            <div className="div10">{review.summary}</div>
+                        <div className="review-container">
+                            <div className="name">{review.name}</div>
+                            <div className="review">{review.summary}</div>
                         </div>
                     )
                 })}
@@ -48,18 +51,22 @@ const BooksPageDetailsComponent = (props) => {
         )
     }
         
+    const history = useHistory();
 
     return (
         <div className="bpd-page-content">
-            <div className="bpd-header">
-                <div className="div1">Titel: {book.title}</div>
-                <div className="div2">Författare: {book.author}</div>
-                <div className="div3">Sidantal: {book.pages}</div>
-                <div className="div4">
+            <div className="information">
+                <FontAwesomeIcon className="backButton" icon={faTimes} color='black' onClick={() => history.push('/books')}/>
+                <div className="title">Titel: {book.title}</div>
+                <div className="author">Författare: {book.author}</div>
+                <div className="pages">Sidantal: {book.pages}</div>
+                <div className="image">
                     <img className="bpd-img" src={book.thumbnail} />
                 </div>
+                
             </div>
-            <div className="bpd-review-result">
+            <div className="description">{book.descr}</div>
+            <div className="reviews"><h1>Recensioner:</h1>
                 {reviewsToBook(reviews)}
             </div>
         </div>

@@ -1,10 +1,11 @@
 .books-content-grid{
     display: grid;
+    min-height: 100%;
     grid-template-areas: 
     "searchbar filter"
     "table table";
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 1fr 8fr;
 }
 
 .searchbar{
@@ -22,7 +23,7 @@
     align-self:center ;
 }
 
-.table-container{
-    min-height: 100%;
+.container-table{
     grid-area: table;
+    min-height: 100%;
 }
