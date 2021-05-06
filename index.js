@@ -26,7 +26,10 @@ app.get('/api/accrev/:id', db.acceptReview)
 app.get('/api/rejrev/:id', db.rejectReview)
 app.get('/api/unpubrev/:id', db.unpublishReview)
 app.get('/api/pubrev/:id', db.publishReview)
+app.get('/api/getbook/:id', db.getBook)
 app.get('/api/reviews', db.getReviews)
+app.get('/api/users/reviews', db.getUserReviews)
+app.get('/api/reviews/:id', db.getReview)
 app.get('/api/latestreviews', db.latestReview)
 app.get('/api/booksearch/:bookname', db.searchBookDb)
 app.get('/api/users/:id', db.getUserById)
@@ -45,6 +48,8 @@ app.get('/api/faq',db.faqGet)
 app.delete('/api/faq/:id',db.faqDel)
 app.put('/api/faq',db.faqPut)
 app.post('/api/faq',db.FAQAdd)
+//DAvid fick feber här
+app.get('/api/reviewedbooks', db.reviewedBooks)
 
 // Load react frontend
 app.use(express.static('client/build'));

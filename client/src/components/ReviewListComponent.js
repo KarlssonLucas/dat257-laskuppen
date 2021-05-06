@@ -1,5 +1,8 @@
 import './css/reviewlist.css';
 import React, { useState, useEffect } from 'react';
+import Accordion from "./Accordion";
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { render } from 'react-dom';
 
 const ReviewListComponent = (props) => {
@@ -28,6 +31,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
+        setBooks([])
+        fetchReviews()
     }
 
     const rejectBooks =  () => {
@@ -36,6 +41,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
+        setBooks([])
+        fetchReviews()
     }
 
     const publishBooks =  () => {
@@ -44,6 +51,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
+        setBooks([])
+        fetchReviews()
     }
 
     const unpublishBooks =  () => {
@@ -52,18 +61,8 @@ const ReviewListComponent = (props) => {
                 console.log(response)
             })
         ))
-    }
-
-    const giveBonusPoints = (points) => {
-         pendAccepting.map((item) => (
-            fetch("/api/bonus/"+item.rid+"/"+points).then(response => response.json()).then(response => {
-                console.log(response)
-            })
-        ))
-    }
-
-    const clearSelection =  () => {
-       pendAccepting.length = 0
+        setBooks([])
+        fetchReviews()
     }
 
     const addBook = (book, e) => {
@@ -76,6 +75,36 @@ const ReviewListComponent = (props) => {
               pendAccepting.splice(index, 1);
             }
         }
+    }
+
+    const deleteBook = (book) => {
+        if (window.confirm("Är du säker?")) {
+            let req = { method: "DELETE", headers: { "Content-Type": "application/json" } }
+            fetch("/api/deletereview/" + book.rid, req).then((response) => response.text())
+                .then((response) => {
+                    console.log(response);
+                });
+            fetchReviews()
+        }
+    }
+
+    const bonusPoints = event => {
+        const points = parseInt(document.getElementById("inputBonus").value);
+        const alegibleForPoints = ([])
+
+        pendAccepting.map((item) => (
+            alegibleForPoints.push(item.uid)
+        ))
+
+        const uniquePoints = Array.from(new Set(alegibleForPoints))
+
+        uniquePoints.map((item) => (
+                fetch("/api/bonus?id="+item+"&points="+points).then(response => response.json()).then(response => {
+                    console.log(response)
+                })
+        ))
+        setBooks([])
+        fetchReviews()
     }
     
     const checkAcc = (b, e) => {
@@ -115,28 +144,47 @@ const ReviewListComponent = (props) => {
             <div>
                 {books.map((book) => {
                     return (
-                        <div className="rlc-book">
-                            <div className="rlc-mul"> 
-                                <label className="rlc-acc-checkbox">
-                                    <input className="rlc-checkb" type="checkbox" onChange={(e) => addBook(book, e)}/> 
-                                </label>
-                            </div>
-                            <div className="rlc-book-title">title: {book.title}</div>
-                            <div className="rlc-book-author">author: {book.author}</div>
-                            <div className="rlc-book-pages">pages: {book.pages}</div>
-                            <div className="rlc-book-writtenby">writtenby: {book.name}</div>
-                            <div className="rlc-book-bookid">bookid: {book.bookid}</div>
-                            <div className="rlc-book-reviewid">reviewid: {book.rid}</div>
-                            <div className="rlc-book-review">review: {book.summary}</div>
-                            <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
-                            <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
-                        </div>
+
+                        <Accordion
+                            checkbutton= {
+                                <div className="rlc-mul"> 
+                                    <label className="rlc-acc-checkbox">
+                                        <input className="rlc-checkb" name="foo" type="checkbox" onChange={(e) => addBook(book, e)}/> 
+                                    </label>
+                                </div>
+                            }
+
+                            removeButton= {
+                                <button onClick={() => deleteBook(book)}>Ta bort</button>                     
+                            }
+
+                            title={
+                            <div className="rlc-book"> 
+                                <div className="rlc-book-title">Titel: {book.title}</div>
+                                <div className="rlc-book-author">Författare: {book.author}</div>
+                                <div className="rlc-book-pages">Sidor: {book.pages}</div>
+                                <div className="rlc-book-writtenby">Recensent: {book.name}</div>
+                                <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
+                                <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
+                                <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
+                                <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
+                            </div>}
+                            
+                            content={book.summary}
+                        />
                     )
-                })}
+                })} 
             </div>
         )
     }
 
+    function toggle() {
+        const checkboxes = document.getElementsByName('foo');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].click()
+        }
+        console.log(checkboxes)
+    }
 
     return (
         <div className="rlc-page-content">
@@ -145,16 +193,23 @@ const ReviewListComponent = (props) => {
                 {showResult(books)}
             </div>
             <div>
-                <button type="button" onClick={() => acceptBooks()}>accept</button>
-                <button type="button" onClick={() => rejectBooks()}>reject</button>
+                <button type="button" onClick={() => acceptBooks()}>Acceptera</button>
+                <button type="button" onClick={() => rejectBooks()}>Avslå</button>
             </div>
             <div>
-                <button type="button" onClick={() => publishBooks()}>publish</button>
-                <button type="button" onClick={() => unpublishBooks()}>unpublish</button>
+                <button type="button" onClick={() => publishBooks()}>Publicera</button>
+                <button type="button" onClick={() => unpublishBooks()}>Avpublicera</button>
             </div>
             <div>
-                <button type="button" onClick={() => books.map((book) => (fetch("/api/accrev/"+book.rid).then(response => response.json()).then(response => {
-                console.log(response)})))}>Accept All</button>
+                <button type="button" onClick={() => toggle()}>Markera alla</button>
+            </div>
+            <div className="rlc-bonusfield">
+                <input
+                type="text"
+                placeholder="Poäng..."
+                id="inputBonus"
+            />
+                <button type="button" onClick={bonusPoints}>Ge bonuspoäng</button>
             </div>
         </div>
     )
