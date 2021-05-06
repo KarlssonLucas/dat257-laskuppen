@@ -74,7 +74,9 @@ const getSession = (request, response) => {
   response.status(200).send(session);
 }
 
-
+// for review-page, takes id of user for archive, points to correct user etc. ¨
+// takes title, pages, review and most often author from google api. Also book introduction and thumbnail from google api.
+// then lets user input rating of book, boolean worthReading and summary.
 const submitreview = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -118,7 +120,7 @@ const submitreview = (request, response) => {
     }
   );
 };
-
+// used for "recommended" books to review, like when a whole class reviews the same book. 
 const latestReview = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -132,15 +134,15 @@ const latestReview = (request, response) => {
     }
   })
 }
-
+// gets the books id to identify book, params finds id in the key it is placed, makes so you don't need to specify key.
 const getBook = (request, response) => {
-    if (!hasSession(request, response)) {
-        return;
-    }
+  if (!hasSession(request, response)) {
+    return;
+  }
 
-    let id = request.params.id
+  let id = request.params.id
 
-client.query("select * from Book where id = $1", [id], (error, results) => {
+  client.query("select * from Book where id = $1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
@@ -150,7 +152,8 @@ client.query("select * from Book where id = $1", [id], (error, results) => {
   })
 }
 
-
+// for search of books which are not in our own DB, if not author, pageCount, title 
+// combo is unique/new it is already in our database and we return null. searchBookDb() search in our DB.
 const bookssearch = async (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -199,19 +202,19 @@ const getUsers = (request, response) => {
     }
   });
 };
-
+// each review from a user.
 const getUserReviews = (request, response) => {
 
   let uid = request.session.userId
 
-  client.query("SELECT review.id AS rid, bookid, thumbnail, accepted, published, worthReading, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Users.id = $1",[uid], (error, results) => {
+  client.query("SELECT review.id AS rid, bookid, thumbnail, accepted, published, worthReading, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Users.id = $1", [uid], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
     response.status(200).json(results.rows);
   });
 };
-
+// all reviews.
 const getReviews = (request, response) => {
   client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages, Users.id AS uid FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby", (error, results) => {
     if (error) {
@@ -220,9 +223,9 @@ const getReviews = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
-
+// each published review of a specific book.
 const getReview = (request, response) => {
-    let id = request.params.id
+  let id = request.params.id
   client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Book.id = $1 AND published=true", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
@@ -271,7 +274,7 @@ const unpublishReview = (request, response) => {
     response.status(200).json(`Review updated with ID: ${id}`);
   });
 };
-
+// most read/reviewed book the last 7 days.
 const mostReadBook = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -284,7 +287,7 @@ const mostReadBook = (request, response) => {
     }
   })
 }
-
+// top list sorted on users and points.
 const userReadMost = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -321,31 +324,32 @@ const reviewedBooks = (request, response) => {
     return;
   }
   //The accepted filters
-  const filters = ["grade","title","pages","author"]
+  const filters = ["grade", "title", "pages", "author"]
   const orders = ["asc", "desc"];
 
-  let filter = request.query.filter 
+  let filter = request.query.filter
   //String formatting
-  let search =  '%' + request.query.search + '%'
+  let search = '%' + request.query.search + '%'
   search = search.toLowerCase()
   let order = orders[1]
 
   //Orders on asc for title and author as Z > A
-  if(filter == "title" || filter == "author"){
+  if (filter == "title" || filter == "author") {
     order = orders[0]
   }
 
 
-//checks that the filter is ok and not a bad input
-if(escape(filter,filters)){
-  client.query("SELECT * from booksRead where translate(lower(title),'?!_,','') like $1 OR lower(author) like $1 order by " + filter +" "+ order,[search] ,(error, results) => {
-    if (error) {
-      response.status(500).send(errorMsg("Internal server error"));
-    } else {
-      response.status(200).json(results.rows);
-    }
-  });
-}};
+  //checks that the filter is ok and not a bad input
+  if (escape(filter, filters)) {
+    client.query("SELECT * from booksRead where translate(lower(title),'?!_,','') like $1 OR lower(author) like $1 order by " + filter + " " + order, [search], (error, results) => {
+      if (error) {
+        response.status(500).send(errorMsg("Internal server error"));
+      } else {
+        response.status(200).json(results.rows);
+      }
+    });
+  }
+};
 
 
 
@@ -367,7 +371,7 @@ const getRandomRecommendation = (request, response) => {
     }
   });
 };
-
+// get points of specific user.
 const getUserPoints = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -382,7 +386,7 @@ const getUserPoints = (request, response) => {
     }
   });
 };
-
+// search book that is in our DB, just need title to identify book.
 const searchBookDb = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -424,7 +428,7 @@ function escape(input, match) {
 function errorMsg(text) {
   return { error: text };
 }
-
+//add bonus points to a review.
 const bonusPoints = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -433,16 +437,16 @@ const bonusPoints = (request, response) => {
   const id = request.query.id
   const points = request.query.points
 
-    client.query('WITH asd AS (select COALESCE(expoints, 0) as epoints from extrapoints where userid=$1) insert into extrapoints values($1, $2) on conflict (userId) do update set expoints = $2 + (SELECT epoints FROM asd);', [id, points], (error, results) => {
-      if (error) {
-        response.status(500).send(errorMsg("Internal server error"));
-      } else {
-        response.status(200).json(results.rows)
-      }
-    })
-  }
+  client.query('WITH asd AS (select COALESCE(expoints, 0) as epoints from extrapoints where userid=$1) insert into extrapoints values($1, $2) on conflict (userId) do update set expoints = $2 + (SELECT epoints FROM asd);', [id, points], (error, results) => {
+    if (error) {
+      response.status(500).send(errorMsg("Internal server error"));
+    } else {
+      response.status(200).json(results.rows)
+    }
+  })
+}
 
-
+// toplist ordered by filter choice.
 const toplist = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -481,7 +485,7 @@ const getClassPoints = (request, response) => {
   });
 
 }
-
+// get all FAQ:s
 const faqGet = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -503,7 +507,7 @@ const faqDel = (request, response) => {
 
   let id = parseInt(request.params.id)
 
-  client.query("delete from FrequentlyAskedQuestions where id = $1",[id], (error, results) => {
+  client.query("delete from FrequentlyAskedQuestions where id = $1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
@@ -512,7 +516,7 @@ const faqDel = (request, response) => {
   });
 
 }
-
+// update existing FAQ question and answer
 const faqPut = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -521,7 +525,7 @@ const faqPut = (request, response) => {
   let question = request.body.question
   let answer = request.body.answer
 
-  client.query("update FrequentlyAskedQuestions set question= $1, answer=$2 where id = $3",[question,answer,id], (error, results) => {
+  client.query("update FrequentlyAskedQuestions set question= $1, answer=$2 where id = $3", [question, answer, id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
@@ -538,7 +542,7 @@ const FAQAdd = (request, response) => {
   let question = request.body.question
   let answer = request.body.answer
 
-  client.query("INSERT INTO FrequentlyAskedQuestions (question, answer) VALUES($1,$2)",[question,answer], (error, results) => {
+  client.query("INSERT INTO FrequentlyAskedQuestions (question, answer) VALUES($1,$2)", [question, answer], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
