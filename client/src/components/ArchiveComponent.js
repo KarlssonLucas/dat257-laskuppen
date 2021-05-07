@@ -10,8 +10,7 @@ const ArchiveComponent = (props) => {
     }, []);
 
     const fetchReviews = async (str) => {
-    
-        await fetch("/api/users/reviews").then(response => response.json()).then(response => {
+        await fetch("/api/user/reviews").then(response => response.json()).then(response => {
             setReviews(response);
         });
     }

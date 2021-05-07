@@ -110,9 +110,7 @@ const getUsers = (request, response) => {
 
 // each review from a user.
 const getUserReviews = (request, response) => {
-
   let uid = request.session.userId
-  console.log(uid)
   client.query("SELECT review.id AS rid, bookid, thumbnail, accepted, published, worthReading, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Users.id = $1", [uid], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));

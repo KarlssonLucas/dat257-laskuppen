@@ -62,7 +62,7 @@ app.use(session({
   app.get('/api/logout', db.logout)
   app.delete('/api/users/:id', db.deleteUser)
   app.get('/api/getbook/:id', db.getBook)
-  app.get('/api/users/reviews', db.getUserReviews)
+  app.get('/api/user/reviews', db.getUserReviews)
 
   // Load react frontend
   app.use(express.static('client/build'));
