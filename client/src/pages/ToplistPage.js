@@ -41,12 +41,12 @@ const ToplistPage = () => {
 
     return (
         <div className="main-page-general-styling">
-            <div className="main-page-header">
+            <div className="main-page-header glassMorphism">
                 <h2> Topplista </h2>
             </div>
             <div className="main-page-inner-container">
-                <div className="main-page-content top-page-content">
-                    <div className="top-top-reader-card">
+                <div className="top-page-content">
+                    <div className="top-top-reader-card glassMorphism">
                         <p className="top-card-title"> Veckans toppläsare </p>
                         <hr />
                         <p className="top-card-text">
@@ -54,19 +54,19 @@ const ToplistPage = () => {
                         </p>
                     </div>
 
-                    <div className="top-top-book-card">
+                    <div className="top-top-book-card glassMorphism">
                         <p className="top-card-title"> Veckans bok </p>
                         <hr />
                         <p className="top-card-text"> {topWeeklyBook} </p>
                     </div>
 
-                    <div className="top-my-points">
+                    <div className="top-my-points glassMorphism">
                         <p className="top-card-title"> Mina poäng </p>
                         <hr />
                         <p className="top-card-text"> {points} </p>
                     </div>
 
-                    <div className="top-my-recommendation">
+                    <div className="top-my-recommendation glassMorphism">
                         <p className="top-card-title">Bokrekommendation</p>
                         <hr />
                         <div className="top-inner-recommendation">
@@ -79,7 +79,7 @@ const ToplistPage = () => {
                         </div>
                     </div>
 
-                    <div className="top-top-lists">
+                    <div className="top-top-lists glassMorphism">
                         <div className="top-top-list-header">
                             <label className="top-filter-label"> Filter: </label>
                             <button className="top-nameButton" onClick = {() => handleClick("name","asc")}> Elev</button>
