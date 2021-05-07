@@ -29,7 +29,6 @@ const MakeReviewComponent = (props) => {
         }
 
         reward.rewardMe();
-
         submitForm();
 
     }

@@ -10,8 +10,8 @@ const ChooseBookComponent = (props) => {
     const [bestBooks, setBestBooks] = useState([]);
     const [recentBooks, setRecentBooks] = useState([]);
 
+    // Component did mount or update we run these
     useEffect(() => {
-
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -30,6 +30,7 @@ const ChooseBookComponent = (props) => {
 
     }, []);
 
+    // Search from database and if we can't find any search from google
     const fetchFromDatabase = async (str) => {
 
         const requestOptions = {
@@ -60,7 +61,7 @@ const ChooseBookComponent = (props) => {
 
     }
 
-
+    // Fetch books from google
     const fetchFromGoogle = async (str) => {
 
         const requestOptions = {
@@ -73,12 +74,9 @@ const ChooseBookComponent = (props) => {
             setBooks(response);
         }
         );
-
-
-
     }
 
-
+    // Fetch to keep it synchronious
     const fetchData = async (str) => {
 
         await fetchFromDatabase(str);
@@ -86,6 +84,7 @@ const ChooseBookComponent = (props) => {
         fetching = false;
     }
 
+    // Checks if we need to update
     const updateSearch = event => {
         search = event.target.value;
         console.log("UPDATE SEARCH ", search)
@@ -103,10 +102,8 @@ const ChooseBookComponent = (props) => {
 
     };
 
-
+    // Shows the search results
     const showResult = (books) => {
-
-
         return (
             <div className="cbc-book-results">
 

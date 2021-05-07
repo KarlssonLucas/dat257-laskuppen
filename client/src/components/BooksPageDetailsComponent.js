@@ -14,6 +14,7 @@ const BooksPageDetailsComponent = (props) => {
         fetchReviews();
     }, []);
 
+    // Fetch the book given the id
     const fetchBook = async (str) => {
     const requestOptions = {
          method: 'GET',
@@ -25,6 +26,7 @@ const BooksPageDetailsComponent = (props) => {
         });
     } 
 
+    // Fetch all the reviews connected to a book
     const fetchReviews = async (str) => {
         const requestOptions = {
             method: 'GET',
@@ -36,13 +38,14 @@ const BooksPageDetailsComponent = (props) => {
         });
     }
 
+    // All the reviews connected to a book displayed
     const reviewsToBook = (reviews) => {
         return (
             <div>
                 {reviews.map((review) => {
                     return (
                         <div className="review-container">
-                            <div className="name">{review.name}</div>
+                            <div className="name">{review.name} - {review.class}</div>
                             <div className="review">{review.summary}</div>
                         </div>
                     )
@@ -51,6 +54,7 @@ const BooksPageDetailsComponent = (props) => {
         )
     }
         
+    // To enable routing back to books page
     const history = useHistory();
 
     return (

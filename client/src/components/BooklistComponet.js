@@ -23,6 +23,7 @@ const BooklistComponent = (props) => {
       });
   };
 
+  // Enables to route the clicks on a book to a new page
   const history = useHistory();
 
   return (

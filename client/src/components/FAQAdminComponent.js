@@ -16,7 +16,7 @@ export default class FAQAdminComponent extends React.Component {
         this.printQuestions();
     }
 
-
+    // Deletes FAQ through a query
     delFAQ = (id) => {
         if (window.confirm("Är du säker?")) {
             let req = { method: "DELETE", headers: { "Content-Type": "application/json" } }
@@ -28,9 +28,7 @@ export default class FAQAdminComponent extends React.Component {
         }
     }
 
-
-
-
+    // Adds a new faq
     addNewFAQ = () => {
         let req = {
             method: "POST",
@@ -44,7 +42,7 @@ export default class FAQAdminComponent extends React.Component {
         this.printQuestions();
     }
 
-
+    // Prints all the faqs you get from quering the databased
     printQuestions = () => {
 
         let FAQs = [];
