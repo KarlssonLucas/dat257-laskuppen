@@ -27,18 +27,6 @@ const hasSession = (request, response) => {
   }
 }
 
-const getUserId = (request) => {
-    return parseInt(request.session.userId);
-  }  
-
-function escape(input, match) {
-
-  if (match.includes(input.toLowerCase())) {
-    return true;
-  }
-  return false;
-}
-
 function errorMsg(text) {
   return { error: text };
 }
@@ -61,6 +49,7 @@ const bonusPoints = (request, response) => {
     })
   }
 
+  // Accepts a review given an id
 const acceptReview = (request, response) => {
     const id = parseInt(request.params.id)
     client.query("UPDATE Review SET accepted=true WHERE id=$1", [id], (error, results) => {
@@ -71,6 +60,7 @@ const acceptReview = (request, response) => {
     });
   };
   
+  // Rejects a review given a id
 const rejectReview = (request, response) => {
     const id = parseInt(request.params.id)
     console.log(id);
@@ -82,6 +72,7 @@ const rejectReview = (request, response) => {
     });
   };
   
+  //Publish review given an id
 const publishReview = (request, response) => {
     const id = parseInt(request.params.id)
     client.query("UPDATE Review SET published=true WHERE id=$1", [id], (error, results) => {
@@ -92,6 +83,7 @@ const publishReview = (request, response) => {
     });
   };
   
+  //Unpublish a review given an id
 const unpublishReview = (request, response) => {
     const id = parseInt(request.params.id)
     client.query("UPDATE Review SET published=false WHERE id=$1", [id], (error, results) => {
@@ -102,7 +94,7 @@ const unpublishReview = (request, response) => {
     });
   };
 
-// all reviews.
+// Get all reviews.
 const getReviews = (request, response) => {
     client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages, Users.id AS uid FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby", (error, results) => {
       if (error) {

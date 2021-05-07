@@ -27,12 +27,13 @@ const hasSession = (request, response) => {
   }
 }
 
-
+//Terminate session
 const logout = (request, response) => {
   request.session.destroy();
   response.status(200).send(true);
 }
 
+//Login user by mail and password matching
 const login = (request, response) => {
 
   const mail = request.body.mail;
@@ -74,11 +75,6 @@ const getSession = (request, response) => {
   response.status(200).send(session);
 }
 
-// for review-page, takes id of user for archive, points to correct user etc. ¨
-// takes title, pages, review and most often author from google api. Also book introduction and thumbnail from google api.
-// then lets user input rating of book, boolean worthReading and summary.
-
-
 // gets the books id to identify book, params finds id in the key it is placed, makes so you don't need to specify key.
 const getBook = (request, response) => {
   if (!hasSession(request, response)) {
@@ -97,6 +93,7 @@ const getBook = (request, response) => {
   })
 }
 
+//Get all the existing users
 const getUsers = (request, response) => {
   if (!hasSession(request, response)) {
     return;

@@ -10,6 +10,7 @@ function Accordion(props) {
 
   const content = useRef(null);
 
+  // Toggles the accordion box
   function toggleAccordion() {
     setActiveState(setActive === "" ? "active" : "");
     setHeightState(

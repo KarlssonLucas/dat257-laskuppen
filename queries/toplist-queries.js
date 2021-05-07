@@ -16,6 +16,7 @@ const client = new Client({
 
 client.connect();
 
+// Checks if the current session has a user
 const hasSession = (request, response) => {
   if (request.session.isLoggedIn && request.session.isLoggedIn == true) {
     return true;
@@ -25,6 +26,18 @@ const hasSession = (request, response) => {
     response.status(400).json(errorMsg("No session. Please log in."));
     return false;
   }
+}
+
+function escape(input, match) {
+
+  if (match.includes(input.toLowerCase())) {
+    return true;
+  }
+  return false;
+}
+
+function errorMsg(text) {
+  return { error: text };
 }
 
 // most read/reviewed book the last 7 days.
@@ -55,6 +68,7 @@ const userReadMost = (request, response) => {
   })
 }
 
+//Gets all the information by a user.
 const getUserById = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -70,10 +84,12 @@ const getUserById = (request, response) => {
   });
 };
 
+// Parse input to id integer
 const getUserId = (request) => {
   return parseInt(request.session.userId);
 }
 
+// "Smart" algorithm to find recommended books tied to a user
 const getRandomRecommendation = (request, response) => {
   if (!hasSession(request, response)) {
     return;
@@ -105,18 +121,6 @@ const getUserPoints = (request, response) => {
   });
 };
 
-function escape(input, match) {
-
-  if (match.includes(input.toLowerCase())) {
-    return true;
-  }
-  return false;
-}
-
-function errorMsg(text) {
-  return { error: text };
-}
-
 // toplist ordered by filter choice.
 const toplist = (request, response) => {
   if (!hasSession(request, response)) {
@@ -143,6 +147,7 @@ const toplist = (request, response) => {
   }
 }
 
+// Sum of all the students in a class points
 const getClassPoints = (request, response) => {
   if (!hasSession(request, response)) {
     return;

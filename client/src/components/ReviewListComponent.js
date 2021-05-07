@@ -13,6 +13,7 @@ const ReviewListComponent = (props) => {
         fetchReviews();
     }, []);
 
+    // Fetches all the reviews
     const fetchReviews = async (str) => {
 
         const requestOptions = {
@@ -25,6 +26,7 @@ const ReviewListComponent = (props) => {
         });
     }
 
+    // Accepts the book in the pendaccepting list
     const acceptBooks =  () => {
         pendAccepting.map((item) => (
             fetch("/api/accrev/"+item.rid).then(response => response.json()).then(response => {
@@ -35,6 +37,7 @@ const ReviewListComponent = (props) => {
         fetchReviews()
     }
 
+    // Rejects the books in the pendaccepting list
     const rejectBooks =  () => {
         pendAccepting.map((item) => (
             fetch("/api/rejrev/"+item.rid).then(response => response.json()).then(response => {
@@ -45,6 +48,7 @@ const ReviewListComponent = (props) => {
         fetchReviews()
     }
 
+    // Publishes the books in the pendaccepting list
     const publishBooks =  () => {
         pendAccepting.map((item) => (
             fetch("/api/pubrev/"+item.rid).then(response => response.json()).then(response => {
@@ -55,6 +59,7 @@ const ReviewListComponent = (props) => {
         fetchReviews()
     }
 
+    // Unpublishes the books in the pendaccepting list
     const unpublishBooks =  () => {
         pendAccepting.map((item) => (
             fetch("/api/unpubrev/"+item.rid).then(response => response.json()).then(response => {
@@ -65,6 +70,7 @@ const ReviewListComponent = (props) => {
         fetchReviews()
     }
 
+    // Adds a book to the list but if its in there, remove it
     const addBook = (book, e) => {
         console.log(e.target.checked)
         if(e.target.checked) {
@@ -77,6 +83,7 @@ const ReviewListComponent = (props) => {
         }
     }
 
+    // Deletes a review
     const deleteBook = (book) => {
         if (window.confirm("Är du säker?")) {
             let req = { method: "DELETE", headers: { "Content-Type": "application/json" } }
@@ -88,6 +95,7 @@ const ReviewListComponent = (props) => {
         }
     }
 
+    // Give bonus points to the users in the pendaccepting list
     const bonusPoints = event => {
         const points = parseInt(document.getElementById("inputBonus").value);
         const alegibleForPoints = ([])
@@ -107,6 +115,7 @@ const ReviewListComponent = (props) => {
         fetchReviews()
     }
     
+    // Check if a book is accepted or not to display it
     const checkAcc = (b, e) => {
         if (b.accepted) {
             return "accepted"
@@ -115,6 +124,7 @@ const ReviewListComponent = (props) => {
         }
     }
 
+    // Check if a book is published or not to display it
     const checkPub = (b) => {
         if (b.published) {
             return "published"
@@ -123,6 +133,7 @@ const ReviewListComponent = (props) => {
         }
     }
 
+    // Checks if the paragraph container should be green or red
     const greenOrRed = (b, s) => {
         if (s == "pub") {
             if (b.published) {
@@ -139,6 +150,7 @@ const ReviewListComponent = (props) => {
         }
     }
 
+    // Creates a box to display the reviews and their information
     const showResult = (books) => {
         return (
             <div>
@@ -178,6 +190,7 @@ const ReviewListComponent = (props) => {
         )
     }
 
+    // Click the checkboxes when you markall
     function toggle() {
         const checkboxes = document.getElementsByName('foo');
         for(var i=0, n=checkboxes.length;i<n;i++) {

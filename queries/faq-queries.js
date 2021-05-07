@@ -58,6 +58,7 @@ const faqGet = (request, response) => {
   
   }
   
+  // Delete a faq
   const faqDel = (request, response) => {
     if (!hasSession(request, response)) {
       return;
@@ -74,6 +75,7 @@ const faqGet = (request, response) => {
     });
   
   }
+
   // update existing FAQ question and answer
   const faqPut = (request, response) => {
     if (!hasSession(request, response)) {
@@ -93,6 +95,7 @@ const faqGet = (request, response) => {
   
   }
   
+  //Add a new faq
   const FAQAdd = (request, response) => {
     if (!hasSession(request, response)) {
       return;
