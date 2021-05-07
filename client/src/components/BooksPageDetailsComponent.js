@@ -55,8 +55,8 @@ const BooksPageDetailsComponent = (props) => {
 
     return (
         <div className="bpd-page-content">
+            <FontAwesomeIcon className="backButton" icon={faTimes} color='black' onClick={() => history.push('/books')}/>
             <div className="information">
-                <FontAwesomeIcon className="backButton" icon={faTimes} color='black' onClick={() => history.push('/books')}/>
                 <div className="title">Titel: {book.title}</div>
                 <div className="author">Författare: {book.author}</div>
                 <div className="pages">Sidantal: {book.pages}</div>
