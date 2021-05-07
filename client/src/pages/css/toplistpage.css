@@ -8,9 +8,10 @@
 }
 
 .top-top-reader-card, .top-top-book-card, .top-my-points, .top-my-recommendation {
-  background: var(--white);
+  background: var(--background);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
+  font-weight: bold;
 }
 
 .top-top-reader-card {
@@ -40,7 +41,7 @@
 
 .top-top-lists {
   grid-area: top-lists;
-  background: var(--white);
+  background: var(--background);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
   display: grid;
@@ -63,7 +64,7 @@
   border-radius: 9px 9px 9px 9px;
   padding: 3%;
   grid-area: table;
-  background: var(--white);
+  background: var(--background);
 }
 
 .top-filter-label {

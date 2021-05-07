@@ -1,11 +1,11 @@
 /* variables */
 
 :root {
-    --pageHeaderColor: #8c6ad3;
-    --pageInnerColor: #7339EE;
-    --white: white;
+    --pageHeaderColor:  hsl(231, 73%, 9%);
+    --pageInnerColor: #3a3050;
+    --white: rgb(243, 234, 234);
     --navBgColor: hsl(231, 73%, 9%);
-    --background: #FAEBD7;
+    --background: #fcfcfc;
     --borders: solid 2px #C4C4C4;
     --topListColor: #d69467;
     --barcolor: #ECDFDF;
