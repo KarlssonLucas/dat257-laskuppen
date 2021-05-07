@@ -85,7 +85,7 @@ export default class Sidebar extends React.Component {
 
     render() {
         return (
-            <div className="sidebar-menu">
+            <div className="sidebar-menu glassMorphism">
                 {(this.state.sidebarData.length === 1) ? <Redirect to="/login" /> : ""}
                 <h1 className='sidebar-logo'> <FontAwesomeIcon icon={faTrophy} color='white' size='lg' />Läskuppen </h1>
 

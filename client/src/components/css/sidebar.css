@@ -1,10 +1,10 @@
 .sidebar-menu {
+  margin: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 95vh;
   min-height: 500px;
-  background-color: var(--navBgColor);
 }
 
 .sidebar-menu hr{
@@ -17,10 +17,10 @@
 .sidebar-logo {
   display: flex;
   justify-content: center;
-  width: 260px;
+  width: 240px;
   height: 50px;
   margin: 25px 0px 0px 0px;
-  font-size: 37px;
+  font-size: 30px;
   color: var(--white);
   font-weight: bold;
 }
@@ -56,7 +56,7 @@
 }
 
 .sidebar-item a:hover {
-  background-color: #1a83ff;
+  background-color: #d57eeb48;
   cursor: pointer;
 }
 
