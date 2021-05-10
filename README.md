@@ -1,4 +1,73 @@
-## SETUP
+# Agile Software Project Management | DAT257 
+[Lucas Karlsson | github: karlssonlucas](https://github.com/KarlssonLucas)
+
+[Karl Gunnarsson | github: balthazark](https://github.com/Balthazark)
+
+[Joakim Ohlsson | github: jaok](https://github.com/JaoK)
+
+[David Andreasson | github: hshanz](https://github.com/hshanz)
+
+[Anton Johansson | github: anjohoh](https://github.com/anjohoh)
+
+[Victor Johansson | github: enteori](https://github.com/EnTeori)
+
+- - - -
+
+## Course Deliverables
+### Scrum Board
+Our scrum board is based in trello and is located [here]()
+
+The structure of the board is as followed:
+  1. Sprint x Planning
+  2. In Progress
+  3. Sprint Done
+  4. User Stories
+  5. User Stories Done
+  6. Product Backlog
+  7. Epics
+
+But we also have our definition of done here.
+  
+### Final Report
+Our final report can be found [here]()
+
+### Technical Documentation
+Can be found in all the javascript files present as a normal comment!
+
+### Contribution Breakdown
+  1. Lucas
+  
+     i.
+     
+     ii.
+  2. Anton
+     
+     i.
+     
+     ii.
+  3. Victor
+     
+     i.
+     
+     ii.  
+  4. Joakim
+     
+     i.
+     
+     ii.
+  5. Karl
+     
+     i.
+     
+     ii.
+  6. David
+     
+     i.
+     
+     ii.
+     
+- - - -
+## Project Setup
 ### Repo
 ```git clone https://github.com/karlssonlucas/dat257-laskuppen.git```
 
@@ -16,3 +85,5 @@ the only thing left is how to run it.
 
 ### Running
 In the main directory run ```node ./index.js``` the site should be up and running on ```localhost:5000```
+
+Or you can just visit [laskuppen](https://laskuppen.herokuapp.com)
