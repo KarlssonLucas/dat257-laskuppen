@@ -53,7 +53,8 @@
 
 .reviews {
   grid-area: reviews;
-  overflow-y: scroll;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .title {
@@ -83,6 +84,9 @@
     "review";
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 5fr;
+  min-width: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
 }
 
 .name {

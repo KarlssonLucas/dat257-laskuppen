@@ -64,9 +64,9 @@ const MakeReviewComponent = (props) => {
     }
 
     return (
-        <div className="main-page-content  mrc-page-content">
+        <div className="mrc-page-content">
             {(submitted) ? <Redirect to="/toplist"/> : null}
-            <div className="mrc-B">
+            <div className="mrc-B glassMorphism">
                 <div className="mrc-score">
                     <p> Betyg </p>
                     <input name="grade" type='number' value={values.grade} onChange={(e) => {
@@ -82,7 +82,7 @@ const MakeReviewComponent = (props) => {
                         <input name="recommended" type='radio' value={false} onChange={handleChange} />Nej
                         </div>
             </div>
-            <div className="mrc-C">
+            <div className="mrc-C glassMorphism">
                 <div className="mrc-title">
                     <p> Titel </p>
                     <input name="title" type='text' value={values.title} onChange={handleChange} />
@@ -100,9 +100,9 @@ const MakeReviewComponent = (props) => {
 
                 </div>
             </div>
-            <div className="mrc-D">
+            <div className="mrc-D glassMorphism">
                 <p> Recension </p>
-                <textarea name="review" type='text' value={values.review} onChange={handleChange} rows={10} cols={100} />
+                <textarea name="review" type='text' value={values.review} placeholder="Skriv här!" onChange={handleChange} />
                 <Reward ref={ref => { reward = ref }} type='confetti'>
                     <button className="btn btn-success" onClick={press}>Skicka</button>
                 </Reward>
