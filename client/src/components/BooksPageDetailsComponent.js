@@ -41,7 +41,7 @@ const BooksPageDetailsComponent = (props) => {
             <div>
                 {reviews.map((review) => {
                     return (
-                        <div className="review-container">
+                        <div className="review-container glassMorphism">
                             <div className="name">{review.name}</div>
                             <div className="review">{review.summary}</div>
                         </div>
@@ -56,7 +56,7 @@ const BooksPageDetailsComponent = (props) => {
     return (
         <div className="bpd-page-content">
             <FontAwesomeIcon className="backButton" icon={faTimes} color='black' onClick={() => history.push('/books')}/>
-            <div className="information">
+            <div className="information glassMorphism">
                 <div className="title">Titel: {book.title}</div>
                 <div className="author">Författare: {book.author}</div>
                 <div className="pages">Sidantal: {book.pages}</div>
@@ -65,8 +65,8 @@ const BooksPageDetailsComponent = (props) => {
                 </div>
                 
             </div>
-            <div className="description">{book.descr}</div>
-            <div className="reviews"><h1>Recensioner:</h1>
+            <div className="description glassMorphism">{book.descr}</div>
+            <div className="reviews">
                 {reviewsToBook(reviews)}
             </div>
         </div>

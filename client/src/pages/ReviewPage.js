@@ -19,7 +19,7 @@ export default class ReviewPage extends React.Component {
     render() {
         return (
             <div className="main-page-general-styling">
-            <div className="main-page-header">
+            <div className="main-page-header glassMorphism">
                 <h2> {(this.state.book == null) ? "Välj bok" : "Skriv Recension"} </h2> 
             </div>
             <div className="main-page-inner-container">

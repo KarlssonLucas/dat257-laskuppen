@@ -18,13 +18,13 @@ const ChooseBookComponent = (props) => {
         };
 
         fetch("/api/mostreadbook", requestOptions).then(response => response.json()).then(response => {
-            setBestBooks(response);
+            setBestBooks(response.slice(0,2));
         }
         );
 
         fetch("/api/latestreviews", requestOptions).then(response => response.json()).then(response => {
             console.log(response);
-            setRecentBooks(response);
+            setRecentBooks(response.slice(0,2));
         }
         );
 
@@ -105,14 +105,14 @@ const ChooseBookComponent = (props) => {
 
 
     const showResult = (books) => {
-
+        
 
         return (
             <div className="cbc-book-results">
 
                 {books.map((book) => {
                     return (
-                        <div className="cbc-book" onClick={() => { props.setBook(book) }}>
+                        <div className="cbc-book glassMorphism" onClick={() => { props.setBook(book) }}>
                             <div className="cbc-book-title">Titel: {book.title}</div>
                             <div className="cbc-book-author">Författare: {(Array.isArray(book.author)) ? book.author : JSON.parse(('"' + book.author.replaceAll('"', '\\"') + '"'))}</div>
                             <div className="cbc-book-pages">Sidor: {book.pages}</div>
@@ -127,11 +127,12 @@ const ChooseBookComponent = (props) => {
     }
 
 
+
     return (
-        <div className="main-page-content cbc-page-content">
+        <div className="cbc-page-content ">
 
 
-            <div className="cbc-search-result">
+            <div className="cbc-search-result glassMorphism">
                 <div className="cbc-search-bar">
                     <span>Sök bok:</span>
                         <input
@@ -142,16 +143,16 @@ const ChooseBookComponent = (props) => {
                 </div>
 
 
-                {showResult(books)}
+                {showResult(books,40)}
             </div>
 
-            <div className="cbc-best-result">
+            <div className="cbc-best-result glassMorphism">
                 <div className="">Populära böcker:</div>
                 {showResult(bestBooks)}
 
             </div>
 
-            <div className="cbc-recent-result">
+            <div className="cbc-recent-result glassMorphism">
                 <div className="">Nyligen recenserade:</div>
                 {showResult(recentBooks)}
 
