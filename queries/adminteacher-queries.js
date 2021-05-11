@@ -96,7 +96,7 @@ const unpublishReview = (request, response) => {
 
 // Get all reviews.
 const getReviews = (request, response) => {
-    client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages, Users.id AS uid FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby", (error, results) => {
+    client.query("SELECT * FROM getReviews", (error, results) => {
       if (error) {
         response.status(500).send(errorMsg("Internal server error"));
       }

@@ -57,3 +57,22 @@ CREATE OR REPLACE VIEW NewReview AS
 SELECT title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,summary
 FROM Book RIGHT JOIN Review ON Book.id = Review.bookId;
 
+CREATE OR REPLACE VIEW getReviews AS
+SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, 
+published, rating, summary, title, author, pages, Users.id AS uid 
+FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby;
+
+CREATE OR REPLACE VIEW usersReviews AS
+SELECT review.id AS rid, bookid, thumbnail, accepted, published, 
+worthReading, rating, summary, title, author, pages, Users.id AS uid 
+FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby;
+
+CREATE OR REPLACE VIEW latestReviews AS
+SELECT Book.id, title, author, pages, descr AS desc, thumbnail 
+FROM review LEFT JOIN book on bookId = Book.id GROUP BY Book.id ORDER BY max(timeofreview) DESC LIMIT 20;
+
+CREATE OR REPLACE VIEW userReadMost AS
+SELECT Users.id, firstName || ' ' || lastName AS name, SUM(COALESCE(pages,0)) as points 
+FROM Review LEFT JOIN Users ON writtenBy = users.id LEFT JOIN Book ON Book.id = bookId 
+WHERE accepted = true AND review.timeofreview > (NOW() - INTERVAL '7 DAY') 
+GROUP BY users.id ORDER BY points DESC LIMIT 1;
