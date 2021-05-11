@@ -5,7 +5,6 @@
 }
 
 .faq-question {
-  background-color: var(--background);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
   margin: 1em;
