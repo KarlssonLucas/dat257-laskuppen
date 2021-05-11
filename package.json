@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install --legacy-peer-deps && npm run build"
   },
   "license": "ISC",
   "dependencies": {
@@ -17,9 +17,12 @@
     "node-fetch": "^2.6.1",
     "pg": "^8.5.1",
     "popper.js": "^1.16.1",
-    "react": "^17.0.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-pose": "^4.0.10",
     "react-rewards": "^1.1.2",
-    "react-select": "^4.3.0"
+    "react-select": "^4.3.0",
+    "rollup": "^2.47.0"
   },
   "engines": {
     "node": "^15.14.0"
