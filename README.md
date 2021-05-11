@@ -9,7 +9,7 @@
 
 [Anton Johansson | github: anjohoh](https://github.com/anjohoh)
 
-[Victor Johansson | github: enteori](https://github.com/EnTeori)
+[Viktor Johansson | github: enteori](https://github.com/EnTeori)
 
 - - - -
 
@@ -45,7 +45,7 @@ Can be found in all the javascript files present as a normal comment!
      i.
      
      ii.
-  3. Victor
+  3. Viktor
      
      i.
      
