@@ -9,14 +9,14 @@ const ArchiveComponent = (props) => {
         fetchReviews();
     }, []);
 
+    // Fetch the reviews connected to a user
     const fetchReviews = async (str) => {
-    
-        await fetch("/api/users/reviews").then(response => response.json()).then(response => {
+        await fetch("/api/user/reviews").then(response => response.json()).then(response => {
             setReviews(response);
         });
     }
 
-
+    // Gets the status of the review
     const getStatus = (review) =>{
         if(review.published === true){
             return "published"
@@ -29,7 +29,8 @@ const ArchiveComponent = (props) => {
         }
     }
 
-    //{"arc-review-container " + getStatus(review).replace(" ","-")}
+
+    // The review container that is displayed on the page
     const reviewsToBook = (reviews) => {
         return (
             <div>
