@@ -7,11 +7,11 @@ export default class AdminPage extends React.Component {
     render() { 
         return (
             <div className="main-page-general-styling">
-                <div className="main-page-header">
+                <div className="main-page-header glassMorphism">
                     <h2> Admin </h2> 
                 </div>
                 <div className="main-page-inner-container">
-                    <ReviewListComponent></ReviewListComponent> 
+                    <ReviewListComponent/>
                 </div>
             </div>
         )

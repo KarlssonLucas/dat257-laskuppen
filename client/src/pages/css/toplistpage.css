@@ -16,6 +16,7 @@
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
   background:rgba(0, 0,0, 0);
+  
 }
 
 .top-top-reader-card {
@@ -39,7 +40,6 @@
   grid-template-areas: "a d" "b d" "c d";
   grid-template-columns: 4fr 2fr;
   grid-template-rows: 1fr 1fr 1fr;
-  padding: 1em;
   width: 100%;
 }
 
@@ -130,6 +130,11 @@ hr {
 }
 
 .top-card-title {
+  margin: 0px;
+  margin-left: 1em;
+}
+
+.top-card-text{
   margin: 0px;
   margin-left: 1em;
 }

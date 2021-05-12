@@ -1,9 +1,6 @@
 import './css/reviewlist.css';
 import React, { useState, useEffect } from 'react';
 import Accordion from "./Accordion";
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { render } from 'react-dom';
 
 const ReviewListComponent = (props) => {
     const [books, setBooks] = useState([]);
@@ -141,7 +138,7 @@ const ReviewListComponent = (props) => {
 
     const showResult = (books) => {
         return (
-            <div>
+            <div className="glassMorphism">
                 {books.map((book) => {
                     return (
 
@@ -155,7 +152,7 @@ const ReviewListComponent = (props) => {
                             }
 
                             removeButton= {
-                                <button onClick={() => deleteBook(book)}>Ta bort</button>                     
+                                <button className="btn btn-light" onClick={() => deleteBook(book)}>Ta bort</button>                     
                             }
 
                             title={
@@ -188,7 +185,7 @@ const ReviewListComponent = (props) => {
 
     return (
         <div className="rlc-page-content">
-            <div className="rlc-search-result">
+            <div className="rlc-search-result glassMorphism">
                 <div className="">Recensioner:</div>
                 {showResult(books)}
             </div>

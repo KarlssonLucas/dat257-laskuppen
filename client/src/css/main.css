@@ -12,7 +12,7 @@
   --backgroundHover: #faddb7;
 
   /*Here begins big brain gradient and glass idea*/
-  --backgroundGradient: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+  --backgroundGradient: radial-gradient( #3494E6 0%, #EC6EAD 100%);
 }
 
 .glassMorphism {

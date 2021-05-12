@@ -38,9 +38,9 @@ const FAQAdminQuestionComponent = (props) => {
                     setChanged(true);
                 }} />
             </div>
-            <div className="faq-admin-FAQ-buttons">
+            <div className="faq-admin-FAQ-buttons ">
                 <FontAwesomeIcon className="faq-admin-FAQ-trash " onClick={() => { props.onDelete(props.id) }} icon={faTrash} color='gray' />
-                <FontAwesomeIcon className="faq-admin-FAQ-save" onClick={() => { updateFAQ(props.id) }} icon={faSave} color='gray' />
+                <FontAwesomeIcon className="faq-admin-FAQ-save " onClick={() => { updateFAQ(props.id) }} icon={faSave} color='gray' />
             </div>
         </div>
     )
