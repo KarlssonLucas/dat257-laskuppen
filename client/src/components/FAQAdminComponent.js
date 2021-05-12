@@ -73,8 +73,8 @@ export default class FAQAdminComponent extends React.Component {
 
     render() {
         return (
-            <div className="main-page-content faq-page-content">
-                 <FontAwesomeIcon className="faq-admin-FAQ-add" onClick={() => { this.addNewFAQ() }} icon={faPlus} color='gray' />
+            <div className="main-page-content faq-page-content glassMorphism">
+                <FontAwesomeIcon className="faq-admin-FAQ-add" onClick={() => { this.addNewFAQ() }} icon={faPlus} color='gray' />
 
                 {this.state.FAQs}
             </div>

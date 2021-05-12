@@ -25,22 +25,22 @@ const FAQAdminQuestionComponent = (props) => {
     }
 
     return (
-        <div className="faq-admin-FAQ">
-            <div className="faq-admin-FAQ-text">
+        <div className="faq-admin-FAQ glassMorphism">
+            <div className="faq-admin-FAQ-text ">
 
-                <input className={(hasChanged) ? "faq-admin-FAQ-changed" : "faq-admin-FAQ-saved" } value={question} type="text" name="question" onChange={(e) => {
+                <input className={(hasChanged) ? "faq-admin-FAQ-changed " : "faq-admin-FAQ-saved "} value={question} type="text" name="question" onChange={(e) => {
                     setQuestion(e.target.value)
                     setChanged(true);
                 }} />
                 <br />
-                <input className={(hasChanged) ? "faq-admin-FAQ-changed" : "faq-admin-FAQ-saved" } value={answer} type="text" name="answer" onChange={(e) => {
+                <input className={(hasChanged) ? "faq-admin-FAQ-changed " : "faq-admin-FAQ-saved "} value={answer} type="text" name="answer" onChange={(e) => {
                     setAnswer(e.target.value)
                     setChanged(true);
                 }} />
             </div>
-            <div className="faq-admin-FAQ-buttons">
-                <FontAwesomeIcon className="faq-admin-FAQ-trash" onClick={() => { props.onDelete(props.id) }} icon={faTrash} color='gray' />
-                <FontAwesomeIcon className="faq-admin-FAQ-save" onClick={() => { updateFAQ(props.id) }} icon={faSave} color='gray' />
+            <div className="faq-admin-FAQ-buttons ">
+                <FontAwesomeIcon className="faq-admin-FAQ-trash " onClick={() => { props.onDelete(props.id) }} icon={faTrash} color='gray' />
+                <FontAwesomeIcon className="faq-admin-FAQ-save " onClick={() => { updateFAQ(props.id) }} icon={faSave} color='gray' />
             </div>
         </div>
     )

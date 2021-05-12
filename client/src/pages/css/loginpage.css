@@ -13,13 +13,19 @@ header {
     grid-template-areas: 
     "header header"
     "login loginart";
+    row-gap: 10vh;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 1fr 8fr;
 }
 
 .login-page-header {
     grid-area: header;
-    
+    font-size: 5%;
+    max-height: 10vh;
+}
+
+.login-page-header h1 {
+    color: white;
 }
 
 .login-page-form {

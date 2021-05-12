@@ -29,13 +29,14 @@ const ArchiveComponent = (props) => {
         }
     }
 
+
     // The review container that is displayed on the page
     const reviewsToBook = (reviews) => {
         return (
             <div>
                 {reviews.map((review) => {
                     return (
-                        <div className={"arc-review-container " + getStatus(review).replace(" ","-")}>
+                        <div className="arc-review-container glassMorphism">
                             <div className="arc-review-img">
                                 <img src={review.thumbnail}/>
                             </div>
@@ -45,12 +46,13 @@ const ArchiveComponent = (props) => {
                             <p>Sidor: {review.pages}</p>
                             </div>
                             <div className="arc-review-text">
+                            <p>Recension:</p>
                             {review.summary}
                             </div>
                             <div className="arc-review-info2">
                             <p>Betyg: {review.rating}</p>
                             <p>Läsvärd: {(review.worthreading === true) ? "Ja" : "Nej"}</p>
-                            <p>Status: {getStatus(review)}</p>
+                            <p className={getStatus(review).replace(" ","-")}>Status: {getStatus(review)}</p>
                             </div>
                         </div>
                     )

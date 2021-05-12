@@ -1,16 +1,22 @@
 .top-page-content {
-  background: var(--pageInnerColor) !important;
+  min-height: 100%;
+  max-height: 100%;
   display: grid;
-  grid-template-areas: "top-reader-card top-book-card my-points my-recommendation" "top-lists top-lists top-lists top-lists";
+  grid-template-areas: 
+  "top-reader-card top-book-card my-points my-recommendation" 
+  "top-lists top-lists top-lists top-lists";
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 3fr;
-  gap: 1em;
+  grid-gap: 1em;
+  background:rgba(255, 255,255, 0) !important;
 }
 
 .top-top-reader-card, .top-top-book-card, .top-my-points, .top-my-recommendation {
   background: var(--white);
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
+  background:rgba(0, 0,0, 0);
+  
 }
 
 .top-top-reader-card {
@@ -47,6 +53,7 @@
   grid-template-areas: "header" "table";
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 6fr;
+  background:rgba(0, 0,0, 0);
 }
 
 .top-top-list-header {
@@ -57,6 +64,7 @@
   gap: 1%;
   grid-template-areas: "filter student class points readbooks";
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  background:rgba(0, 0,0, 0);
 }
 
 .top-tableDiv {
@@ -64,13 +72,13 @@
   padding: 3%;
   grid-area: table;
   background: var(--white);
+  background:rgba(0, 0,0, 0);
 }
 
 .top-filter-label {
   grid-area: filter;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
+  justify-self: center;
 }
 
 .top-nameButton {
@@ -79,6 +87,7 @@
   grid-area: student;
   border-radius: 9px 9px 0px 0px !important;
   border-style: solid solid hidden solid;
+  background:rgba(0, 0,0, 0);
 }
 
 .top-classButton {
@@ -87,6 +96,7 @@
   grid-area: class;
   border-radius: 9px 9px 0px 0px !important;
   border-style: solid solid hidden solid;
+  background:rgba(0, 0,0, 0);
 }
 
 .top-pointsButton {
@@ -95,6 +105,7 @@
   grid-area: points;
   border-radius: 9px 9px 0px 0px !important;
   border-style: solid solid hidden solid;
+  background:rgba(0, 0,0, 0);
 }
 
 .top-readBooksButton {
@@ -103,11 +114,13 @@
   grid-area: readbooks;
   border-radius: 9px 9px 0px 0px !important;
   border-style: solid solid hidden solid;
+  background:rgba(0, 0,0, 0);
 }
 
 .top-table-holder {
   border: var(--borders);
   background: var(--background);
+  background:rgba(0, 0,0, 0);
 }
 
 hr {
@@ -119,6 +132,12 @@ hr {
 
 .top-card-title {
   margin: 0px;
+  margin-left: 1em;
+}
+
+.top-card-text{
+  margin: 0px;
+  margin-top: 1em;
   margin-left: 1em;
 }
 
