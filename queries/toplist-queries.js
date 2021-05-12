@@ -59,7 +59,7 @@ const userReadMost = (request, response) => {
   if (!hasSession(request, response)) {
     return;
   }
-  client.query("SELECT Users.id, firstName || ' ' || lastName AS name, SUM(COALESCE(pages,0)) as points FROM Review LEFT JOIN Users ON writtenBy = users.id LEFT JOIN Book ON Book.id = bookId WHERE accepted = true AND review.timeofreview > (NOW() - INTERVAL '7 DAY') GROUP BY users.id ORDER BY points DESC LIMIT 1", (error, results) => {
+  client.query("SELECT * FROM userReadMost", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {

@@ -111,7 +111,7 @@ const getUsers = (request, response) => {
 // each review from a user.
 const getUserReviews = (request, response) => {
   let uid = request.session.userId
-  client.query("SELECT review.id AS rid, bookid, thumbnail, accepted, published, worthReading, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Users.id = $1", [uid], (error, results) => {
+  client.query("SELECT * FROM usersReviews WHERE uid = $1", [uid], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
@@ -160,7 +160,7 @@ const getUserId = (request) => {
 // each published review of a specific book.
 const getReview = (request, response) => {
   let id = request.params.id
-  client.query("SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, published, rating, summary, title, author, pages FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby WHERE Book.id = $1 AND published=true", [id], (error, results) => {
+  client.query("SELECT * FROM getReviews WHERE bookid = $1 AND published=true", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
