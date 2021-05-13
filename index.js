@@ -2,7 +2,11 @@ const express = require('express')
 var session = require('express-session')
 
 const app = express()
-const db = require('./queries')
+const db = require('./queries/defaultqueries')
+const toplistdb = require('./queries/toplist-queries')
+const reviewdb = require('./queries/review-queries')
+const atdb = require('./queries/adminteacher-queries')
+const faqdb = require('./queries/faq-queries')
 const port = process.env.PORT || 5000
 
 // Data parsing
@@ -17,48 +21,56 @@ app.use(session({
   cookie: { maxAge: 60*60*1000 }}) // Inloggad max 1 timme?
   )
 
+  //Toplist Queries
+  app.get('/api/recommendation', toplistdb.getRandomRecommendation)
+  app.get('/api/toplist', toplistdb.toplist)
+  app.get('/api/classpoints', toplistdb.getClassPoints)
+  app.get('/api/users/:id', toplistdb.getUserById)
+  app.get('/api/userpoints', toplistdb.getUserPoints)
+  app.get('/api/mostreadbook', toplistdb.mostReadBook)
+  app.get('/api/userreadmost', toplistdb.userReadMost)
 
-// Create all API-requests
-app.post('/api/login', db.login)
-app.get('/api/users', db.getUsers)
-app.get('/api/recommendation', db.getRandomRecommendation)
-app.get('/api/accrev/:id', db.acceptReview)
-app.get('/api/rejrev/:id', db.rejectReview)
-app.get('/api/unpubrev/:id', db.unpublishReview)
-app.get('/api/pubrev/:id', db.publishReview)
-app.get('/api/getbook/:id', db.getBook)
-app.get('/api/reviews', db.getReviews)
-app.get('/api/users/reviews', db.getUserReviews)
-app.get('/api/reviews/:id', db.getReview)
-app.get('/api/latestreviews', db.latestReview)
-app.get('/api/booksearch/:bookname', db.searchBookDb)
-app.get('/api/users/:id', db.getUserById)
-app.get('/api/userpoints', db.getUserPoints)
-app.get('/api/books/:bookname', db.bookssearch)
-app.post('/api/submitreview',db.submitreview);
-app.get('/api/mostreadbook', db.mostReadBook)
-app.get('/api/userreadmost', db.userReadMost)
-app.get('/api/toplist', db.toplist)
-app.get('/api/bonus', db.bonusPoints)
-app.get('/api/classpoints', db.getClassPoints)
-app.delete('/api/users/:id', db.deleteUser)
-app.get('/api/session', db.getSession)
-app.get('/api/logout', db.logout)
-app.get('/api/faq',db.faqGet)
-app.delete('/api/faq/:id',db.faqDel)
-app.put('/api/faq',db.faqPut)
-app.post('/api/faq',db.FAQAdd)
-//DAvid fick feber här
-app.get('/api/reviewedbooks', db.reviewedBooks)
+  //Review Queries
+  app.get('/api/booksearch/:bookname', reviewdb.searchBookDb)
+  app.get('/api/latestreviews', reviewdb.latestReview)
+  app.get('/api/books/:bookname', reviewdb.bookssearch)
+  app.post('/api/submitreview',reviewdb.submitreview)
 
-// Load react frontend
-app.use(express.static('client/build'));
+  //Admin and Teacher Queries
+  app.get('/api/accrev/:id', atdb.acceptReview)
+  app.get('/api/rejrev/:id', atdb.rejectReview)
+  app.get('/api/unpubrev/:id', atdb.unpublishReview)
+  app.get('/api/pubrev/:id', atdb.publishReview)
+  app.get('/api/reviews', atdb.getReviews)
+  app.get('/api/bonus', atdb.bonusPoints)
+
+
+  //FAQ Queries
+  app.get('/api/faq',faqdb.faqGet)
+  app.delete('/api/faq/:id',faqdb.faqDel)
+  app.put('/api/faq',faqdb.faqPut)
+  app.post('/api/faq',faqdb.FAQAdd)
+
+  //Book Queries
+  app.get('/api/reviews/:id', db.getReview)
+  app.get('/api/reviewedbooks', db.reviewedBooks)
+
+  // Other
+  app.post('/api/login', db.login)
+  app.get('/api/users', db.getUsers)
+  app.get('/api/session', db.getSession)
+  app.get('/api/logout', db.logout)
+  app.delete('/api/users/:id', db.deleteUser)
+  app.get('/api/getbook/:id', db.getBook)
+  app.get('/api/user/reviews', db.getUserReviews)
+
+  // Load react frontend
+  app.use(express.static('client/build'));
 
 // 404 Not found -> redirects to home page
 app.get('/*', (request, response) => {
   response.redirect('/');
 })
-
 
 // Start server
 app.listen(port, () => {

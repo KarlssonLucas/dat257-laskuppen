@@ -7,11 +7,11 @@ export default class ProfilePage extends React.Component {
     render() { 
         return (
             <div className="main-page-general-styling">
-                <div className="main-page-header">
+                <div className="main-page-header glassMorphism">
                     <h2> Profil </h2> 
                 </div>
                 <div className="main-page-inner-container">
-                    <div className="main-page-content pp-page-content">
+                    <div className="pp-page-content glassMorphism">
                         <ArchiveComponent />
                     </div>
                 </div>

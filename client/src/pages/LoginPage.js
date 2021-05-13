@@ -76,11 +76,8 @@ const LoginPage = (props) => {
   return (
     <div className="main-page-content login-page-content">
       {(loggedIn) ? <Redirect to="/toplist" /> : <Redirect to="/login" />}
-      <div className="login-page-header">
-        <header>
-          <div className="skewed-header"></div>
+      <div className="login-page-header main-page-header glassMorphism">
           <h1>Välkommen till läskuppen</h1>
-        </header>
       </div>
       <div className="login-page-form">
         <div className="center-login">

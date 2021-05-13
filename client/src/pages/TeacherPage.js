@@ -7,7 +7,7 @@ export default class TeacherPage extends React.Component {
     render() {
         return (
             <div className="main-page-general-styling">
-                <div className="main-page-header">
+                <div className="main-page-header glassMorphism">
                     <h2> Lärare </h2>
                 </div>
                 <div className="main-page-inner-container">

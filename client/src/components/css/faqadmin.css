@@ -1,15 +1,11 @@
 .faq-admin-FAQ {
-  background-color: var(--background);
+  
   border-radius: 9px 9px 9px 9px;
   border: var(--borders);
   margin: 1em;
   display: flex;
 }
 
-.faq-admin-FAQ:hover {
-  background-color: var(--backgroundHover);
-  cursor: pointer;
-}
 
 .faq-admin-FAQ svg {
   height: 50px !important;

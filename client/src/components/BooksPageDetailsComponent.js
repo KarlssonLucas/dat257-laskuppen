@@ -14,6 +14,7 @@ const BooksPageDetailsComponent = (props) => {
         fetchReviews();
     }, []);
 
+    // Fetch the book given the id
     const fetchBook = async (str) => {
     const requestOptions = {
          method: 'GET',
@@ -25,6 +26,7 @@ const BooksPageDetailsComponent = (props) => {
         });
     } 
 
+    // Fetch all the reviews connected to a book
     const fetchReviews = async (str) => {
         const requestOptions = {
             method: 'GET',
@@ -36,12 +38,13 @@ const BooksPageDetailsComponent = (props) => {
         });
     }
 
+    // All the reviews connected to a book displayed
     const reviewsToBook = (reviews) => {
         return (
             <div>
                 {reviews.map((review) => {
                     return (
-                        <div className="review-container">
+                        <div className="review-container glassMorphism">
                             <div className="name">{review.name}</div>
                             <div className="review">{review.summary}</div>
                         </div>
@@ -51,12 +54,13 @@ const BooksPageDetailsComponent = (props) => {
         )
     }
         
+    // To enable routing back to books page
     const history = useHistory();
 
     return (
         <div className="bpd-page-content">
-            <div className="information">
-                <FontAwesomeIcon className="backButton" icon={faTimes} color='black' onClick={() => history.push('/books')}/>
+            <FontAwesomeIcon className="backButton" icon={faTimes} color='black' onClick={() => history.push('/books')}/>
+            <div className="information glassMorphism">
                 <div className="title">Titel: {book.title}</div>
                 <div className="author">Författare: {book.author}</div>
                 <div className="pages">Sidantal: {book.pages}</div>
@@ -65,8 +69,8 @@ const BooksPageDetailsComponent = (props) => {
                 </div>
                 
             </div>
-            <div className="description">{book.descr}</div>
-            <div className="reviews"><h1>Recensioner:</h1>
+            <div className="description glassMorphism">{book.descr}</div>
+            <div className="reviews">
                 {reviewsToBook(reviews)}
             </div>
         </div>

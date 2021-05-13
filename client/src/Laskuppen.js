@@ -43,7 +43,7 @@ export default class Laskuppen extends React.Component {
                         <Route exact path="/login" render={(props) => <LoginPage {...props} />} />
                         <Route exact path="/logout" render={(props) => <LoginPage logout={true} {...props} />} />
                             {(this.state.loggedIn) ?
-                                <div>
+                                <div className="page-holder">
                                     <Route exact path="/toplist" render={(props) => <ToplistPage {...props} />} />
                                     <Route exact path="/makereview" render={(props) => <ReviewPage  {...props} />} />
                                     <Route exact path="/books" render={(props) => <BooksPage {...props} />} />

@@ -7,7 +7,7 @@ export default class FAQPage extends React.Component {
     constructor(props) {
         super(props);
         this.printQuestions = this.printQuestions.bind(this);
-        this.state = {FAQs:null}
+        this.state = { FAQs: null }
         this.printQuestions();
 
     }
@@ -28,7 +28,7 @@ export default class FAQPage extends React.Component {
                 }
                 );
                 console.log("STATE", FAQs)
-                this.setState({FAQs})
+                this.setState({ FAQs })
             });
 
 
@@ -38,11 +38,11 @@ export default class FAQPage extends React.Component {
     render() {
         return (
             <div className="main-page-general-styling">
-                <div className="main-page-header">
+                <div className="main-page-header glassMorphism">
                     <h2> FAQ </h2>
                 </div>
                 <div className="main-page-inner-container">
-                    <div className="main-page-content faq-page-content">
+                    <div className="main-page-content faq-page-content glassMorphism">
                         {this.state.FAQs}
                     </div>
                 </div>
