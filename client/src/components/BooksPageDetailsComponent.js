@@ -44,8 +44,8 @@ const BooksPageDetailsComponent = (props) => {
             <div>
                 {reviews.map((review) => {
                     return (
-                        <div className="review-container">
-                            <div className="name">{review.name} - {review.class}</div>
+                        <div className="review-container glassMorphism">
+                            <div className="name">{review.name}</div>
                             <div className="review">{review.summary}</div>
                         </div>
                     )

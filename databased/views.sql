@@ -58,7 +58,7 @@ SELECT title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,
 FROM Book RIGHT JOIN Review ON Book.id = Review.bookId;
 
 CREATE OR REPLACE VIEW getReviews AS
-SELECT review.id AS rid, firstName || ' ' || lastName AS name, bookid, accepted, 
+SELECT review.id AS rid, firstName || ' ' || lastName AS name, class, bookid, accepted, 
 published, rating, summary, title, author, pages, Users.id AS uid 
 FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby;
 
