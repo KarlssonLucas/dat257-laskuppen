@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './components/Sidebar';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ToplistPage from './pages/ToplistPage';
 import ReviewPage from './pages/ReviewPage';
 import BooksPageDetails from './pages/BooksPageDetails';
@@ -30,25 +30,19 @@ export default class Laskuppen extends React.Component {
             }
         });
     }
-    /*
-    <Route exact path="/login" render={(props) => <LoginPage {...props} />} />
-                        <Route exact path="/logout" render={(props) => <LoginPage logout={true} {...props} />} />
-                            
-
-    */
 
     render() {
         return (
             <BrowserRouter>
-                {(this.state.loggedIn) ? 
                 <div className="main-general-styling">
                     <div className="main-sidebar-container">
                         <Sidebar />
                     </div>
                     <div className="main-page-container">
-                        <Redirect to="/toplist"/>
                         <Switch>
-                                <Route exact path="/logout" render={(props) => <LoginPage logout={true} {...props} />} />
+                        <Route exact path="/login" render={(props) => <LoginPage {...props} />} />
+                        <Route exact path="/logout" render={(props) => <LoginPage logout={true} {...props} />} />
+                            {(this.state.loggedIn) ?
                                 <div className="page-holder">
                                     <Route exact path="/toplist" render={(props) => <ToplistPage {...props} />} />
                                     <Route exact path="/makereview" render={(props) => <ReviewPage  {...props} />} />
@@ -59,15 +53,13 @@ export default class Laskuppen extends React.Component {
                                     <Route exact path="/teacher" render={(props) => <TeacherPage {...props} />} />
                                     <Route exact path="/admin" render={(props) => <AdminPage {...props} />} />
                                 </div>
-                            
+                                : ""
+                            }
                         </Switch>
 
                     </div>
-                </div> 
-                : <LoginPage/>}
-            </BrowserRouter> 
-
-           )
+                </div>
+            </BrowserRouter>)
     };
 
 }
