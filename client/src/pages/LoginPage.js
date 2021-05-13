@@ -1,9 +1,10 @@
 import fetch from "node-fetch";
 import React, { useEffect, useState } from "react";
 import Reward from "react-rewards";
-import { Redirect } from "react-router";
+import {  faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./css/loginpage.css";
-import mypic from "./EPIC.png";
+
 
 
 const useLoginHook = (formValues) => {
@@ -73,35 +74,59 @@ const LoginPage = (props) => {
 
   };
 
-  return (
-    <div className="main-page-content login-page-content">
-      {(loggedIn) ? <Redirect to="/toplist" /> : <Redirect to="/login" />}
-      <div className="login-page-header main-page-header glassMorphism">
-          <h1>Välkommen till läskuppen</h1>
-      </div>
-      <div className="login-page-form">
-        <div className="center-login">
+  /*
+  mailinput: <input value={credentials.mail} name="mail" type="text" onChange={setCredentials} /> 
+  passwordinput: <input name="password" type="password" onChange={setCredentials} />
 
-          Användarnamn<br />
-          <input value={credentials.mail} name="mail" type="text" onChange={setCredentials} /> 
-          <br /><br />Lösenord (qwe123)<br />
-          <input name="password" type="password" onChange={setCredentials} /> 
-          <br />
+
+
+  inputcheack: 
           <Reward ref={ref => { reward = ref }} type='memphis'>
             <button type="button" onClick={() => { login() }} class="btn btn-primary button-gradient">Logga in</button>
-            <br/>
             {(wrongCredentials) ? <span style={{color:"red"}}>Fel uppgifter</span> : null }
             {(correctCredentials) ? <span style={{color:"green"}}>Välkommen!</span> : null }
           </Reward>
+  */
+
+  return (
+    <div className="login-page">
+      <span className="logo"> 
+        <h1><FontAwesomeIcon icon={faTrophy} color='white' /> Läskuppen </h1> 
+      </span>
+
+      <div className="center-login"> 
+        
+        <p>Välkommen till Läskuppen!</p>
+
+        <div className="login-box glassMorphism">
+        <div className="login-user">
+          <input value={credentials.mail} name="mail" type="text" onChange={setCredentials} placeholder="Användarnamn" />
         </div>
-      </div>
-      <div className="login-page-loginart">
-      <img className="pic" src={mypic} alt="cool bild" height="100%" width="100%"/>
+
+        <div className="login-password">
+          <input name="password" type="password" onChange={setCredentials} placeholder="  Lösenord:qwe123"/>
+        </div>
+
+        <div className="login-button" >
+          <Reward ref={ref => { reward = ref }} type='memphis'>
+              <button type="button" onClick={() => { login() }} class="btn btn-primary button-gradient">Logga in</button>
+              {(wrongCredentials) ? <div style={{color:"red"}}>Fel uppgifter</div> : null }
+              {(correctCredentials) ? <div style={{color:"green"}}>Välkommen!</div> : null }
+          </Reward>
+        </div>
+      
+
+
+        </div>
+       
+
+        
 
       </div>
-      
     </div>
-  );
+  
+  
+  )
 };
 
 export default LoginPage;

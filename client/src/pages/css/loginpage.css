@@ -1,97 +1,111 @@
-header {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-
-}
-
-
-.login-page-content {
-    font-family: Helvetica;
-    background: #f78b7d15; 
+.login-page{
+    height: 100vh;
+    width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+    background-image: linear-gradient(120deg, #57a0e0 -50%, #EC6EAD 100%);
     display: grid;
     grid-template-areas: 
-    "header header"
-    "login loginart";
-    row-gap: 10vh;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 8fr;
+    "logo logo ." 
+    "centerlogin centerlogin centerlogin";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 5fr;
+    overflow: hidden;
 }
 
-.login-page-header {
-    grid-area: header;
-    font-size: 5%;
-    max-height: 10vh;
+.login-page input{
+  background-color:rgba(255, 255, 255, 0.719);
+  border-radius: 9px 9px 9px 9px;
+  outline: none;
+  border-style: none;
+  color: rgb(54, 53, 53);
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
 
-.login-page-header h1 {
+.logo{
+    grid-area: logo;
+    align-self: center;
+}
+
+.logo h1{
+    font-size: 2em;
     color: white;
 }
 
-.login-page-form {
+.center-login{
+    grid-area: centerlogin;
     justify-self: center;
-    width: 60%;
-    margin-top: 12%;
-    aspect-ratio: 1/1;
-    grid-area: login;
+    align-self: start;
+    height: 50%;
+    width: 30%;
+    margin-top: 5%;
+    display: grid;
+    grid-template-areas: "header" "loginbox";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 4fr;
+}
+
+.center-login p{
+    grid-area: header;
+    justify-self: center;
+    align-self: start;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0%;
+    color: white;
+}
+
+.login-box{
+    grid-area: loginbox;
+    justify-self: center;
+    align-self: start;
+    height: 90%;
+    width: 80%;
+
+    display: grid;
+    grid-template-areas: 
+    "user"
+    "password"
+    "button";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding-top: 1em;
+}   
+
+
+.login-user{
+    grid-area: user;
+    justify-self: center;
+    align-self: center;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.651);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 6.0px );
-    -webkit-backdrop-filter: blur( 12.0px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 80%;
+    height: 40%;
 }
 
-.pic {
-    background: rgba(0, 0,0,0);
+.login-password{
+    grid-area: password;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 40%;
 }
 
-.login-page-loginart {
-    grid-area: loginart;
-    width: 100%;
-    aspect-ratio: 100/75;
-    margin-top: 2%;
-
+.login-button{
+    grid-area: button;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
 }
 
-.skewed-header{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to right,#CCABD8 , #86E3CE);
-    transform: skewY(-6deg);
-    transform-origin: top left;
-
-}
-.login-page-content h1{
-    margin-top: 1%;
-    font-size: 50px;
-    text-align: center;
-
-}
-
-
-header h1 {
-    position: relative;
-    color: white;
-}
-
-.button-gradient {
-    background:#CCABD8;
-    border: solid 1px;
-    margin-top: 7%;
-}
-
-.button-gradient:hover {
-    background:#86E3CE;
-    border: solid 1px;
-    
+.button-gradient{
+    background-image: linear-gradient(120deg, #57a0e0 -50%, #EC6EAD 100%);
+    outline: none;
+    border: none;
 }
 
