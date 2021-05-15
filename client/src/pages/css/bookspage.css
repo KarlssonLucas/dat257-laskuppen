@@ -15,6 +15,11 @@
     align-self:center ;
     margin-left: 10%;
 }
+.searchbar input{
+    border-radius: 5px;
+    border:none;
+    margin-left: 5px;
+}
 
 .filter{ 
     min-width: 40%;
