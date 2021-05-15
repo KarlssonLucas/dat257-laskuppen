@@ -1,24 +1,42 @@
 .faq-page-content {
-  padding: 1em;
+  padding: 0px 15px;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: scroll;
 }
 
-.faq-question {
+
+.faq-card{
   border-radius: 9px 9px 9px 9px;
-  border: var(--borders);
-  margin: 1em;
+  margin: 15px 0px;
+  padding: 0px 15px;
 }
 
-.tri {
-  text-align: right;
-  margin-right: 0.5%;
-  margin-top: -2.8%;
+.faq-card:hover{
+  cursor: pointer;
+  
 }
 
-.faq-answer {}
+
+.faq-question {
+    display: flex;
+}
+
+.faq-question p {
+  margin: 15px 0px 15px 15px;
+  font-weight: bold;
+}
+
+.tri svg{
+  margin-top: 15px;
+  width: 20px  !important;
+  height:20px !important;
+}
+
+.faq-answer p{
+  margin-bottom:15px;
+}
 
 .expand {
   background-color: red;

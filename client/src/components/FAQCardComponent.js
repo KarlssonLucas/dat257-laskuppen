@@ -24,17 +24,20 @@ export default class FAQCardComponent extends React.Component {
         return (
             <div>
 
-                <div className="faq-question glassMorphism" onClick={() => this.setState(
-                    { expand: !expand })}>
-                    <p>  {this.props.question} </p>
-
-                    <div className="tri">
-                        <p> {triangle} </p>
+                <div className="faq-card glassMorphism" onClick={() => this.setState({ expand: !expand })}>
+                    
+                   
+                    <div className="faq-question">
+                        <div className="tri">
+                            {triangle}
+                        </div>
+                        <p>{this.props.question} </p>
                     </div>
 
+                    
                     {expand
                         ? <div className="faq-answer">
-                            <p> {this.props.answer} </p>
+                            <p> Svar: {this.props.answer} </p>
 
 
                         </div>
