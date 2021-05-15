@@ -1,31 +1,7 @@
 const { request, response } = require("express");
 const fetch = require("node-fetch");
+const { client, hasSession, errorMsg, escape, getUserId } = require("./utils")
 
-if (!process.env.DATABASE_URL) {
-  require("dotenv").config();
-}
-
-const { Client } = require("pg");
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
-client.connect();
-
-const hasSession = (request, response) => {
-  if (request.session.isLoggedIn && request.session.isLoggedIn == true) {
-    return true;
-  }
-  else {
-    console.log("NOT LOGGED IN")
-    response.status(400).json(errorMsg("No session. Please log in."));
-    return false;
-  }
-}
 
 //Terminate session
 const logout = (request, response) => {
@@ -153,9 +129,7 @@ const reviewedBooks = (request, response) => {
   }
 };
 
-const getUserId = (request) => {
-  return parseInt(request.session.userId);
-}
+
 
 // each published review of a specific book.
 const getReview = (request, response) => {
@@ -199,17 +173,7 @@ const deleteUser = (request, response) => {
   });
 };
 
-function escape(input, match) {
 
-  if (match.includes(input.toLowerCase())) {
-    return true;
-  }
-  return false;
-}
-
-function errorMsg(text) {
-  return { error: text };
-}
 
 module.exports = {
   getUsers,

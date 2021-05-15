@@ -49,7 +49,7 @@ app.use(session({
   app.get('/api/faq',faqdb.faqGet)
   app.delete('/api/faq/:id',faqdb.faqDel)
   app.put('/api/faq',faqdb.faqPut)
-  app.post('/api/faq',faqdb.FAQAdd)
+  app.post('/api/faq',faqdb.faqAdd)
 
   //Book Queries
   app.get('/api/reviews/:id', db.getReview)

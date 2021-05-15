@@ -1,44 +1,6 @@
 const { request, response } = require("express");
 const fetch = require("node-fetch");
-
-if (!process.env.DATABASE_URL) {
-  require("dotenv").config();
-}
-
-const { Client } = require("pg");
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
-client.connect();
-
-// Checks if the current session has a user
-const hasSession = (request, response) => {
-  if (request.session.isLoggedIn && request.session.isLoggedIn == true) {
-    return true;
-  }
-  else {
-    console.log("NOT LOGGED IN")
-    response.status(400).json(errorMsg("No session. Please log in."));
-    return false;
-  }
-}
-
-function escape(input, match) {
-
-  if (match.includes(input.toLowerCase())) {
-    return true;
-  }
-  return false;
-}
-
-function errorMsg(text) {
-  return { error: text };
-}
+const { client, hasSession, errorMsg, escape, getUserId } = require("./utils")
 
 // most read/reviewed book the last 7 days.
 const mostReadBook = (request, response) => {
@@ -83,11 +45,6 @@ const getUserById = (request, response) => {
     }
   });
 };
-
-// Parse input to id integer
-const getUserId = (request) => {
-  return parseInt(request.session.userId);
-}
 
 // "Smart" algorithm to find recommended books tied to a user
 const getRandomRecommendation = (request, response) => {
@@ -163,11 +120,11 @@ const getClassPoints = (request, response) => {
 }
 
 module.exports = {
-    getClassPoints,
-    mostReadBook,
-    userReadMost,
-    getUserPoints,
-    getUserById,
-    toplist,
-    getRandomRecommendation
+  getClassPoints,
+  mostReadBook,
+  userReadMost,
+  getUserPoints,
+  getUserById,
+  toplist,
+  getRandomRecommendation
 }
