@@ -102,24 +102,21 @@ const reviewedBooks = (request, response) => {
   if (!hasSession(request, response)) {
     return;
   }
+
   //The accepted filters
   const filters = ["grade", "title", "pages", "author"]
   const orders = ["asc", "desc"];
 
-  let filter = request.query.filter
-  //String formatting
-  let search = '%' + request.query.search + '%'
-  search = search.toLowerCase()
-  let order = orders[1]
+  let filter = request.query.filter ? request.query.filter : "title"
+  let sorting = request.query.sorting ? request.query.sorting : "asc"
 
-  //Orders on asc for title and author as Z > A
-  if (filter == "title" || filter == "author") {
-    order = orders[0]
-  }
+  //String formatting
+  let search = request.query.search ? '%' + request.query.search + '%' : '%%'
+  search = search.toLowerCase()
 
   //checks that the filter is ok and not a bad input
   if (escape(filter, filters)) {
-    client.query("SELECT * from booksRead where translate(lower(title),'?!_,','') like $1 OR lower(author) like $1 order by " + filter + " " + order, [search], (error, results) => {
+    client.query("SELECT * from booksRead where translate(lower(title),'?!_,','') like $1 OR lower(author) like $1 order by " + filter + " " + sorting, [search], (error, results) => {
       if (error) {
         response.status(500).send(errorMsg("Internal server error"));
       } else {

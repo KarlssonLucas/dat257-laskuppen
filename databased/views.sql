@@ -33,7 +33,7 @@ LEFT JOIN Book ON Book.id = bookId; --add where accepted = true for "läs recens
 
 -- Books that have been read
 CREATE OR REPLACE VIEW booksRead AS
-SELECT title, author, pages, ROUND(AVG(rating)) || '/' || 10 as grade,
+SELECT title, author, pages, ROUND(AVG(rating),3) as grade,
 descr, thumbnail, book.id
 FROM Review LEFT JOIN Book ON book.id = bookId
 GROUP BY book.id;
@@ -58,7 +58,7 @@ SELECT title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,
 FROM Book RIGHT JOIN Review ON Book.id = Review.bookId;
 
 CREATE OR REPLACE VIEW getReviews AS
-SELECT review.id AS rid, firstName || ' ' || lastName AS name, class, bookid, accepted, 
+SELECT review.id AS rid, firstName || ' ' || lastName AS name, users.classid, bookid, accepted, 
 published, rating, summary, title, author, pages, Users.id AS uid 
 FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby;
 

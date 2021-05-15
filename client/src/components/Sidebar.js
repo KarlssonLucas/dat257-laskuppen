@@ -13,8 +13,8 @@ const Sidebar = (props) => {
     const [session, setSession] = useState(null);
     const [sidebarData, setSidebarData] = useState([]);
 
-    const small = useMediaQuery({ minWidth: 800 })
-    const medium = useMediaQuery({ minWidth: 1000 })
+    const small = useMediaQuery({ minWidth: 801 })
+    const medium = useMediaQuery({ minWidth: 1101 })
     const big = useMediaQuery({ minWidth: 1401 })
 
 
