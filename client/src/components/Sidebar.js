@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import { faTrophy, faAward, faBook, faGraduationCap, faHome, faPenNib, faQuestionCircle, faUser, faUserShield, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './css/sidebar.css';
 import fetch from 'node-fetch';
+import { useMediaQuery } from 'react-responsive'
+import SidebarSmall from './SidebarSmall';
+import SidebarBig from './SidebarBig';
 
-export default class Sidebar extends React.Component {
+const Sidebar = (props) => {
 
-    constructor(props) {
-        super(props);
+    const [session, setSession] = useState(null);
+    const [sidebarData, setSidebarData] = useState([]);
 
-        this.state = {
-            sidebarData: [],
-            session: null
-        };
-    }
+    const small = useMediaQuery({ minWidth: 800 })
+    const medium = useMediaQuery({ minWidth: 1000 })
+    const big = useMediaQuery({ minWidth: 1401 })
 
 
-    componentDidMount() {
+
+    useEffect(() => {
+
         fetch("/api/session").then(response => response.json()).then(response => {
 
             var sidebarData = [{
@@ -25,7 +28,7 @@ export default class Sidebar extends React.Component {
                 path: "/login",
                 icon: <FontAwesomeIcon icon={faSignInAlt} color='white' />
             }];
-            this.setState({ session: response })
+            setSession(response)
 
             if (response.role > 0) {
                 sidebarData = [];
@@ -76,55 +79,27 @@ export default class Sidebar extends React.Component {
                 });
             }
 
-            this.setState({ sidebarData });
+            setSidebarData(sidebarData);
 
         })
 
 
+    }, []);
+
+
+    function sidebar() {
+        if (big)
+            return <SidebarBig sidebarData={sidebarData} session={session} />
+        else
+            return <SidebarSmall sidebarData={sidebarData} session={session} />
     }
 
-    render() {
-        return (
-            <div className="sidebar-menu glassMorphism">
-                {(this.state.sidebarData.length === 1) ? <Redirect to="/login" /> : ""}
-                <h1 className='sidebar-logo'> <FontAwesomeIcon icon={faTrophy} color='white' size='lg' />Läskuppen </h1>
 
-                <ul className="sidebar-menu-items">
 
-                    {(this.state.session && this.state.session.login != false) ? 
-                    <div>
-                    <li className="sidebar-item">
-                        
-                        <Link to="/profile">
-                            <div className="sidebar-link">
-                                <FontAwesomeIcon icon={faUser} color='white' size='lg' />
-                                <span className="sidebar-link-text">
-                                    {this.state.session.name}
-                                </span>
-                            </div>
-                        </Link>
-                        
-                    </li>
-                    <hr/>
-                    </div>
-:""}
-
-                    {this.state.sidebarData.map((item, index) => {
-                        return (
-                            <li key={index} className="sidebar-item">
-                                <Link to={item.path}>
-                                    <div className="sidebar-link">
-                                        {item.icon}
-                                        <span className="sidebar-link-text">
-                                            {item.title}
-                                        </span>
-                                    </div>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div>
-        )
-    }
+    return (
+        sidebar()
+    )
 }
+
+
+export default Sidebar;

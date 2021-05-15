@@ -35,9 +35,9 @@ export default class Laskuppen extends React.Component {
         return (
             <BrowserRouter>
                 <div className="main-general-styling">
-                    <div className="main-sidebar-container">
-                        <Sidebar />
-                    </div>
+                    
+                    <Sidebar />
+                   
                     <div className="main-page-container">
                         <Switch>
                         <Route exact path="/login" render={(props) => <LoginPage {...props} />} />
