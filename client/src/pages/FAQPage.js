@@ -20,11 +20,13 @@ export default class FAQPage extends React.Component {
             .then((response) => {
                 console.log(response);
                 response.map((faq) => {
-                    FAQs.push(
-                        <FAQCardComponent
-                            question={faq.question}
-                            answer={faq.answer} />
-                    );
+                    if (faq.question && faq.answer) {
+                        FAQs.push(
+                            <FAQCardComponent
+                                question={faq.question}
+                                answer={faq.answer} />
+                        );
+                    }
                 }
                 );
                 console.log("STATE", FAQs)
