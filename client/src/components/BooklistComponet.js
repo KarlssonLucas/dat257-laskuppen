@@ -73,7 +73,7 @@ const BooklistComponent = (props) => {
       </div>
 
       <div className="bl-container-table">
-        <table className="table">
+        <table className="table bl-table">
           <thead>
             <tr className="bl-table-header">
               <th onClick={() => setFilter("title")} width="50%" scope="col">{currentFilter == "title" ? <FontAwesomeIcon icon={sorting == "desc" ? faCaretUp : faCaretDown} /> : ""}Titel</th>

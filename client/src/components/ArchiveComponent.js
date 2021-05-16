@@ -1,7 +1,15 @@
 import './css/archive.css';
 import React, { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive'
 
 const ArchiveComponent = (props) => {
+
+
+
+    const big = useMediaQuery({ minWidth: 1401 })
+    const medium = useMediaQuery({ minWidth: 1101 })
+    const small = useMediaQuery({ minWidth: 801 })
+
     const [book, setBook] = useState({});
     const [reviews, setReviews] = useState([]);
 
@@ -17,16 +25,24 @@ const ArchiveComponent = (props) => {
     }
 
     // Gets the status of the review
-    const getStatus = (review) =>{
-        if(review.published === true){
+    const getStatus = (review) => {
+        if (review.published === true) {
             return "published"
         }
-        if(review.accepted === true){
+        if (review.accepted === true) {
             return "accepted"
         }
-        else{
+        else {
             return "not accepted"
         }
+    }
+
+    function parseAuthors(authors) {
+        var res = "";
+
+        JSON.parse(authors).forEach(author => res += author + ", ");
+
+        return res.slice(0, -2)
     }
 
 
@@ -38,29 +54,34 @@ const ArchiveComponent = (props) => {
                     return (
                         <div className="arc-review-container glassMorphism">
                             <div className="arc-review-img">
-                                <img src={review.thumbnail}/>
-                            </div>
-                            <div className="arc-review-info">
-                            <p>Titel: {review.title}</p>
-                            <p>Författare: {review.author}</p>
-                            <p>Sidor: {review.pages}</p>
-                            </div>
-                            <div className="arc-review-text">
-                            <p>Recension:</p>
-                            {review.summary}
+                                <img src={review.thumbnail} />
                             </div>
                             <div className="arc-review-info2">
-                            <p>Betyg: {review.rating}</p>
-                            <p>Läsvärd: {(review.worthreading === true) ? "Ja" : "Nej"}</p>
-                            <p className={getStatus(review).replace(" ","-")}>Status: {getStatus(review)}</p>
+                                <p><b>Betyg:</b> {review.rating}</p>
+                                <p><b>Läsvärd:</b> {(review.worthreading === true) ? "Ja" : "Nej"}</p>
+                                <p><b>Status:</b> <span className={getStatus(review).replace(" ", "-")}>{getStatus(review)}</span></p>
                             </div>
+                            {small ?
+                                <div className="arc-review-text">
+                                    <p><b>Recension:</b></p>
+                                    <p>{review.summary}</p>
+                                </div>
+                                : ""}
+                            {medium ?
+                                <div className="arc-review-info">
+                                    <p><b>Titel:</b> {review.title}</p>
+                                    <p><b>Författare:</b> {parseAuthors(review.author)}</p>
+                                    <p><b>Sidor:</b> {review.pages}</p>
+                                </div>
+                                : ""}
+
                         </div>
                     )
                 })}
             </div>
         )
     }
-        
+
 
     return (
         <div className="arc-page-content">
