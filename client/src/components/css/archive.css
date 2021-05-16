@@ -1,25 +1,24 @@
-.arc-page-content{
-}
+.arc-page-content {}
 
-
-
-.arc-review-container{
+.arc-review-container {
     grid-template-areas: "img info2 text info";
     grid-template-columns: 100px 200px auto 300px;
 }
 
-
+.arc-review-container:hover {
+    cursor: pointer;
+    background-color: #d57eeb48;
+}
 
 @media screen and (max-width: 1100px) {
-    .arc-review-container{
+    .arc-review-container {
         grid-template-areas: "img info2 text ";
-        grid-template-columns: 100px 200px auto ;
+        grid-template-columns: 100px 200px auto;
     }
 }
 
-
-.arc-review-img{
-    margin:10px;
+.arc-review-img {
+    margin: 10px;
     grid-area: img;
     display: flex;
     justify-content: center;
@@ -30,101 +29,91 @@
 }
 
 @media screen and (max-width: 800px) {
-    .arc-review-container{
+    .arc-review-container {
         grid-template-areas: "img info2";
         grid-template-columns: 100px auto;
     }
-    
 }
 
 @media screen and (max-width: 400px) {
-    .arc-review-container{
+    .arc-review-container {
         grid-template-areas: "img info2";
         grid-template-columns: 80px auto;
     }
-    .arc-review-img{
+    .arc-review-img {
         width: 60px;
     }
 }
 
-
-
-
-.arc-review-container{
+.arc-review-container {
     display: grid;
-    margin:15px;
+    margin: 15px;
     height: 146px;
     border: var(--borders);
     border-radius: 10px;
 }
 
-.arc-review-container :hover{
+.arc-review-container :hover {}
 
-}
-
-.published{
+.published {
     color: rgb(24, 64, 138);
 }
 
-.accepted{
+.accepted {
     color: rgb(29, 122, 53);
 }
 
-.not-accepted{
+.not-accepted {
     color: rgb(128, 27, 27);
 }
 
-
-
-
-.arc-review-info,.arc-review-img,.arc-review-text,.arc-review-info2{
+.arc-review-info, .arc-review-img, .arc-review-text, .arc-review-info2 {
     height: 120px;
     overflow-y: hidden;
 }
 
-.arc-review-img img{
+.arc-review-img img {
     height: 100%;
     width: 100%;
 }
-.arc-review-info{
+
+.arc-review-info {
     grid-area: info;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin:10px;
+    margin: 10px;
 }
 
-.arc-review-text{
+.arc-review-text {
     grid-area: text;
     display: flex;
     flex-direction: column;
     justify-content: start;
     margin-top: 2em;
-    margin:10px;
+    margin: 10px;
     min-width: 50%;
 }
 
-.arc-review-info2{
+.arc-review-info2 {
     grid-area: info2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin:10px;
+    margin: 10px;
 }
 
-.arc-review-container p{
+.arc-review-container p {
     margin: 0px;
     line-height: 20px;
     overflow-y: hidden;
     max-height: 40px;
 }
 
-.arc-review-text p{
+.arc-review-text p {
     max-height: 100px;
 }
 
-.arc-review-text p:first{
+.arc-review-text p:first {
     max-height: 20px;
 }
-
-

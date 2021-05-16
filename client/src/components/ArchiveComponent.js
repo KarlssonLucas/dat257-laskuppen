@@ -1,6 +1,7 @@
 import './css/archive.css';
 import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
+import {useHistory} from 'react-router-dom';
 
 const ArchiveComponent = (props) => {
 
@@ -12,6 +13,9 @@ const ArchiveComponent = (props) => {
 
     const [book, setBook] = useState({});
     const [reviews, setReviews] = useState([]);
+
+
+    const history = useHistory();
 
     useEffect(() => {
         fetchReviews();
@@ -52,7 +56,7 @@ const ArchiveComponent = (props) => {
             <div>
                 {reviews.map((review) => {
                     return (
-                        <div className="arc-review-container glassMorphism">
+                        <div className="arc-review-container glassMorphism" onClick={() => history.push('/books/' + review.bookid)}>
                             <div className="arc-review-img">
                                 <img src={review.thumbnail} />
                             </div>
