@@ -16,10 +16,19 @@ INSERT INTO Users VALUES
 (DEFAULT,'bar@gmail.com','Bar','Barson','qwe123',1,1);
 
 INSERT INTO NewReview (title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,summary) VALUES
-('Nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 1, true, 5, 'brabok1'),
-('Nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 4, 'brabok1'),
-('You liked nice book', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 6, 'brabok1'),
-('Dont catch this ples', '["Apa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, true, 7, 'brabok1');
+('T1', '["Aaa"]', 100, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 1, true, 10, 'review1'),
+('T6', '["Bbb"]', 105, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 9, 'review2'),
+('Asd', '["Cac"]', 1000, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, false, 8, 'review3'),
+('Test bookkkk', '["Ccc"]', 1123, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, true, 7, 'review4'),
+('Test book', '["Dfg"]', 120, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 1, true, 9, 'review5'),
+('Test book', '["Dfg"]', 120, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, false, 5, 'review6'),
+('Test book', '["Dfg"]', 120, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 2, 'review7'),
+('Bibeln', '["Eee"]', 555, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, true, 6, 'review8'),
+('Book', '["Fff"]', 1234, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, true, 5, 'review9'),
+('Ttt', '["Ggg"]', 2000, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 1, true, 4, 'review10'),
+('Asdfg', '["Http"]', 186, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, false, 3, 'review11'),
+('T01', '["Https"]', 777, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 2, false, 2, 'review12'),
+('Title 123', '["Hhh"]', 666, 'google', 'desc', 'https://images-na.ssl-images-amazon.com/images/I/41joxA5gtjL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg', 3, false, 1, 'review13');
 
 INSERT INTO ExtraPoints VALUES 
 (2, 20),

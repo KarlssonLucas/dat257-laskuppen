@@ -35,9 +35,9 @@ export default class Laskuppen extends React.Component {
             <BrowserRouter>
                 {(this.state.loggedIn) ? 
                 <div className="main-general-styling">
-                    <div className="main-sidebar-container">
-                        <Sidebar />
-                    </div>
+                    
+                    <Sidebar />
+                   
                     <div className="main-page-container">
                         <Redirect to="/toplist"/>
                         <Switch>

@@ -11,6 +11,7 @@
   --barcolor: #ecdfdf;
   --backgroundHover: #faddb7;
 
+
   /*Here begins big brain gradient and glass idea*/
   --backgroundGradient: radial-gradient( #57a0e0 0%, #EC6EAD 100%);
 }
@@ -26,14 +27,14 @@
 
 /* in Laskuppen-Component */
 body {
-  
+  margin: 0px;
 }
+
 .main-general-styling {
 
   background-image: var(--backgroundGradient);
   display: grid;
   grid-template: "a b";
-  grid-template-rows: 95vh;
   grid-template-columns: 1fr 5fr;
   max-height: 100vh;
   height: 100vh;
@@ -41,16 +42,21 @@ body {
   overflow-x: auto;
 }
 
+
+@media screen and (max-width: 1400px) {
+  .main-general-styling {
+        grid-template-columns: 65px 1fr;
+  }
+
+}
+  
+
 .main-sidebar-container {
   grid-area: a;
 }
 
 .main-page-container {
   grid-area: b;
-  margin-right: 15px;
-  margin-top: 15px;
-  height: 95%;
-  max-height: 95%;
   overflow: visible;
 }
 
@@ -61,25 +67,21 @@ body {
 /* in each Page-Component*/
 
 .main-page-general-styling {
-  max-height: 95vh;
-  height: 95vh;
-  min-height: 95vh;
-  width: 100%;
+
   display: grid;
   grid-template-areas: "header" "innerContent";
   grid-template-rows: 0.6fr 10fr;
   grid-template-columns: 1fr;
   gap: 15px;
-  justify-items: center;
+  margin:15px;
   align-items: center;
+  height: calc(100vh - 30px);
 
   /* SHOULD NOT SEE RED ANYWHERE!! */
 }
 
 .main-page-header {
   grid-area: header;
-  min-width: 93%;
-  max-width: 93%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,13 +90,13 @@ body {
 .main-page-header h2 {
   color: var(--white);
 }
-
+::-webkit-scrollbar {
+  width: 0px;
+}
 .main-page-inner-container {
   max-height: 100%;
   height: 100%;
   min-height: 100%;
-  min-width: 93%;
-  max-width: 93%;
   border-radius: 10px 10px 0px 0px;
   grid-area: innerContent;
 }

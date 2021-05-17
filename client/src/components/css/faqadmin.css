@@ -39,9 +39,7 @@
   background-color: rgb(240, 159, 159);
 }
 
-.faq-admin-FAQ-saved[type="text"] {
-  background-color: rgb(159, 240, 179);
-}
+
 
 .faq-admin-FAQ-text {
   width: 100%;
@@ -56,4 +54,7 @@
 
 .faq-admin-FAQ-text input {
   width: 100%;
+  border:none;
+  margin:5px;
+  border-radius:5px;
 }

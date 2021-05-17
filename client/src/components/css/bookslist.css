@@ -1,6 +1,49 @@
-.row-pliancy:hover{
-    cursor:pointer;
-    background:#ec6ead9a;
-    
+.bl-content-grid {
+    display: grid;
+    height: 100%;
+    grid-template-areas: "searchbar" "table";
+    grid-template-rows: auto 8fr;
+    overflow-y: scroll;
 }
 
+.bl-container-table tr:nth-child(2n) {
+    background-color: rgb(87, 160, 224, 0.2);
+}
+
+.bl-container-table tr:hover {
+    cursor: pointer;
+    background: #ec6ead9a;
+}
+
+.bl-container-table th {
+    background-color: rgb(87, 160, 224, 0.5);
+}
+
+.bl-table-header th:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.bl-searchbar {
+    display: flex;
+    grid-area: searchbar;
+    align-self: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.bl-searchbar input {
+    border-radius: 5px;
+    border: none;
+    margin-left: 15px;
+    width:60%
+}
+
+.bl-container-table {
+    grid-area: table;
+}
+
+
+.bl-table{
+    margin: 0px;;
+}
