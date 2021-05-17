@@ -74,20 +74,6 @@ const LoginPage = (props) => {
 
   };
 
-  /*
-  mailinput: <input value={credentials.mail} name="mail" type="text" onChange={setCredentials} /> 
-  passwordinput: <input name="password" type="password" onChange={setCredentials} />
-
-
-
-  inputcheack: 
-          <Reward ref={ref => { reward = ref }} type='memphis'>
-            <button type="button" onClick={() => { login() }} class="btn btn-primary button-gradient">Logga in</button>
-            {(wrongCredentials) ? <span style={{color:"red"}}>Fel uppgifter</span> : null }
-            {(correctCredentials) ? <span style={{color:"green"}}>Välkommen!</span> : null }
-          </Reward>
-  */
-
   return (
     <div className="login-page">
       <span className="logo"> 

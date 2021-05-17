@@ -30,14 +30,7 @@ export default class Laskuppen extends React.Component {
             }
         });
     }
-    /*
-    <Route exact path="/login" render={(props) => <LoginPage {...props} />} />
-                        <Route exact path="/logout" render={(props) => <LoginPage logout={true} {...props} />} />
-                            
-
-    */
-
-    render() {
+       render() {
         return (
             <BrowserRouter>
                 {(this.state.loggedIn) ? 
