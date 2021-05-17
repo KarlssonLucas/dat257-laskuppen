@@ -1,10 +1,9 @@
 import fetch from "node-fetch";
 import React, { useEffect, useState } from "react";
 import Reward from "react-rewards";
-import {  faTrophy } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Redirect } from "react-router";
 import "./css/loginpage.css";
-
+import mypic from "./EPIC.png";
 
 
 const useLoginHook = (formValues) => {
@@ -100,11 +99,11 @@ const LoginPage = (props) => {
             </Reward>
           </div>
         </div>
+
       </div>
+      
     </div>
-  
-  
-  )
+  );
 };
 
 export default LoginPage;
