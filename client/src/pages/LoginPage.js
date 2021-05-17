@@ -81,33 +81,25 @@ const LoginPage = (props) => {
       </span>
 
       <div className="center-login"> 
-        
-        <p>Välkommen till Läskuppen!</p>
+          <p>Välkommen till Läskuppen!</p>
 
-        <div className="login-box glassMorphism">
-        <div className="login-user">
-          <input value={credentials.mail} name="mail" type="text" onChange={setCredentials} placeholder="Användarnamn" />
+          <div className="login-box glassMorphism">
+          <div className="login-user">
+            <input value={credentials.mail} name="mail" type="text" onChange={setCredentials} placeholder="Användarnamn" />
+          </div>
+
+          <div className="login-password">
+            <input name="password" type="password" onChange={setCredentials} placeholder="  Lösenord:qwe123"/>
+          </div>
+
+          <div className="login-button" >
+            <Reward ref={ref => { reward = ref }} type='memphis'>
+                <button type="button" onClick={() => { login() }} class="btn btn-primary button-gradient">Logga in</button>
+                {(wrongCredentials) ? <div style={{color:"red"}}>Fel uppgifter</div> : null }
+                {(correctCredentials) ? <div style={{color:"green"}}>Välkommen!</div> : null }
+            </Reward>
+          </div>
         </div>
-
-        <div className="login-password">
-          <input name="password" type="password" onChange={setCredentials} placeholder="  Lösenord:qwe123"/>
-        </div>
-
-        <div className="login-button" >
-          <Reward ref={ref => { reward = ref }} type='memphis'>
-              <button type="button" onClick={() => { login() }} class="btn btn-primary button-gradient">Logga in</button>
-              {(wrongCredentials) ? <div style={{color:"red"}}>Fel uppgifter</div> : null }
-              {(correctCredentials) ? <div style={{color:"green"}}>Välkommen!</div> : null }
-          </Reward>
-        </div>
-      
-
-
-        </div>
-       
-
-        
-
       </div>
     </div>
   
