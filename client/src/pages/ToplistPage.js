@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useMediaQuery } from 'react-responsive';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import "./css/toplistpage.css";
 
 const ToplistPage = () => {
@@ -7,6 +10,12 @@ const ToplistPage = () => {
     const [topWeeklyBook, setTopWeeklyBook] = useState("");
     const [topList, setTopList] = useState([]);
     const [recBook, setRecBook] = useState([]);
+    const [filter, setFilter] = useState("points");
+    const [order, setOrder] = useState("desc");
+
+    const big = useMediaQuery({ minWidth: 701 })
+    const medium = useMediaQuery({ minWidth: 401 })
+
 
     useEffect(() => {
         let response = fetchData("/api/toplist?filter=points&order=desc")
@@ -18,11 +27,21 @@ const ToplistPage = () => {
         fetchRec();
     }, []);
 
-    const handleClick = (filter, order) => {
+    useEffect(() =>{
         console.log("/api/toplist?filter=" + filter + "&order=" + order)
         let response = fetchData("/api/toplist?filter=" + filter + "&order=" + order)
         console.log(response)
         response.then(response => { setTopList(response) })
+    },[filter,order])
+
+    const handleClick = (newFilter, newOrder) => {
+        if(newFilter == filter){
+            setOrder((order == "desc") ? "asc" : "desc" )
+        }else{
+            setFilter(newFilter)
+            setOrder(newOrder)
+        }
+        
     }
     
     const fetchData = (query) => {
@@ -80,30 +99,23 @@ const ToplistPage = () => {
                     </div>
 
                     <div className="top-top-lists glassMorphism">
-                        <div className="top-top-list-header">
-                            <label className="top-filter-label"> Filter: </label>
-                            <button className="top-nameButton" onClick = {() => handleClick("name","asc")}> Elev</button>
-                            <button className="top-classButton" onClick = {() => handleClick("classname","desc")}> Klass </button>
-                            <button className="top-pointsButton" onClick = {() => handleClick("points","desc")}> Poäng </button>
-                            <button className="top-readBooksButton"onClick = {() => handleClick("booksread","desc")}> Lästa böcker </button>
-                        </div>
                         <div className="top-tableDiv">
                             <table class="table table-holder">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Elev</th>
-                                        <th scope="col">Klass</th>
-                                        <th scope="col">Poäng</th>
-                                        <th scope="col">Lästa böcker</th>
+                                        <th onClick = {() => handleClick("name","asc")}  scope="col"> {filter == "name" ? <FontAwesomeIcon icon={order == "asc" ? faCaretUp : faCaretDown} /> : ""} Elev</th>
+                                        {medium ? <th onClick = {() => handleClick("classname","desc")} scope="col"> {filter == "classname" ? <FontAwesomeIcon icon={order == "desc" ? faCaretUp : faCaretDown} /> : ""} Klass</th> : ""}
+                                        <th onClick = {() => handleClick("points","desc")} scope="col"> {filter == "points" ? <FontAwesomeIcon icon={order == "desc" ? faCaretUp : faCaretDown} /> : ""} Poäng</th>
+                                        {big ? <th onClick = {() => handleClick("booksread","desc")} scope="col"> {filter == "booksread" ? <FontAwesomeIcon icon={order == "desc" ? faCaretUp : faCaretDown} /> : ""} Lästa böcker</th> : ""}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {topList.map((listItem) => (
                                         <tr>
                                             <td>{listItem.name}</td>
-                                            <td>{listItem.classname} </td>
+                                            {medium ? <td>{listItem.classname} </td>: ""}
                                             <td>{listItem.points}</td>
-                                            <td>{listItem.booksread}</td>
+                                            {big ? <td>{listItem.booksread}</td>:""}
                                         </tr>
                                     ))}
                                 </tbody>
