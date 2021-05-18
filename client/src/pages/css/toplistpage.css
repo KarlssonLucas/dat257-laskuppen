@@ -11,12 +11,55 @@
   background:rgba(255, 255,255, 0) !important;
 }
 
-.top-top-reader-card, .top-top-book-card, .top-my-points, .top-my-recommendation {
-  background: var(--white);
-  border-radius: 9px 9px 9px 9px;
-  border: var(--borders);
-  background:rgba(0, 0,0, 0);
+.top-page-content th:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+
+@media screen and (max-width: 700px) {
+  .top-page-content{
+    display: grid;
+    grid-template-areas: 
+    "my-points my-recommendation" 
+    "top-lists top-lists";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 5fr;
+    grid-gap: 1em;
+  }
+  .top-my-points{
+    text-align: center;
+  }
+  .top-top-reader-card, .top-top-book-card, .top-inner-recommendation {
+    display: none;
+  }
+
+  .cbc-book-img{
+    display: none;
+  }
+
+  @media screen and (max-width: 400px) {
+    .top-page-content{
+      display: grid;
+      grid-template-areas: 
+      "my-points" 
+      "top-lists";
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 5fr;
+      grid-gap: 1em;
+    }
+    .top-my-points{
+      text-align: center;
+    }
+    .top-top-reader-card, .top-top-book-card, .top-my-recommendation, .top-inner-recommendation {
+      display: none;
+    }
   
+  
+  }
+
+
 }
 
 .top-top-reader-card {
@@ -46,26 +89,13 @@
 
 .top-top-lists {
   grid-area: top-lists;
-  background: var(--white);
-  border-radius: 9px 9px 9px 9px;
-  border: var(--borders);
   display: grid;
-  grid-template-areas: "header" "table";
+  grid-template-areas: "table";
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 6fr;
-  background:rgba(0, 0,0, 0);
+  grid-template-rows: 1fr;
+  overflow-y: auto;
 }
 
-.top-top-list-header {
-  background: var(--barcolor);
-  grid-area: "header";
-  padding-top: 1%;
-  display: grid;
-  gap: 1%;
-  grid-template-areas: "filter student class points readbooks";
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  background:rgba(0, 0,0, 0);
-}
 
 .top-tableDiv {
   border-radius: 9px 9px 9px 9px;
@@ -73,6 +103,7 @@
   grid-area: table;
   background: var(--white);
   background:rgba(0, 0,0, 0);
+  overflow-y: auto;
 }
 
 .top-filter-label {
