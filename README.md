@@ -15,7 +15,7 @@
 
 ## Course Deliverables
 ### Scrum Board
-Our scrum board is based in trello and is located [here]()
+Our scrum board is based in trello and is located [here](https://trello.com/b/Kdz3BXNU/dat257-scrum)
 
 The structure of the board is as followed:
   1. Sprint x Planning
