@@ -9,7 +9,7 @@
 }
 
 .rlc-search-result {
-    background-color: var(--background);
+    background-color: #FFFFFF;
     overflow-y: scroll;
     height: 78vh;
     overflow-x: hidden;

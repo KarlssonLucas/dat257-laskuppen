@@ -150,7 +150,7 @@ const ReviewListComponent = (props) => {
     // Creates a box to display the reviews and their information
     const showResult = (books) => {
         return (
-            <div className="glassMorphism">
+            <div className="">
                 {books.map((book) => {
                     return (
 
@@ -197,8 +197,8 @@ const ReviewListComponent = (props) => {
     }
 
     return (
-        <div className="rlc-page-content glassMorphism">
-            <div className="rlc-search-result glassMorphism">
+        <div className="rlc-page-content">
+            <div className="rlc-search-result">
                 <div className="">Recensioner:</div>
                 {showResult(books)}
             </div>
