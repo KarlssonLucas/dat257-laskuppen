@@ -7,7 +7,7 @@
 }
 
 .accordion {
-  background-color: var(--background);
+  background-color: inherit;
   color: #444;
   cursor: pointer;
   padding: 5px;
@@ -15,7 +15,7 @@
   align-items: center;
   outline: none;
   transition: background-color 0.3s ease;
-  border: 1px solid black;
+  border: none;
 }
 
 .accordion__title {

@@ -197,7 +197,7 @@ const ReviewListComponent = (props) => {
     }
 
     return (
-        <div className="rlc-page-content">
+        <div className="rlc-page-content glassMorphism">
             <div className="rlc-search-result glassMorphism">
                 <div className="">Recensioner:</div>
                 {showResult(books)}
