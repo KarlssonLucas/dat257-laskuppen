@@ -42,5 +42,3 @@ INSERT INTO FrequentlyAskedQuestions (question, answer) VALUES
 ('Vad ar en groda utan ben','Hopplos'),
 ('Vilket ar det storsta djuret i skogen','En orm'),
 ('Vad heter Mc Donalds nya fiskburgare','Mc Rill');
-
-UPDATE Review SET accepted = true;
