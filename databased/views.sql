@@ -27,7 +27,7 @@ LEFT JOIN Classes ON Classes.id = classId;
 -- Reviews that have been accepted
 CREATE OR REPLACE VIEW acceptedReviews AS
 SELECT title, firstName || ' ' || lastName as name, author, 
-rating || '/' || '10' as grade, worthReading, summary, accepted, published
+rating || '/' || '10' as grade, worthReading, summary, status
 FROM Review LEFT JOIN Users on review.id = users.id
 LEFT JOIN Book ON Book.id = bookId; --add where accepted = true for "läs recensioner"
 
@@ -58,12 +58,11 @@ SELECT title,author,pages,apiLink,descr,thumbnail,writtenBy,worthReading,rating,
 FROM Book RIGHT JOIN Review ON Book.id = Review.bookId;
 
 CREATE OR REPLACE VIEW getReviews AS
-SELECT review.id AS rid, firstName || ' ' || lastName AS name, users.classid, bookid, accepted, 
-published, rating, summary, title, author, pages, Users.id AS uid 
+SELECT review.id AS rid, firstName || ' ' || lastName AS name, users.classid, bookid, status rating, summary, title, author, pages, Users.id AS uid 
 FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby;
 
 CREATE OR REPLACE VIEW usersReviews AS
-SELECT review.id AS rid, bookid, thumbnail, accepted, published, 
+SELECT review.id AS rid, bookid, thumbnail, status, 
 worthReading, rating, summary, title, author, pages, Users.id AS uid 
 FROM Review LEFT JOIN Book ON bookid=Book.id LEFT JOIN Users ON Users.id = writtenby;
 
