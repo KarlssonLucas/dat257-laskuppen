@@ -30,14 +30,17 @@ const ArchiveComponent = (props) => {
 
     // Gets the status of the review
     const getStatus = (review) => {
-        if (review.published === true) {
-            return "published"
+        if (review.status === 4) {
+            return "Publicerad"
         }
-        if (review.accepted === true) {
-            return "accepted"
+        else if (review.status === 3) {
+            return "Godkänd"
+        }
+        else if (review.status === 2) {
+            return "Ej behandlad"
         }
         else {
-            return "not accepted"
+            return "Nekad"
         }
     }
 
@@ -63,7 +66,7 @@ const ArchiveComponent = (props) => {
                             <div className="arc-review-info2">
                                 <p><b>Betyg:</b> {review.rating}</p>
                                 <p><b>Läsvärd:</b> {(review.worthreading === true) ? "Ja" : "Nej"}</p>
-                                <p><b>Status:</b> <span className={getStatus(review).replace(" ", "-")}>{getStatus(review)}</span></p>
+                                <p><b>Status:</b> <span className={"status-"+review.status}>{getStatus(review)}</span></p>
                             </div>
                             {small ?
                                 <div className="arc-review-text">
