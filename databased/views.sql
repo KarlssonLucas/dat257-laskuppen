@@ -4,7 +4,7 @@ SELECT Users.id as uidd, SUM(COALESCE(pages,0)) as points,
 COUNT(Review.id) as booksRead
 FROM Review 
 LEFT JOIN Users ON writtenBy = users.id 
-LEFT JOIN Book ON Book.id = bookId WHERE accepted = true 
+LEFT JOIN Book ON Book.id = bookId WHERE status >= 3 
 GROUP BY users.id;
 
 -- Toplist view
@@ -73,5 +73,5 @@ FROM review LEFT JOIN book on bookId = Book.id GROUP BY Book.id ORDER BY max(tim
 CREATE OR REPLACE VIEW userReadMost AS
 SELECT Users.id, firstName || ' ' || lastName AS name, SUM(COALESCE(pages,0)) as points 
 FROM Review LEFT JOIN Users ON writtenBy = users.id LEFT JOIN Book ON Book.id = bookId 
-WHERE accepted = true AND review.timeofreview > (NOW() - INTERVAL '7 DAY') 
+WHERE status >= 3 AND review.timeofreview > (NOW() - INTERVAL '7 DAY') 
 GROUP BY users.id ORDER BY points DESC LIMIT 1;
