@@ -2,6 +2,7 @@
 import fetch from "node-fetch";
 import React, { useEffect, useState } from "react";
 import Reward from "react-rewards";
+import { useHistory } from 'react-router-dom';
 import {  faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./css/loginpage.css";
@@ -31,10 +32,12 @@ const LoginPage = (props) => {
     password: null
   });
 
+  const history = useHistory();
 
   useEffect(() => {
     if (props.logout === true) {
       fetch("/api/logout").then(response => response.json()).then(response => {
+        history.push('/')
         window.location.reload();
       })
     }
@@ -75,6 +78,12 @@ const LoginPage = (props) => {
 
   };
 
+  const loginForm = (e) => {
+    if (e.key === 'Enter') {
+      login()
+    } 
+  }
+
   return (
     <div className="login-page">
       <span className="logo"> 
@@ -91,7 +100,7 @@ const LoginPage = (props) => {
         </div>
 
         <div className="login-password">
-          <input name="password" type="password" onChange={setCredentials} placeholder="  Lösenord:qwe123"/>
+          <input name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="  Lösenord:qwe123"/>
         </div>
 
         <div className="login-button" >
