@@ -1,10 +1,15 @@
 import './css/reviewlist.css';
 import React, { useState, useEffect } from 'react';
 import Accordion from "./Accordion";
+import { useMediaQuery } from 'react-responsive';
 
 const ReviewListComponent = (props) => {
     const [books, setBooks] = useState([]);
     const pendAccepting = [];
+
+    const big = useMediaQuery({minWidth: 1401})
+    const medium = useMediaQuery({ minWidth: 1101 })
+    const small = useMediaQuery({ minWidth: 801 })
 
     useEffect(() => {
         fetchReviews();
@@ -163,18 +168,14 @@ const ReviewListComponent = (props) => {
                                 </div>
                             }
 
-                            removeButton= {
-                                <button className="btn btn-light" onClick={() => deleteBook(book)}>Ta bort</button>                     
-                            }
-
                             title={
                             <div className="rlc-book"> 
                                 <div className="rlc-book-title">Titel: {book.title}</div>
-                                <div className="rlc-book-author">Författare: {book.author}</div>
+                                {small ? <div className="rlc-book-writtenby">Författare: {book.author}</div> : "" }
                                 <div className="rlc-book-pages">Sidor: {book.pages}</div>
-                                <div className="rlc-book-writtenby">Recensent: {book.name}</div>
-                                <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
-                                <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
+                                <div className="rlc-book-author">Recensent: {book.name}</div>
+                                {small ? <div className="rlc-book-bookid">Book ID: {book.bookid}</div> : "" }
+                                {small ? <div className="rlc-book-reviewid">Recension ID: {book.rid}</div> : ""}
                                 <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
                                 <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
                             </div>}
@@ -215,6 +216,7 @@ const ReviewListComponent = (props) => {
             </div>
             <div className="rlc-bonusfield">
                 <input
+                className="rlc-field"
                 type="text"
                 placeholder="Poäng..."
                 id="inputBonus"

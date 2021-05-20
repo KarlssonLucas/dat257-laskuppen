@@ -38,8 +38,12 @@
 
 .rlc-bonusfield {
     position: absolute;
-    right: 10%;
+    right: 1%;
     bottom: 4%;
+}
+
+.rlc-field {
+    width: 100px;
 }
 
 .rlc-mul { grid-area: 2 / 1 / 4 / 2; justify-self: center;}
