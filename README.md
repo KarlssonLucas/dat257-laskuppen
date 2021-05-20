@@ -29,7 +29,7 @@ The structure of the board is as followed:
 But we also have our definition of done here.
 
 ### Google-docs
-The most relevant things we have in google docs are our time logs and our social contract.[This](https://drive.google.com/drive/folders/1008sJI5Wnr-Zti_D7nwAibry_rtSnE1j)is a link to the team folder.
+The most relevant things we have in google docs are our time logs and our social contract.[This](https://drive.google.com/drive/folders/1008sJI5Wnr-Zti_D7nwAibry_rtSnE1j) is a link to the team folder.
   
 ### Final Report
 Our final report can be found [here]()
