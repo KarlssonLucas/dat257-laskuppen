@@ -74,7 +74,9 @@ CREATE TABLE FrequentlyAskedQuestions(
 CREATE TABLE SchoolSettings(
     weeklyBook INT REFERENCES Book(id), -- CAN BE NULL
     minimumReviewLength INT DEFAULT 1 NOT NULL,
-    CHECK (minimumReviewLength > 0)
+    publishedPoints INT DEFAULT 0 NOT NULL,
+    CHECK (minimumReviewLength >= 0),
+    CHECK (publishedPoints > 0)
 );
 
 CREATE TABLE RecommendedBooks(

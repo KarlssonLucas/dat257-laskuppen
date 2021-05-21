@@ -50,8 +50,22 @@
 .rlc-book-bookid { grid-area: 3 / 3 / 3 / 4;}
 .rlc-book-reviewid { grid-area: 4 / 3 / 4 / 4;}
 .rlc-book-review { grid-area: 1 / 4 / 4 / 5;}
-.rlc-book-accepted { grid-area: 2 / 5 / 2 / 6; color: green;}
-.rlc-book-notaccepted { grid-area: 2 / 5 / 2 / 6; color: red;}
-.rlc-book-published { grid-area: 4 / 5 / 4 / 6; color: green;}
-.rlc-book-notpublished { grid-area: 4 / 5 / 4 / 6; color: red;}
+.status-4 {
+    grid-area: 2 / 5 / 2 / 6;
+    color: rgb(24, 64, 138);
+}
 
+.status-3 {
+    color: rgb(29, 122, 53);
+    grid-area: 2 / 5 / 2 / 6;
+}
+
+.status-2 {
+    grid-area: 2 / 5 / 2 / 6;
+    color: rgb(87, 87, 87);
+}
+
+.status-1 {
+    grid-area: 2 / 5 / 2 / 6;
+    color: rgb(128, 27, 27);
+}

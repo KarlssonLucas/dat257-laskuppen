@@ -130,8 +130,11 @@ const reviewedBooks = (request, response) => {
 
 // each published review of a specific book.
 const getReview = (request, response) => {
+  if (!hasSession(request, response)) {
+    return;
+  }
   let id = request.params.id
-  client.query("SELECT * FROM getReviews WHERE bookid = $1 AND published=true", [id], (error, results) => {
+  client.query("SELECT * FROM getReviews WHERE bookid = $1 AND status=4", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
