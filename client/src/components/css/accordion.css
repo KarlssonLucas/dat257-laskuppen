@@ -41,8 +41,8 @@
 
 .test {
   position: absolute;
-  margin-left: 5em;
-  margin-top: 5em;
+  left: 5%;
+  top: 40%;
 }
 
 .rButton {

@@ -195,22 +195,13 @@ const ReviewListComponent = (props) => {
         console.log(checkboxes)
     }
 
+    const mobile = small ? 'rlc-search-result' : 'rlc-search-result-mobile';
+
     return (
         <div className="rlc-page-content">
-            <div className="rlc-search-result">
+            <div className={mobile}>
                 <div className="">Recensioner:</div>
                 {showResult(books)}
-            </div>
-            <div>
-                <button type="button" onClick={() => acceptBooks()}>Acceptera</button>
-                <button type="button" onClick={() => rejectBooks()}>Avslå</button>
-            </div>
-            <div>
-                <button type="button" onClick={() => publishBooks()}>Publicera</button>
-                <button type="button" onClick={() => unpublishBooks()}>Avpublicera</button>
-            </div>
-            <div>
-                <button type="button" onClick={() => toggle()}>Markera alla</button>
             </div>
             <div className="rlc-bonusfield">
                 <input
@@ -221,7 +212,16 @@ const ReviewListComponent = (props) => {
             />
                 <button type="button" onClick={bonusPoints}>Ge bonuspoäng</button>
             </div>
-        </div>
+            <div>
+                <button type="button" onClick={() => acceptBooks()}>Acceptera</button>
+                <button type="button" onClick={() => rejectBooks()}>Avslå</button>
+                <button type="button" onClick={() => publishBooks()}>Publicera</button>
+            </div>
+            <div>
+                <button type="button" onClick={() => unpublishBooks()}>Avpublicera</button>
+                <button type="button" onClick={() => toggle()}>Markera alla</button>
+            </div>
+            </div>
     )
 }
 
