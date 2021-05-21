@@ -47,11 +47,36 @@
     grid-template-rows: 1fr 4fr;
 }
 
+.center-login-mobile {
+    grid-area: centerlogin;
+    justify-self: center;
+    align-self: start;
+    height: 50%;
+    width: 60%;
+    margin-top: 5%;
+    display: grid;
+    grid-template-areas: "header" "loginbox";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 4fr;
+
+}
+
 .center-login p{
     grid-area: header;
     justify-self: center;
     align-self: start;
     font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0%;
+    color: white;
+    text-align: center;
+}
+
+.center-login-mobile p{
+    grid-area: header;
+    justify-self: center;
+    align-self: start;
+    font-size: 2rem;
     font-weight: 600;
     margin: 0%;
     color: white;

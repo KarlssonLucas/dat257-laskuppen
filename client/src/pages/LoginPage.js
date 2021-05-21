@@ -1,8 +1,8 @@
-  
 import fetch from "node-fetch";
 import React, { useEffect, useState } from "react";
 import Reward from "react-rewards";
 import { useHistory } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import {  faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./css/loginpage.css";
@@ -18,6 +18,7 @@ const useLoginHook = (formValues) => {
   }];
 };
 
+
 const LoginPage = (props) => {
   
   var reward;
@@ -31,6 +32,7 @@ const LoginPage = (props) => {
   });
 
   const history = useHistory();
+  const small = useMediaQuery({ minWidth: 883 });
 
   useEffect(() => {
     if (props.logout === true) {
@@ -88,9 +90,9 @@ const LoginPage = (props) => {
         <h1><FontAwesomeIcon icon={faTrophy} color='white' /> Läskuppen </h1> 
       </span>
 
-      <div className="center-login"> 
+      <div className={small ? "center-login" : "center-login-mobile"}> 
         
-        <p>Välkommen till Läskuppen!</p>
+        <p> Välkommen till Läskuppen! </p>
 
         <div className="login-box glassMorphism">
         <div className="login-user">
