@@ -1,6 +1,7 @@
 import './css/reviewlist.css';
 import React, { useState, useEffect } from 'react';
 import Accordion from "./Accordion";
+import { useMediaQuery } from 'react-responsive';
 
 const ReviewListComponent = (props) => {
     const [books, setBooks] = useState([]);
@@ -9,6 +10,8 @@ const ReviewListComponent = (props) => {
     useEffect(() => {
         fetchReviews();
     }, []);
+
+    const small = useMediaQuery({ minWidth: 801 })
 
     // Fetches all the reviews
     const fetchReviews = async (str) => {
@@ -134,7 +137,7 @@ const ReviewListComponent = (props) => {
     // Creates a box to display the reviews and their information
     const showResult = (books) => {
         return (
-            <div className="glassMorphism">
+            <div className="">
                 {books.map((book) => {
                     return (
 
@@ -147,19 +150,16 @@ const ReviewListComponent = (props) => {
                                 </div>
                             }
 
-                            removeButton= {
-                                <button className="btn btn-light" onClick={() => deleteBook(book)}>Ta bort</button>                     
-                            }
-
                             title={
                             <div className="rlc-book"> 
                                 <div className="rlc-book-title">Titel: {book.title}</div>
-                                <div className="rlc-book-author">Författare: {book.author}</div>
+                                {small ? <div className="rlc-book-writtenby">Författare: {book.author}</div> : "" }
                                 <div className="rlc-book-pages">Sidor: {book.pages}</div>
                                 <div className="rlc-book-writtenby">Recensent: {book.name}</div>
                                 <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
                                 <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
                                 <div className={"status-" + book.status}>{checkAcc(book)}</div>
+
                             </div>}
                             
                             content={book.summary}
@@ -180,8 +180,8 @@ const ReviewListComponent = (props) => {
     }
 
     return (
-        <div className="rlc-page-content glassMorphism">
-            <div className="rlc-search-result glassMorphism">
+        <div className="rlc-page-content">
+            <div className="rlc-search-result">
                 <div className="">Recensioner:</div>
                 {showResult(books)}
             </div>
@@ -198,6 +198,7 @@ const ReviewListComponent = (props) => {
             </div>
             <div className="rlc-bonusfield">
                 <input
+                className="rlc-field"
                 type="text"
                 placeholder="Poäng..."
                 id="inputBonus"
