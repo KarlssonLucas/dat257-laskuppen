@@ -54,7 +54,7 @@ const Sidebar = (props) => {
                         icon: <FontAwesomeIcon icon={faQuestionCircle} color='white' size='lg' />
                     });
             }
-
+/*
             if (response.role > 1) {
                 sidebarData.push({
                     title: "Lärare",
@@ -62,7 +62,7 @@ const Sidebar = (props) => {
                     icon: <FontAwesomeIcon icon={faGraduationCap} color='green' size='lg' />
                 })
             }
-
+*/
             if (response.role > 2) {
                 sidebarData.push({
                     title: "Admin",
