@@ -8,8 +8,8 @@
 
 
 .faq-admin-FAQ svg {
-  height: 50px !important;
-  width: 50px !important;
+  height: 35px !important;
+  width: 35px !important;
   margin-left: 10px
 }
 
@@ -19,8 +19,8 @@
 }
 
 .faq-admin-FAQ-add {
-  width: 50px !important;
-  height: 50px !important;
+  width: 35px !important;
+  height:35px !important;
   align-self: flex-end;
   margin-right: 18px
 }
@@ -47,7 +47,7 @@
 
 .faq-admin-FAQ-buttons {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
   align-items: center;
   width: auto;
 }

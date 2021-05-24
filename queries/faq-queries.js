@@ -8,7 +8,7 @@ const faqGet = (request, response) => {
   if (!hasSession(request, response)) {
     return;
   }
-  client.query("select * from FrequentlyAskedQuestions", (error, results) => {
+  client.query("select * from FrequentlyAskedQuestions ORDER BY id ASC", (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     } else {
