@@ -41,3 +41,26 @@
 .expand {
   background-color: red;
 }
+
+
+.faq-cogs{
+  position: absolute;
+  float: left;
+  margin:auto;
+  margin-left: calc(100% - 50px);
+  width: 40px;
+}
+
+.faq-cogs svg{
+  color: red;
+}
+
+
+
+.faq-cogs  svg:hover{
+  cursor: pointer;
+  color: gray;
+}
+
+
+

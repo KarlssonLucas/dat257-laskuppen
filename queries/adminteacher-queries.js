@@ -28,7 +28,7 @@ const acceptReview = (request, response) => {
   }
 
   const id = parseInt(request.params.id)
-  client.query("UPDATE Review SET accepted=true WHERE id=$1", [id], (error, results) => {
+  client.query("UPDATE Review SET status=3 WHERE id=$1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
@@ -44,7 +44,7 @@ const rejectReview = (request, response) => {
   }
   const id = parseInt(request.params.id)
   console.log(id);
-  client.query("UPDATE Review SET accepted=false WHERE id=$1", [id], (error, results) => {
+  client.query("UPDATE Review SET status=1 WHERE id=$1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }
@@ -59,7 +59,7 @@ const publishReview = (request, response) => {
     return;
   }
   const id = parseInt(request.params.id)
-  client.query("UPDATE Review SET published=true WHERE id=$1", [id], (error, results) => {
+  client.query("UPDATE Review SET status=4 WHERE id=$1", [id], (error, results) => {
     if (error) {
       response.status(500).send(errorMsg("Internal server error"));
     }

@@ -55,15 +55,19 @@
 
 .arc-review-container :hover {}
 
-.published {
+.status-4 {
     color: rgb(24, 64, 138);
 }
 
-.accepted {
+.status-3 {
     color: rgb(29, 122, 53);
 }
 
-.not-accepted {
+.status-2 {
+    color: rgb(87, 87, 87);
+}
+
+.status-1 {
     color: rgb(128, 27, 27);
 }
 

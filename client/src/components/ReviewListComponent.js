@@ -117,39 +117,23 @@ const ReviewListComponent = (props) => {
     
     // Check if a book is accepted or not to display it
     const checkAcc = (b, e) => {
-        if (b.accepted) {
-            return "accepted"
-        } else {
-            return "not accepted"
+        if (b.status===4) {
+            return "Publicerad"
+        } 
+        else if (b.status===3) {
+            return "Godkänd"
+        } 
+        else if (b.status===2) {
+            return "Ej behandlad"
+        } 
+        else {
+            return "Ej godkänd"
         }
     }
 
-    // Check if a book is published or not to display it
-    const checkPub = (b) => {
-        if (b.published) {
-            return "published"
-        } else {
-            return "not published"
-        }
-    }
+    
 
-    // Checks if the paragraph container should be green or red
-    const greenOrRed = (b, s) => {
-        if (s == "pub") {
-            if (b.published) {
-                return "rlc-book-published"
-            } else {
-                return "rlc-book-notpublished"
-            }
-        } else {
-            if (b.accepted) {
-                return "rlc-book-accepted"
-            } else {
-                return "rlc-book-notaccepted"
-            }
-        }
-    }
-
+    
     // Creates a box to display the reviews and their information
     const showResult = (books) => {
         return (
@@ -169,13 +153,13 @@ const ReviewListComponent = (props) => {
                             title={
                             <div className="rlc-book"> 
                                 <div className="rlc-book-title">Titel: {book.title}</div>
-                                {small ? <div className="rlc-book-writtenby">Författare: {book.author}</div> : "" }
+                                {small ? <div className="rlc-book-author">Författare: {book.author}</div> : "" }
                                 <div className="rlc-book-pages">Sidor: {book.pages}</div>
-                                <div className="rlc-book-author">Recensent: {book.name}</div>
-                                {small ? <div className="rlc-book-bookid">Book ID: {book.bookid}</div> : "" }
-                                {small ? <div className="rlc-book-reviewid">Recension ID: {book.rid}</div> : ""}
-                                <div className={greenOrRed(book, "acc")}>{checkAcc(book)}</div>
-                                <div className={greenOrRed(book, "pub")}>{checkPub(book)}</div>
+                                <div className="rlc-book-writtenby">Recensent: {book.name}</div>
+                                <div className="rlc-book-bookid">Book ID: {book.bookid}</div>
+                                <div className="rlc-book-reviewid">Recension ID: {book.rid}</div>
+                                <div className={"status-" + book.status}>{checkAcc(book)}</div>
+
                             </div>}
                             
                             content={book.summary}

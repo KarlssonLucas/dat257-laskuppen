@@ -11,22 +11,11 @@ export default class FAQAdminComponent extends React.Component {
         super(props);
         this.state = { FAQs: null }
         this.printQuestions = this.printQuestions.bind(this);
-        this.delFAQ = this.delFAQ.bind(this);
         this.addNewFAQ = this.addNewFAQ.bind(this);
         this.printQuestions();
     }
 
-    // Deletes FAQ through a query
-    delFAQ = (id) => {
-        if (window.confirm("Är du säker?")) {
-            let req = { method: "DELETE", headers: { "Content-Type": "application/json" } }
-            fetch("/api/faq/" + id, req).then((response) => response.text())
-                .then((response) => {
-                    console.log(response);
-                });
-            this.printQuestions();
-        }
-    }
+
 
     // Adds a new faq
     addNewFAQ = () => {
@@ -37,9 +26,8 @@ export default class FAQAdminComponent extends React.Component {
         fetch("/api/faq", req)
             .then((response) => response.text())
             .then((response) => {
-                console.log(response);
+                this.printQuestions();
             });
-        this.printQuestions();
     }
 
     // Prints all the faqs you get from quering the databased
@@ -54,11 +42,11 @@ export default class FAQAdminComponent extends React.Component {
                 response.map((faq) => {
                     FAQs.push(
                         <FAQAdminQuestionComponent
-                            onDelete={this.delFAQ}
                             id={faq.id}
                             question={faq.question}
                             answer={faq.answer}
-                            onAdd={this.addFAQ} />
+                            onDelete={this.printQuestions}
+                            onUpdate={this.props.update} />
                     );
                 }
                 );
@@ -73,7 +61,7 @@ export default class FAQAdminComponent extends React.Component {
 
     render() {
         return (
-            <div className="main-page-content faq-page-content glassMorphism">
+            <div >
                 <FontAwesomeIcon className="faq-admin-FAQ-add" onClick={() => { this.addNewFAQ() }} icon={faPlus} color='gray' />
 
                 {this.state.FAQs}

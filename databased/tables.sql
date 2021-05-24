@@ -49,18 +49,20 @@ CREATE TABLE Book(
     CHECK (pages > 0)
 );
 
+
 CREATE TABLE Review(
     id SERIAL PRIMARY KEY,
     bookId INT REFERENCES Book(id) NOT NULL, 
     writtenBy INT REFERENCES Users(id) NOT NULL,
     worthReading BOOLEAN DEFAULT FALSE NOT NULL,
-    accepted BOOLEAN DEFAULT FALSE NOT NULL,
+    status INT DEFAULT 2 NOT NULL, -- 1 = DENIED , 2 = PENDING , 3 = ACCEPTED , 4 = PUBLISHED
     published BOOLEAN DEFAULT FALSE NOT NULL,
     rating INT NOT NULL, 
     summary TEXT NOT NULL,
     timeOfReview DATE DEFAULT NOW(),
     UNIQUE (writtenBy,bookId), -- USER CAN ONLY READ SAME BOOK ONE TIME
-    CHECK (rating BETWEEN 0 AND 11)
+    CHECK (rating BETWEEN 0 AND 11),
+    CHECK (status BETWEEN 0 AND 5)
 );
 
 CREATE TABLE FrequentlyAskedQuestions(
@@ -72,7 +74,9 @@ CREATE TABLE FrequentlyAskedQuestions(
 CREATE TABLE SchoolSettings(
     weeklyBook INT REFERENCES Book(id), -- CAN BE NULL
     minimumReviewLength INT DEFAULT 1 NOT NULL,
-    CHECK (minimumReviewLength > 0)
+    publishedPoints INT DEFAULT 0 NOT NULL,
+    CHECK (minimumReviewLength >= 0),
+    CHECK (publishedPoints > 0)
 );
 
 CREATE TABLE RecommendedBooks(

@@ -12,7 +12,7 @@ export default class TeacherPage extends React.Component {
                 </div>
                 <div className="main-page-inner-container">
                     <div className="main-page-content tp-page-content">
-                        <FAQAdminComponent />
+
                     </div>
                 </div>
             </div>

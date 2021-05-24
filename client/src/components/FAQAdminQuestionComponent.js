@@ -10,6 +10,20 @@ const FAQAdminQuestionComponent = (props) => {
 
     const [hasChanged, setChanged] = useState(false);
 
+
+    // Deletes FAQ through a query
+    const delFAQ = (id) => {
+        if (window.confirm("Är du säker?")) {
+            let req = { method: "DELETE", headers: { "Content-Type": "application/json" } }
+            fetch("/api/faq/" + id, req).then((response) => response.text())
+                .then((response) => {
+                    props.onDelete();
+                });
+
+            props.onUpdate();
+        }
+    }
+
     const updateFAQ = (id) => {
         setChanged(false);
         let req = {
@@ -21,6 +35,7 @@ const FAQAdminQuestionComponent = (props) => {
             .then((response) => response.text())
             .then((response) => {
                 console.log(response);
+                props.onUpdate();
             });
     }
 
@@ -39,7 +54,7 @@ const FAQAdminQuestionComponent = (props) => {
                 }} />
             </div>
             <div className="faq-admin-FAQ-buttons ">
-                <FontAwesomeIcon className="faq-admin-FAQ-trash " onClick={() => { props.onDelete(props.id) }} icon={faTrash} color='gray' />
+                <FontAwesomeIcon className="faq-admin-FAQ-trash " onClick={() => { delFAQ(props.id) }} icon={faTrash} color='gray' />
                 <FontAwesomeIcon className="faq-admin-FAQ-save " onClick={() => { updateFAQ(props.id) }} icon={faSave} color='gray' />
             </div>
         </div>

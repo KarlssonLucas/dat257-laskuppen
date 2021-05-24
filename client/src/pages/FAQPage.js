@@ -1,18 +1,23 @@
-import React from 'react';
+import { faCogs } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import fetch from 'node-fetch';
+import React, { useEffect, useState } from 'react';
+import FAQAdminComponent from '../components/FAQAdminComponent';
 import FAQCardComponent from '../components/FAQCardComponent';
 import "./css/faqpage.css";
 
-export default class FAQPage extends React.Component {
+const FAQPage = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.printQuestions = this.printQuestions.bind(this);
-        this.state = { FAQs: null }
-        this.printQuestions();
+    const [FAQs, setFAQs] = useState([]);
+    const [admin, setAdmin] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    }
+    useEffect(() => {
+        printQuestions();
+        getSession()
+    }, [])
 
-    printQuestions = () => {
+    const printQuestions = () => {
         let FAQs = [];
 
         fetch("/api/faq")
@@ -30,25 +35,39 @@ export default class FAQPage extends React.Component {
                 }
                 );
                 console.log("STATE", FAQs)
-                this.setState({ FAQs })
+                setFAQs(FAQs)
             });
-
-
     }
 
+    const getSession = () => {
+        fetch("/api/session")
+            .then((response) => response.json())
+            .then((response) => {
+                console.log("role", response.role)
+                if (response.role == 3)
+                    setIsAdmin(true);
+            });
+    }
 
-    render() {
-        return (
-            <div className="main-page-general-styling">
-                <div className="main-page-header glassMorphism">
-                    <h2> FAQ </h2>
-                </div>
-                <div className="main-page-inner-container">
-                    <div className="main-page-content faq-page-content glassMorphism">
-                        {this.state.FAQs}
-                    </div>
+    const changeAdmin = () => {
+        setAdmin(!admin);
+        console.log(admin);
+    }
+
+    return (
+        <div className="main-page-general-styling">
+            <div className="main-page-header glassMorphism">
+                <h2 className="faq-header"> FAQ </h2> <h2 className="faq-cogs"> {(isAdmin) ? <FontAwesomeIcon onClick={() => { changeAdmin() }} icon={faCogs} /> : ""} </h2>
+            </div>
+            <div className="main-page-inner-container">
+                <div className="main-page-content faq-page-content glassMorphism">
+                    {(admin) ? <FAQAdminComponent update={printQuestions} /> : FAQs}
+
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+
+export default FAQPage;
