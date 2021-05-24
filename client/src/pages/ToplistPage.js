@@ -21,7 +21,7 @@ const ToplistPage = () => {
         let response = fetchData("/api/toplist?filter=points&order=desc")
         response.then(response => { settopReaderOfWeek(response[0]); setTopList(response) })
         response = fetchData("/api/mostreadbook")
-        response.then(response => { setTopWeeklyBook(response[0].title) })
+        response.then(response => { setTopWeeklyBook(response[0]) })
         response = fetchData("/api/userpoints")
         response.then(response => { setPoints(response[0].points); })
         fetchRec();
@@ -76,7 +76,14 @@ const ToplistPage = () => {
                     <div className="top-top-book-card glassMorphism">
                         <p className="top-card-title"> Veckans bok </p>
                         <hr />
-                        <p className="top-card-text"> {topWeeklyBook} </p>
+                        <div className="top-inner-recommendation">
+                        <div className="cbc-book-title">Titel: {topWeeklyBook.title}</div>
+                            <div className="cbc-book-author">Författare: {topWeeklyBook.author}</div>
+                            <div className="cbc-book-pages">Sidor: {topWeeklyBook.pages}</div>
+                            <div className="cbc-book-img">
+                                <img size= '1g' src={(topWeeklyBook.thumbnail) ? ((topWeeklyBook.thumbnail.thumbnail) ? topWeeklyBook.thumbnail.thumbnail : topWeeklyBook.thumbnail): "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"} />
+                            </div>
+                         </div>
                     </div>
 
                     <div className="top-my-points glassMorphism">
