@@ -52,7 +52,7 @@ Can be found in all the javascript files present as a normal comment!
 
      i. Parts of the css on the site, mostly the top list and FAQ-page. Also helped with comments in the backend. Pair programmed setup of architecture and a mix of things here and there as well.
 
-     ii. 
+     ii. Read about scrum and applications of scrum in practice. Have been discussing ideas during meetings and been part of bringing our workflow to where it was in the end.
   4. Joakim
 
      i.
