@@ -50,9 +50,9 @@ Can be found in all the javascript files present as a normal comment!
      ii.
   3. Viktor
 
-     i.
+     i. Parts of the css on the site, mostly the top list and FAQ-page. Also helped with comments in the backend. Pair programmed setup of architecture and a mix of things here and there as well.
 
-     ii.  
+     ii. 
   4. Joakim
 
      i.
