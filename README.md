@@ -45,9 +45,11 @@ Can be found in all the javascript files present as a normal comment!
      ii.
   2. Anton
 
-     i.
+     i. My contribution has mostly been related to frontend and css which has involved pair programming with different team members. More specifically, I have been involved in the design of the FAQ-page and css design of the webpage. 
 
-     ii.
+     ii. I have had the role of secretary with the goal of keeping the meetings structured and keeping discussions to certain topics. I have tried to make sure we relfect and discuss future improvements on each meeting and improve our workflow. Furtheremore, I have been active during the meetings and tried to contribute with my thoughts and opinions.
+     
+     
   3. Viktor
 
      i. Parts of the css on the site, mostly the top list and FAQ-page. Also helped with comments in the backend. Pair programmed setup of architecture and a mix of things here and there as well.
