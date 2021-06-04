@@ -62,9 +62,9 @@ Can be found in all the javascript files present as a normal comment!
      ii.
   5. Karl
 
-     i.
+     i. I have contributed by working on the majority of the pages, mainly focusing on the frontend and thus have written CSS, HTML and Javascript to create responsive pages. I have been doing a lot of pair programming with David, and thus spent a lot of time working on the finalized, glassmorphism design of the website. 
 
-     ii.
+     ii. I have been learning about scrum and the agile workflow, been participating in our meetings where I contributed with my ideas, thoughts and reflections. I also took part of discussing and improving our workflow throughout the project. 
   6. David
 
      i. I have worked on almost every page of the site and i have written CSS, JS and worked on the frontend and the backend and also worked on making the site functional and responsive to smaller screens. I also worked a lot with developing the current theme of the website.  
