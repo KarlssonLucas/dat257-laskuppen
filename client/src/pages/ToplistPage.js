@@ -21,7 +21,7 @@ const ToplistPage = () => {
         let response = fetchData("/api/toplist?filter=points&order=desc")
         response.then(response => { settopReaderOfWeek(response[0]); setTopList(response) })
         response = fetchData("/api/mostreadbook")
-        response.then(response => { setTopWeeklyBook(response[0].title) })
+        response.then(response => { setTopWeeklyBook(response[0]?.title)})
         response = fetchData("/api/userpoints")
         response.then(response => { setPoints(response[0].points); })
         fetchRec();
