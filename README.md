@@ -67,9 +67,9 @@ Can be found in all the javascript files present as a normal comment!
      ii.
   6. David
 
-     i.
+     i. I have worked on almost every page of the site and i have written CSS, JS and worked on the frontend and the backend and also worked on making the site functional and responsive to smaller screens. I also worked a lot with developing the current theme of the website.  
 
-     ii.
+     ii. I have been active and have discussed ideas during meetings and tried to bring valuable information and ideas when planning and discussing during meetings. 
 
 - - - -
 ## Project Setup
