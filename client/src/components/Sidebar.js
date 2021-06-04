@@ -55,13 +55,7 @@ const Sidebar = (props) => {
                     });
             }
 
-            if (response.role > 1) {
-                sidebarData.push({
-                    title: "Lärare",
-                    path: "/teacher",
-                    icon: <FontAwesomeIcon icon={faGraduationCap} color='green' size='lg' />
-                })
-            }
+           
 
             if (response.role > 2) {
                 sidebarData.push({
