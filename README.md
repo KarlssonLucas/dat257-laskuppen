@@ -55,11 +55,13 @@ Can be found in all the javascript files present as a normal comment!
      i. Parts of the css on the site, mostly the top list and FAQ-page. Also helped with comments in the backend. Pair programmed setup of architecture and a mix of things here and there as well.
 
      ii. Read about scrum and applications of scrum in practice. Have been discussing ideas during meetings and been part of bringing our workflow to where it was in the end.
+
   4. Joakim
 
-     i.
+     i. I was involved with setting up the development environment, database and external deployment. I also had some prevoius knowledge about React so throughout the whole project I've been helping all the team members with various problems, bugs and other stuff related to the framework and the environment. In the beginning I've played a big role in getting everyone on track with everything. I've contributed to every page and also much to the backend and API.
 
-     ii.
+     ii. I was appointed Project Owner in the beginning so I've had the most contact with the stakeholder. In the meetings with the stakeholder I've been the one makeing sure there is relevant discussions and making sure the meetings progresses. Regarding prioritizing user stories and other stuff related to the scrum-board everyone has been equally involved, so I haven't been "administrating" the scrum-board more than anyone else(as a PO sometimes does/should). 
+     
   5. Karl
 
      i. I have contributed by working on the majority of the pages, mainly focusing on the frontend and thus have written CSS, HTML and Javascript to create responsive pages. I have been doing a lot of pair programming with David, and thus spent a lot of time working on the finalized, glassmorphism design of the website. 
