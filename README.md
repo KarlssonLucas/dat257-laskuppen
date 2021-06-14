@@ -38,11 +38,13 @@ Our final report can be found [here]()
 Can be found in all the javascript files present as a normal comment!
 
 ### Contribution Breakdown
-  1. Lucas
+  1. Lucas 
 
-     i.
+     i. Did most of my work in the backend, setting up the dev environment, connecting the database with the backend, the structure of the database.
 
-     ii.
+     ii. Did all the backend work for the book-detail page but left the css, did the entire admin page backend and frontend.
+     
+     iii. Also worked with scrum and all of its appilcations, communicating with the group, being there during the daily standups, discussing how we prioritize user stories. 
   2. Anton
 
      i. My contribution has mostly been related to frontend and css which has involved pair programming with different team members. More specifically, I have been involved in the design of the FAQ-page and css design of the webpage. 
